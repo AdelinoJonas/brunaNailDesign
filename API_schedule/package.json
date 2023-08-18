@@ -1,0 +1,20 @@
+{
+  "name": "api_nail_design",
+  "version": "1.0.0",
+  "description": "service to schedule appointments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "format": "prettier --write \"src/**/*.{js}\""
+  },
+  "author": "Jonas Adelino Neto",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.4.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.2"
+  }
+}
