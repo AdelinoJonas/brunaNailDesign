@@ -19,6 +19,7 @@
   "author": "Jonas Adelino Neto",
   "license": "ISC",
   "dependencies": {
+    "@cubos/knex-repository": "^0.0.0-dev.20210120191809",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

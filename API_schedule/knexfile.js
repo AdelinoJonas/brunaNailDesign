@@ -14,6 +14,6 @@ module.exports = {
         extension: "js",
     },
     seeds:{
-        directory:"./src/seeds"
+        directory:"./src/seed"
     }
 };

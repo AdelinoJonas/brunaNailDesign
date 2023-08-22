@@ -1,0 +1,69 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const { UserService } = require("../services/usersServices");
+const { UserRepository } = require("../repositories/UserRepository");
+const { OfficeService } = require("../services/officeService");
+const { OfficeRepository } = require("../repositories/OfficeRepository");
+const {loginValidatorSchema} = require("../helpers/validators/loginValidator");
+
+const userRepository = new UserRepository();
+const userServices = new UserService(userRepository);
+const officeRepository = new OfficeRepository();
+const officeService = new OfficeService(officeRepository);
+
+async function login(request, response) {
+  const { email, password } = request.body;
+
+  try {
+    await loginValidatorSchema.validate({ email, password });
+
+    const user = await userServices.findUserByEmail({ email });
+    
+
+    if (!user || !user.is_active) {
+      return response
+        .status(400)
+        .json({ message: "Email ou Password inválido." });
+    }
+
+    if(!user.is_admin){
+      const office = await officeService.getOffice(user.offices_id);
+      
+      if(!office.is_active){
+        return response
+        .status(400)
+        .json({ message: "Email ou Password inválido." });
+      }
+    }
+
+    const passwordVerified = await bcrypt.compare(password, user.password);
+
+    if (!passwordVerified) {
+      return response
+        .status(400)
+        .json({ message: "Email ou Password inválido." });
+    }
+
+    const { password: _, ...userLogin } = user;
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        office: user.offices_id,
+      },
+      process.env.JWT_SECRET
+    );
+
+    return response.status(200).json({
+      user: userLogin,
+      token,
+    });
+  } catch (error) {
+    return response.status(500).json({ message: error.message });
+  }
+}
+
+
+module.exports = login;
