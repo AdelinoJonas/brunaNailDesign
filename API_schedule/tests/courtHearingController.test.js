@@ -35,7 +35,7 @@ describe("Clients Endpoints", () => {
       });
 
       expect(statusCode).toBe(201);
-      court = body.insertedCourtHearing;
+      court = body.insertedprocedure;
     });
   });
 

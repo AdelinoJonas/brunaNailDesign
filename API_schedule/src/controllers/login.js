@@ -2,14 +2,12 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { UserService } = require("../services/usersServices");
 const { UserRepository } = require("../repositories/UserRepository");
-const { OfficeService } = require("../services/officeService");
-const { OfficeRepository } = require("../repositories/OfficeRepository");
+// const { OfficeService } = require("../services/officeService");
+// const { OfficeRepository } = require("../repositories/OfficeRepository");
 const {loginValidatorSchema} = require("../helpers/validators/loginValidator");
 
 const userRepository = new UserRepository();
 const userServices = new UserService(userRepository);
-const officeRepository = new OfficeRepository();
-const officeService = new OfficeService(officeRepository);
 
 async function login(request, response) {
   const { email, password } = request.body;
@@ -19,14 +17,13 @@ async function login(request, response) {
 
     const user = await userServices.findUserByEmail({ email });
     
-
-    if (!user || !user.is_active) {
+    if (!user) {
       return response
         .status(400)
         .json({ message: "Email ou Password inválido." });
     }
 
-    if(!user.is_admin){
+    if(!user.isAdmin){
       const office = await officeService.getOffice(user.offices_id);
       
       if(!office.is_active){
@@ -51,7 +48,6 @@ async function login(request, response) {
         id: user.id,
         name: user.name,
         email: user.email,
-        office: user.offices_id,
       },
       process.env.JWT_SECRET
     );

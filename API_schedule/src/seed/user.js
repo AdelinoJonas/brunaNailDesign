@@ -15,7 +15,7 @@ exports.seed = async function (knex) {
       id: randomUUID(),
       name: "User Admin",
       cpf: "00000000000",
-      email: "useradmin@gmail.com.br",
+      email: "useradmin@maisadv.com.br",
       phone: "00 0000 0000",
       password,
       genre: "Masculino",

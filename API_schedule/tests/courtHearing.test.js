@@ -1,14 +1,14 @@
 const {
-  CourtHearingRepositoryInMemory,
-} = require("../src/repositories/in-memory/CourtHearingInMemory");
-const { CourtHearingService } = require("../src/services/courtHearingService");
+  procedureRepositoryInMemory,
+} = require("../src/repositories/in-memory/procedureInMemory");
+const { procedureService } = require("../src/services/procedureService");
 const db = require("./in-memory-db/db");
 
 describe("Court Hearing", () => {
   let courtService;
   beforeAll(() => {
-    const courtRepository = new CourtHearingRepositoryInMemory();
-    return courtService = new CourtHearingService(courtRepository);
+    const courtRepository = new procedureRepositoryInMemory();
+    return courtService = new procedureService(courtRepository);
   });
 
   const courtTest = {
