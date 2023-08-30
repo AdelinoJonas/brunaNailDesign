@@ -11,7 +11,6 @@ const validateUser = yup.object().shape({
   email: yup.string().trim().email().required(),
   phone: yup.string().trim().required(),
   password: yup.string().trim().required().min(6, "A senha deve ter entre 6 e 10 caracteres.").max(10, "A senha deve ter entre 6 e 10 caracteres."),
-  isAdmin: yup.boolean().required(),
 });
 
 const validateUserUpdate = yup.object().shape({
