@@ -1,0 +1,47 @@
+{
+  "name": "api_nail_design",
+  "version": "0.1.0",
+  "description": "service to schedule appointments",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "migration:create": "knex migrate:make",
+    "migration:revert": "knex migrate:rollback",
+    "migration:run": "knex migrate:latest",
+    "seeder:create": "knex seed:make",
+    "seeder:run": "knex --knexfile knexfile.js seed:run",
+    "postgres:start": "docker run -d -p $(grep DB_PORT .env | cut -d= -f 2):5432 --name $(grep DB_DATABASE .env | cut -d= -f 2) -e POSTGRES_HOST_AUTH_METHOD=trust postgres:12-alpine",
+    "database:create": "docker exec $(grep DB_DATABASE .env | cut -d= -f 2) psql -U postgres postgres -c \"CREATE DATABASE $(grep DB_DATABASE .env | cut -d= -f 2)\"",
+    "format": "prettier --write \"src/**/*.{js}\""
+  },
+  "author": "Jonas Adelino Neto",
+  "license": "ISC",
+  "dependencies": {
+    "@cubos/knex-repository": "^0.0.0-dev.20210120191809",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.9.2",
+    "joi-translation-pt-br": "^0.0.10",
+    "jsonwebtoken": "^9.0.1",
+    "knex": "^2.5.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.4",
+    "nodemailer-express-handlebars": "^6.1.0",
+    "pg": "^8.11.3",
+    "prettier": "^3.0.2",
+    "yup": "^1.2.0",
+    "yup-locales": "^1.2.16"
+  },
+  "devDependencies": {
+    "jest": "^29.6.3",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
+  }
+}
