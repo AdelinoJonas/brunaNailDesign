@@ -4,11 +4,10 @@ const { UserService } = require("../services/usersServices");
 const bcrypt = require("bcrypt");
 const path = require('path');
 const yup = require('yup'); // Importe o módulo yup
-const {validateUser} = require('../helpers/validators/userValidator')
+const { validateUser } = require('../helpers/validators/userValidator')
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
-
 
 async function createUser(request, response) {
   const {
@@ -19,32 +18,20 @@ async function createUser(request, response) {
   } = request.body;
 
   try {
-    await validateUser.validate({
+    // Validação usando o userService
+    await userService.createUser({
       name,
       email,
       phone,
       password,
     });
 
-    const existingUser = await userRepository.findByEmail(email);
-    if (existingUser) {
-      return response.status(409).json({ error: "Já existe um usuário com este e-mail." });
-    }
+    const verifiedUser = await userService.findUserByEmail({ email });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Se chegou até aqui, significa que o usuário foi criado com sucesso
+    const token = jwt.sign({ userId: verifiedUser.id }, 'secreto', { expiresIn: '1h' });
 
-    const newUser = {
-      name,
-      email,
-      phone,
-      password: hashedPassword,
-    };
-
-    const createdUser = await userRepository.create(newUser);
-
-    const token = jwt.sign({ userId: createdUser.id }, 'secreto', { expiresIn: '1h' });
-
-    response.status(201).json({ message: "Usuário criado com sucesso", user: createdUser, token });
+    response.status(201).json({ message: "Usuário criado com sucesso", user: verifiedUser, token });
   } catch (error) {
     if (error.name === 'ValidationError') {
       response.status(400).json({ error: error.message });

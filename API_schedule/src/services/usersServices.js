@@ -27,16 +27,18 @@ class UserService {
       phone: formattedPhone,
     });
 
-    let encryptedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await this.userRepository.insert({
+    const newUser = {
       name,
       email,
-      password: encryptedPassword,
       phone: formattedPhone,
-    });
+      password: hashedPassword,
+    };
 
-    return user;
+    const createdUser = await this.userRepository.create(newUser);
+
+    return createdUser;
   }
 
   async findUserByEmail({ email }) {
