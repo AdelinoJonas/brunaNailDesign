@@ -8,14 +8,6 @@ class UserRepository extends BaseRepository {
     super(knex, "users");
   }
 
-  async findAdminUsers() {
-    const adminUsers = await this.knex('users')
-      .select('id', 'name', 'email', 'phone', 'isAdmin')
-      .where('isAdmin', true);
-
-    return adminUsers;
-  }
-
   async findAllUsers() {
     const allUsers = await this.knex('users')
       .select('id', 'name', 'email', 'phone', 'isAdmin');

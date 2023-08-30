@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require('path')
 
 module.exports = {
     client: "pg",
@@ -14,6 +15,6 @@ module.exports = {
         extension: "js",
     },
     seeds:{
-        directory:"./src/seed"
+        directory:path.resolve(__dirname, 'src', 'seeds')
     }
 };

@@ -2,7 +2,7 @@ const { Router } = require("express");
 require("express-async-errors");
 const login = require("./controllers/login");
 // const adminControllers = require("./controllers/adminUser");
-// const usersControllers = require("./controllers/user");
+const usersControllers = require("./controllers/user");
 // const officesController = require("./controllers/offices");
 // const officesLogoControllers = require("./controllers/officesLogo");
 // const clientControllers = require("./controllers/clients");
@@ -25,7 +25,7 @@ routes.post("/login", login);
 
 routes.use(tokenVerify);
 
-// routes.post("/user", usersControllers.createUser);
+routes.post("/user", usersControllers.createUser);
 // routes.get("/user", usersControllers.getUserInfos);
 // routes.patch("/user/infos", usersControllers.updateUserInfos);
 
