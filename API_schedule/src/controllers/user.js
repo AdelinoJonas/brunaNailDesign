@@ -29,7 +29,7 @@ async function createUser(request, response) {
     const verifiedUser = await userService.findUserByEmail({ email });
 
     // Se chegou até aqui, significa que o usuário foi criado com sucesso
-    const token = jwt.sign({ userId: verifiedUser.id }, 'secreto', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: verifiedUser.id }, 'secreto');
 
     response.status(201).json({ message: "Usuário criado com sucesso", user: verifiedUser, token });
   } catch (error) {
