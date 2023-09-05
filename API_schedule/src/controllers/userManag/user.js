@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const { UserRepository } = require("../repositories/UserRepository");
-const { UserService } = require("../services/usersServices");
+const { UserRepository } = require("../../repositories/UserRepository");
+const { UserService } = require("../../services/usersServices");
 const bcrypt = require("bcrypt");
 const path = require('path');
 const yup = require('yup'); // Importe o módulo yup
-const { validateUser } = require('../helpers/validators/userValidator')
+const { validateUser } = require('../../helpers/validators/userValidator')
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
@@ -18,7 +18,6 @@ async function createUser(request, response) {
   } = request.body;
 
   try {
-    // Validação usando o userService
     await userService.createUser({
       name,
       email,
@@ -28,7 +27,6 @@ async function createUser(request, response) {
 
     const verifiedUser = await userService.findUserByEmail({ email });
 
-    // Se chegou até aqui, significa que o usuário foi criado com sucesso
     const token = jwt.sign({ userId: verifiedUser.id }, 'secreto');
 
     response.status(201).json({ message: "Usuário criado com sucesso", user: verifiedUser, token });

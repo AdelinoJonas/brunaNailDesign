@@ -7,7 +7,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20) NOT NULL,
     password VARCHAR(10) CHECK (LENGTH(password) >= 6 AND LENGTH(password) <= 10) NOT NULL,
-    registerDate TIMESTAMP DEFAULT NOW(),
+    created_at TIMESTAMP DEFAULT NOW(),
     isAdmin BOOLEAN
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE services (
     duration TIME NOT NULL,
     description TEXT,
     image VARCHAR(255),
-    isCourse BOOLEAN
+    is_course BOOLEAN
 );
 
 
@@ -27,7 +27,7 @@ CREATE TABLE schedules (
     days_available VARCHAR(255) NOT NULL UNIQUE,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    register_date TIMESTAMP DEFAULT NOW() NOT NULL
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL
 );
 
 CREATE TABLE appointments (

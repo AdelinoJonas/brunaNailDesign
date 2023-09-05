@@ -12,7 +12,7 @@ async function tokenVerify(request, response, next) {
 
   if (!authorization) {
     return response.status(401).json({
-      message: "Usuário não autenticado, por favor faça novamente login.",
+      message: "Usuário não autenticado, por favor faça o login novamente.",
     });
   }
 
@@ -23,15 +23,19 @@ async function tokenVerify(request, response, next) {
 
     const userExists = await userService.getUser(id);
 
-    if (!userExists || !userExists.is_active) {
+    if (!userExists) {
       return response.status(404).json({ message: "Usuário não encontrado" });
     }
 
-    const { password, cpf, oab, ...user } = userExists;
+    const { password,...user } = userExists;
+
+    console.log('userExists', userExists);
+
 
     request.cookies.user = user;
 
     next();
+    
   } catch (error) {
     if (error.name === "TokenExpiredError") {
       return response

@@ -14,6 +14,11 @@ class UserRepository extends BaseRepository {
     return userId;
   }
 
+  async get(id) {
+    const user = this.users.filter((user) => user.id === id);
+    return user[0];
+  }
+
   async findAllUsers() {
     const allUsers = await this.knex('users')
       .select('id', 'name', 'email', 'phone');
