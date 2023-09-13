@@ -7,8 +7,8 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20) NOT NULL,
     password VARCHAR(10) CHECK (LENGTH(password) >= 6 AND LENGTH(password) <= 10) NOT NULL,
-    registerDate TIMESTAMP DEFAULT NOW(),
-    isAdmin BOOLEAN
+    created_at TIMESTAMP DEFAULT NOW(),
+    is_admin BOOLEAN
 );
 
 CREATE TABLE services (
@@ -18,7 +18,7 @@ CREATE TABLE services (
     duration TIME NOT NULL,
     description TEXT,
     image VARCHAR(255),
-    isCourse BOOLEAN
+    is_course BOOLEAN
 );
 
 
@@ -27,7 +27,7 @@ CREATE TABLE schedules (
     days_available VARCHAR(255) NOT NULL UNIQUE,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    register_date TIMESTAMP DEFAULT NOW() NOT NULL
+    created_at TIMESTAMP DEFAULT NOW() NOT NULL
 );
 
 CREATE TABLE appointments (
@@ -46,7 +46,7 @@ DROP table appointments;
 
 ALTER TABLE appointments DROP COLUMN schedule_date;
 
-INSERT INTO users (name, email, phone, password, isAdmin) 
+INSERT INTO users (name, email, phone, password, is_admin) 
 VALUES 
     ('Nome do Usuário', 'usuario@email.com', '1234567890', 'senha123', true),
     ('Outro Usuário', 'outro@email.com', '9876543210', 'senha456', false);

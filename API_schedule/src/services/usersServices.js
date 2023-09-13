@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const { formatReturnOnlyNumber } = require("../utils/formatOnlyNumber");
 const {
   validateUser,
+  validateUserId,
 } = require("../helpers/validators/userValidator");
 
 class UserService {
@@ -27,24 +28,29 @@ class UserService {
       phone: formattedPhone,
     });
 
-    let encryptedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await this.userRepository.insert({
+    const newUser = {
       name,
       email,
-      password: encryptedPassword,
       phone: formattedPhone,
-    });
+      password: hashedPassword,
+    };
 
+    const createdUser = await this.userRepository.create(newUser);
+
+    return createdUser;
+  }
+
+  async getUser(id) {
+    await validateUserId.validate({ id });
+
+    const user = await this.userRepository.get(id);
     return user;
   }
 
   async findUserByEmail({ email }) {
     const user = await this.userRepository.findOneBy({ email });
-
-
-console.log(user);
-
 
     return user;
   }

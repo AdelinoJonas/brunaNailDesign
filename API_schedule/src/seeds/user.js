@@ -4,11 +4,7 @@ const Knex = require("knex");
 
 exports.seed = async function(knex) {
   
-  console.log('cheguei aqui');
-
   const password = await bcrypt.hash("password",10)
-
-  console.log('password', password);
   
   // Deletes ALL existing entries
   // await knex('users').del()
