@@ -8,7 +8,7 @@ CREATE TABLE users (
     phone VARCHAR(20) NOT NULL,
     password VARCHAR(10) CHECK (LENGTH(password) >= 6 AND LENGTH(password) <= 10) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    isAdmin BOOLEAN
+    is_admin BOOLEAN
 );
 
 CREATE TABLE services (
@@ -46,7 +46,7 @@ DROP table appointments;
 
 ALTER TABLE appointments DROP COLUMN schedule_date;
 
-INSERT INTO users (name, email, phone, password, isAdmin) 
+INSERT INTO users (name, email, phone, password, is_admin) 
 VALUES 
     ('Nome do Usuário', 'usuario@email.com', '1234567890', 'senha123', true),
     ('Outro Usuário', 'outro@email.com', '9876543210', 'senha456', false);

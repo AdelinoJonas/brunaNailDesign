@@ -2,10 +2,12 @@ const { Router } = require("express");
 require("express-async-errors");
 const login = require("./controllers/login");
 const usersControllers = require("./controllers/userManag/user");
+const serviceControllers = require("./controllers/serviceManag/service");
 // const adminControllers = require("./controllers/admin");
 const { globalErrorHandler } = require("./controllers/error");
 const { tokenVerify } = require("./middlewares/tokenVerify");
 const { adminVerify } = require("./middlewares/adminVerify");
+const userByAdmin  = require("./controllers/userManag/userByAdmin");
 
 const routes = Router();
 
@@ -24,13 +26,14 @@ routes.use(tokenVerify);
 routes.use(adminVerify);
 
 // Rotas de administrador
-// routes.post("/admin/user", adminControllers.createUser);
+routes.post("/admin/user", userByAdmin.createUserByAdmin);
+
 // routes.patch("/admin/user/:id", adminControllers.updateUser);
 // routes.get("/admin/user/:id", adminControllers.getUser);
 // routes.get("/admin/users", adminControllers.listAllUsers);
 // routes.delete("/admin/user/:id", adminControllers.deleteUser);
 
-// routes.post("/admin/service", adminControllers.createService);
+routes.post("/admin/service", serviceControllers.createService);
 // routes.patch("/admin/service/:id", adminControllers.updateService);
 // routes.get("/admin/service/:id", adminControllers.getService);
 // routes.delete("/admin/service/:id", adminControllers.deleteService);
