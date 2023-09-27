@@ -1,13 +1,14 @@
 const { Router } = require("express");
 require("express-async-errors");
 const login = require("./controllers/login");
-const usersControllers = require("./controllers/userManag/user");
+const usersControllers = require("./controllers/user");
 // const adminControllers = require("./controllers/admin");
 const { globalErrorHandler } = require("./controllers/error");
 const { tokenVerify } = require("./middlewares/tokenVerify");
 const { adminVerify } = require("./middlewares/adminVerify");
 
 const routes = Router();
+routes.use(globalErrorHandler);
 
 routes.post("/login", login);
 routes.post("/createUser", usersControllers.createUser);
@@ -42,7 +43,5 @@ routes.use(adminVerify);
 // routes.get("/admin/schedule/:id", adminControllers.getSchedule);
 // routes.delete("/admin/schedule/:id", adminControllers.deleteSchedule);
 // routes.get("/admin/schedules", adminControllers.listAllSchedules);
-
-routes.use(globalErrorHandler);
 
 module.exports = routes;

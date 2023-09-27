@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const { UserRepository } = require("../../repositories/UserRepository");
-const { UserService } = require("../../services/usersServices");
+const { UserRepository } = require("../repositories/UserRepository");
+const { UserService } = require("../services/usersServices");
 const bcrypt = require("bcrypt");
 const path = require('path');
 const yup = require('yup'); // Importe o módulo yup
-const { validateUser } = require('../../helpers/validators/userValidator')
+const { validateUser } = require('../helpers/validators/userValidator')
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);

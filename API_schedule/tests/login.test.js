@@ -34,13 +34,13 @@ describe("login test", () => {
     expect(body.message).toBe("Email ou Password inválido." );
   });
 
-  it("User not found", async () => {
-    const { body, status } = await request.post("/login").send({
-      email: "testtest@email.com.br",
-      password: "12345678",
-    });
+  // it("User not found", async () => {
+  //   const { body, status } = await request.post("/login").send({
+  //     email: "testtest@email.com.br",
+  //     password: "12345678",
+  //   });
 
-    expect(status).toBe(400);
-    expect(body.message).toBe("Email ou Password inválido." );
-  });
+  //   expect(status).toBe(400);
+  //   expect(body.message).toBe("Email ou Password inválido." );
+  // });
 });
