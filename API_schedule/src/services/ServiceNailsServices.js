@@ -4,11 +4,9 @@ const {
 
 class ServiceNailsServices {
   serviceRepository;
-
   constructor(serviceRepository) {
     this.serviceRepository = serviceRepository;
   }
-
   async createService({
     title,
     price,
@@ -17,7 +15,6 @@ class ServiceNailsServices {
     image,
     is_course,
   }) {
-
     await validateService.validate({
       title,
       price,
@@ -26,7 +23,6 @@ class ServiceNailsServices {
       image,
       is_course,
     });
-
     const newService = {
       title,
       price,
@@ -35,14 +31,9 @@ class ServiceNailsServices {
       image,
       is_course,
     };
-
     const createdService = await this.serviceRepository.create(newService);
-
-    console.log(createdService);
-
     return createdService;
   }
-
 }
 
 module.exports = {

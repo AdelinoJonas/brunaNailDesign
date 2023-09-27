@@ -1,29 +1,26 @@
-const multer  = require('multer')
-const {randomBytes} = require("crypto")
+const multerModule = require('multer');
+const { randomBytes } = require("crypto");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, 'uploadFiles/')
+const diskStorageConfig = {
+  destination: function (req, file, destinationCallback) {
+    destinationCallback(null, 'uploadFiles/');
   },
-  filename: function (req, file, cb) {
-      const extensaoArquivo = file.originalname.split('.')[file.originalname.split('.').length -1];
-
-      // Cria um código randômico que será o nome do arquivo
-      const novoNomeArquivo = randomBytes(64)
-          .toString('hex');
-      // Indica o novo nome do arquivo:
-      cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
+  filename: function (req, file, filenameCallback) {
+    const fileExtension = file.originalname.split('.').pop();
+    const newFileName = randomBytes(64).toString('hex');
+    filenameCallback(null, `${newFileName}.${fileExtension}`);
   }
-});
+};
 
-function filter (req, file, cb) {
-  const ext = file.originalname.split('.')[file.originalname.split('.').length -1];
-  if(ext !== 'png' && ext !== 'jpg' && ext !== 'gif' && ext !== 'jpeg') {
-      return cb(new Error('Apenas imagens são permitidas!'))
+function fileFilterFunction(req, file, filterCallback) {
+  const allowedExtensions = ['png', 'jpg', 'gif', 'jpeg'];
+  const fileExtension = file.originalname.split('.').pop();
+  if (!allowedExtensions.includes(fileExtension)) {
+    return filterCallback(new Error('Apenas imagens são permitidas!'));
   }
-  cb(null, true)
+  filterCallback(null, true);
 }
 
-const upload = multer({ storage,fileFilter:filter })
+const multerUploader = multerModule({ storage: diskStorageConfig, fileFilter: fileFilterFunction });
 
-module.exports={upload}
+module.exports = { multerUploader };

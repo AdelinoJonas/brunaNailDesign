@@ -5,7 +5,6 @@ const Knex = require("knex")
 exports.up = async function (knex) {
   await knex.schema.createTable('users', (table)=> {
     table.uuid('id').primary().notNullable();
-
     table.string('name').notNullable();
     table.string('email').unique().notNullable();
     table.string('phone').unique().notNullable();
