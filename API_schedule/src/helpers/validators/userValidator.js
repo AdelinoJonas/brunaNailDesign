@@ -23,7 +23,7 @@ const validateUserUpdate = yup.object().shape({
     .min(6, "A senha deve ter entre 6 e 10 caracteres.")
     .max(10, "A senha deve ter entre 6 e 10 caracteres.")
     .required(),
-  isAdmin: yup.boolean(),
+  is_admin: yup.boolean(),
 });
 
 const validateChangePassword = yup.object().shape({

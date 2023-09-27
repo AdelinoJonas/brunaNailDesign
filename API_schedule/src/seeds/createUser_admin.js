@@ -4,7 +4,7 @@ const Knex = require("knex");
 exports.seed = async function(knex) {
   try {
     const password = await bcrypt.hash("password", 10);
-    await knex('users').del(); // Exclui todos os registros existentes na tabela 'users'
+    await knex('users').del(); 
     await knex('users').insert([
       {
         name: "Bruna Pereira",
