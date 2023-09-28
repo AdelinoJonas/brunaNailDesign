@@ -1,12 +1,21 @@
 CREATE DATABASE appbrunanail_db
 DROP DATABASE appbrunanail_db
 
+DROP table knex_migrations;
+DROP table knex_migrations_lock;
+
+DROP table services;
+DROP table users;
+DROP table schedules;
+DROP table appointment;
+
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20) NOT NULL,
-    password VARCHAR(10) CHECK (LENGTH(password) >= 6 AND LENGTH(password) <= 10) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     is_admin BOOLEAN
 );
@@ -41,8 +50,12 @@ CREATE TABLE appointments (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-DROP table services;
-DROP table appointments;
+ALTER TABLE appointments ALTER COLUMN user_id TYPE integer;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+SELECT gen_random_uuid();
+
 
 ALTER TABLE appointments DROP COLUMN schedule_date;
 

@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
-const { UserRepository } = require("../../repositories/UserRepository");
-const { UserService } = require("../../services/usersServices");
+const { UserByAdminRepository } = require("../repositories/UserByAdminRepository");
+const { UserByAdminService } = require("../services/UsersByAdminServices");
 const bcrypt = require("bcrypt");
-const { validateUser } = require('../../helpers/validators/userValidator');
+const { validateUser } = require('../helpers/validators/userValidator');
 
-const userRepository = new UserRepository();
-const userService = new UserService(userRepository);
+const userByAdminRepository = new UserByAdminRepository();
+const userByAdminService = new UserByAdminService(userByAdminRepository);
 
 async function createUserByAdmin(request, response) {
   const {
@@ -15,20 +15,21 @@ async function createUserByAdmin(request, response) {
     password,
   } = request.body;
   try {
-    await validateUser.validate({
-      name,
-      email,
-      phone,
-      password,
-    });
+    // await validateUser.validate({
+    //   name,
+    //   email,
+    //   phone,
+    //   password,
+    // });
     const hashedPassword = await bcrypt.hash(password, 10);
-    await userService.createUserByAdmin({
+    await userByAdminService.createUserByAdmin({
       name,
       email,
       phone,
       password: hashedPassword,
     });
-    const verifiedUser = await userService.findUserByEmail({ email });
+    const verifiedUser = await userByAdminService.findUserByEmail({ email });
+    console.log(verifiedUser);
     const token = jwt.sign({ userId: verifiedUser.id }, 'secreto');
     response.status(201).json({ message: "Usuário criado com sucesso", user: verifiedUser, token });
   } catch (error) {

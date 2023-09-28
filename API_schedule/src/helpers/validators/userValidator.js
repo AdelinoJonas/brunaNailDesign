@@ -10,7 +10,7 @@ const validateUser = yup.object().shape({
     .matches(regex, "Apenas letras são permitidas no nome."),
   email: yup.string().trim().email().required(),
   phone: yup.string().trim().required(),
-  password: yup.string().trim().required().min(6, "A senha deve ter entre 6 e 10 caracteres.").max(10, "A senha deve ter entre 6 e 10 caracteres."),
+  password: yup.string().trim().required(),
 });
 
 const validateUserUpdate = yup.object().shape({
@@ -19,10 +19,7 @@ const validateUserUpdate = yup.object().shape({
   phone: yup.string(),
   password: yup
     .string()
-    .trim()
-    .min(6, "A senha deve ter entre 6 e 10 caracteres.")
-    .max(10, "A senha deve ter entre 6 e 10 caracteres.")
-    .required(),
+    .trim().required(),
   is_admin: yup.boolean(),
 });
 
@@ -30,8 +27,6 @@ const validateChangePassword = yup.object().shape({
   password: yup
     .string()
     .trim()
-    .min(6, "A senha deve ter entre 6 e 10 caracteres.")
-    .max(10, "A senha deve ter entre 6 e 10 caracteres.")
     .required(),
 });
 

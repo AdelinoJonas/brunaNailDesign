@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { UserRepository } = require("../repositories/UserRepository");
 const { UserService } = require("../services/usersServices");
 const bcrypt = require("bcrypt");
-// const { validateUser } = require('../../helpers/validators/userValidator')
+const { validateUser } = require('../helpers/validators/userValidator')
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);
@@ -16,12 +16,12 @@ async function createUser(request, response) {
   } = request.body;
 
   try {
-    // await validateUser.validate({
-    //   name,
-    //   email,
-    //   phone,
-    //   password,
-    // });
+    await validateUser.validate({
+      name,
+      email,
+      phone,
+      password,
+    });
     const hashedPassword = await bcrypt.hash(password, 10);
     await userService.createUser({
       name,

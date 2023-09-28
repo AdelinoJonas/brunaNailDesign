@@ -1,19 +1,18 @@
-const { BaseRepository } = require("@cubos/knex-repository")
-
-const Knex = require("knex")
+const { BaseRepository } = require("@cubos/knex-repository");
+const Knex = require("knex");
 
 exports.up = async function (knex) {
-  await knex.schema.createTable('users', (table)=> {
-    table.uuid('id').primary().notNullable();
-    table.string('name').notNullable();
-    table.string('email').unique().notNullable();
-    table.string('phone').unique().notNullable();
-    table.string('password', 10).notNullable();
-    table.timestamp('created_at').defaultTo(knex.fn.now()).notNullable();
-    table.boolean('is_admin').defaultTo(false).notNullable();
-  })
+  await Knex.schema.createTable("users", (table) => {
+    table.increments("id").primary();
+    table.string("name", 255).notNullable();
+    table.string("email", 255).unique().notNullable();
+    table.string("phone", 20).notNullable();
+    table.string("password", 10).notNullable();
+    table.timestamp("created_at").defaultTo(Knex.fn.now());
+    table.boolean("is_admin");
+  });
 };
 
 exports.down = async function (knex) {
-    await BaseRepository.dropTable(knex, "users");
+  await BaseRepository.dropTable(knex, "users");
 };
