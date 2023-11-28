@@ -1,7 +1,4 @@
 # Bruna Pereira Nail Design App
-
-A aplicação é composta por uma plataforma web responsiva para a gestão do App desenvolvida em React.Js, o Aplicativo desenvolvido com React Native em javascript, e uma API Rest que faz o tratamento do front com o banco de dados com o Mongoose do MongoDB e javascript na API.
-# Clean_code_Clean_Architecture
 Este é um sistema de agendamento para uma nail designer, composto por uma plataforma online para gerenciamento, uma API para conectar o banco de dados e interação com o front-end e uma aplicação mobile para clientes.
 
 ### `Tecnologias utilizadas:`
@@ -36,8 +33,8 @@ Instale as dependências com o comando npm install
 ### `npm run dev`
 Execute o projeto com o comando npm run dev
 
-### `docker`
-Para executar este comando, é necessário ter o docker instalado na máquina
+### `docker compose up`
+Para executar este comando, é necessário ter o docker compose instalado na máquina
 
 ## Contato
 **Se você gostou do meu trabalho e quer entrar em contato comigo, pode me encontrar em:**
