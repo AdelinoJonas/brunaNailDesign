@@ -4,7 +4,7 @@ const Knex = require("knex")
 
 exports.up = async function (knex) {
   await knex.schema.createTable('services', (table)=> {
-    table.uuid('id').primary().notNullable();
+    table.uuid('id').defaultTo(knex.fn.uuid());
     table.string('title').unique('Este titulo já existe').notNullable();
     table.string('description').notNullable();
     table.integer('price').notNullable();

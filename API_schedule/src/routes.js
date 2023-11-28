@@ -3,11 +3,10 @@ require("express-async-errors");
 const login = require("./controllers/login");
 const usersControllers = require("./controllers/user");
 const serviceControllers = require("./controllers/service");
-// const adminControllers = require("./controllers/admin");
+const userAdminControllers = require("./controllers/userByAdmin");
 const { globalErrorHandler } = require("./controllers/error");
 const { tokenVerify } = require("./middlewares/tokenVerify");
 const { adminVerify } = require("./middlewares/adminVerify");
-// const userByAdmin  = require("./controllers/userByAdmin");
 
 const routes = Router();
 routes.use(globalErrorHandler);
@@ -27,7 +26,7 @@ routes.use(tokenVerify);
 routes.use(adminVerify);
 
 // Rotas de administrador
-// routes.post("/admin/user", userByAdmin.createUserByAdmin);
+routes.post("/admin/user", userAdminControllers.createUserByAdmin);
 
 // routes.patch("/admin/user/:id", adminControllers.updateUser);
 // routes.get("/admin/user/:id", adminControllers.getUser);

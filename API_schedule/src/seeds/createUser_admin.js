@@ -9,7 +9,7 @@ exports.seed = async function(knex) {
       {
         name: "Bruna Pereira",
         email: "brunapereira@studio.com.br",
-        phone: "00 0000 0000",
+        phone: "0000000000",
         password,
         is_admin: true,
       },
