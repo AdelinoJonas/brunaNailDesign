@@ -1,15 +1,10 @@
-import { useState } from 'react'
 import './App.css'
+import Error from '../pages/Error'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-      <div>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
+    <div><Error/></div>
 
        
   )
