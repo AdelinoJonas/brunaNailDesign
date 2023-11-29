@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function AvailableTime() {
+export default function Schedule() {
   return (
-    <div>AvailableTime</div>
+    <div>Schedule</div>
   )
 }

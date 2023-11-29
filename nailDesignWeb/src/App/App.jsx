@@ -1,12 +1,13 @@
-import './App.css'
 import Error from '../pages/Error'
+import SideMenu from '../components/Navigation/SideMenu'
 
 function App() {
 
   return (
-    <div><Error/></div>
-
-       
+    <div>
+      <Error/>
+      <SideMenu/>
+    </div>    
   )
 }
 
