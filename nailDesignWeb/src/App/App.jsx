@@ -1,14 +1,16 @@
-import Error from '../pages/Error'
-import SideMenu from '../components/Navigation/SideMenu'
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from '../global/GlobalStyles';
+import theme from '../global/theme/theme';
+import { MyRoutes } from './routes';
 
-function App() {
-
+export default function App() {
   return (
-    <div>
-      <Error/>
-      <SideMenu/>
-    </div>    
-  )
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <BrowserRouter>
+        <MyRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
-
-export default App
