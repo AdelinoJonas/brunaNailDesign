@@ -8,7 +8,7 @@ import {
 import { useStores } from '../stores';
 
 // Import components directly
-import Login from '../pages/Login';
+import { Login } from '../pages/Login';
 // import ForgotPassword from '../pages/Login/ForgotPassword';
 // import RedefinePassword from '../pages/Login/ForgotPassword/RedefinePassword';
 // import AdminLayout from '../layouts/AdminLayout';
