@@ -7,7 +7,7 @@
 // import { ModalEditClient } from "pages/ClientArea/components/ModalEditClient";
 // import { ModalNewClient } from "pages/ClientArea/components/ModalNewClient";
 import { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useStores } from '../../stores';
 import * as Sc from './styles';
 import SideMenu from "../../components/Navigation/SideMenu";
@@ -15,28 +15,27 @@ import SideMenu from "../../components/Navigation/SideMenu";
 
 export function DefaultLayout() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   let screenWidth = window.innerWidth;
 
-  const {
-    userStores: {
-      fetchUser,
-      token
-    },
-    // audienceStore: {
-    //   statusResponse,
-    //   message,
-    //   showToast,
-    //   setShowToast
-    // },
-  } = useStores();
+  // const {
+  //   // userStores: {
+  //   //   fetchUser,
+  //   //   token
+  //   // },
+  //   // audienceStore: {
+  //   //   statusResponse,
+  //   //   message,
+  //   //   showToast,
+  //   //   setShowToast
+  //   // },
+  // } = useStores();
 
   // let currentMessage = message;
 
   useEffect(() => {
-    if (token) {
-      fetchUser();
-    }
+    navigate('/home');
   }, []);
 
   // useEffect(() => {
@@ -57,32 +56,24 @@ export function DefaultLayout() {
   // }, [showToast]);
 
   return (
-    // <>
-      <Sc.LayoutContainer>
-        {/* <DeleteModal />
-        <ModalNewClient />
-        <ModalEditClient />
-        <ConfirmModal />
-        <ModalLogout /> */}
-
-        {/* {screenWidth > 1080 ?
-          <Navbar />
-          :
-          <Sc.MobileContainer >
-            <MobileNavbar />
-          </Sc.MobileContainer>
-        } */}
-        <Sc.AsideNavibar>
-          <SideMenu />
-        </Sc.AsideNavibar>
-        <Sc.Main>
-          {/* {(pathname === '/home' || pathname === '/clients') &&
-            <Sc.MobileContainer >
-              <SearchInput />
-            </Sc.MobileContainer>
-          } */}
-          <Outlet />
-        </Sc.Main>
-      </Sc.LayoutContainer>
+    <Sc.LayoutContainer>
+      {/* <DeleteModal />
+      <ModalNewClient />
+      <ModalEditClient />
+      <ConfirmModal />
+      <ModalLogout /> */}
+     {/* {screenWidth > 1000 ? */}
+        {/* :
+        <Sc.MobileContainer >
+        <MobileMenu />
+      </Sc.MobileContainer> */}
+      {/* } */}
+      <Sc.AsideNavibar>
+        <SideMenu />
+      </Sc.AsideNavibar>
+      <Sc.Main>
+        <Outlet />
+      </Sc.Main>
+    </Sc.LayoutContainer>
   )
 }

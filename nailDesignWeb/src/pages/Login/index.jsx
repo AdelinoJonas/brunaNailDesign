@@ -34,7 +34,6 @@ export function Login() {
 // } = useStores();
 
   async function handleLogin(data) {
-
     try {
       // const response = await instance.post('/login', {
       //   email: data.email,
@@ -65,9 +64,8 @@ export function Login() {
   }
 
   function handleOpenWhatsapp() {
-    const whatsAppNumber = process.env.ADMIN_WHATSAPP_NUMBER;
     const message = "Olá, Esqueci minha senha. Pode me ajudar?"
-    const whatsappLink = `https://wa.me/55${whatsAppNumber}?text=T${message}`;
+    const whatsappLink = `https://wa.me/5541984498900?text=T${message}`;
     window.open(whatsappLink);
   }
 
@@ -93,7 +91,7 @@ export function Login() {
           />
         </header>
         <Sc.FormContent
-          onSubmit={handleSubmit(handleLogin)}
+          // onSubmit={handleSubmit(handleLogin)}
         >
           <Sc.InputGroup>
             <label htmlFor="email">
@@ -145,7 +143,8 @@ export function Login() {
           <button
             id="loginButton"
             type="submit"
-            disabled={isSubmitting}
+            // disabled={isSubmitting}
+            onClick={()=>navigate('/home')}
           >
             Entrar
           </button>
