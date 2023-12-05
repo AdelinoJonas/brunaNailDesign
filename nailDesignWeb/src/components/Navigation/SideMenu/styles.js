@@ -13,7 +13,7 @@ export const Container = styled.div`
   .footerMenu {
     margin-bottom: 1rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     color: #52475C;
   }
 `;
@@ -29,11 +29,11 @@ export const LinkList = styled.li`
   color: #52475C;
   list-style: none;
   padding-left: 2rem;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
   height: 100%;
   &:hover {
     color: #9a5108;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 700;
     opacity: 0.8;
     transition: all 0.3s;
