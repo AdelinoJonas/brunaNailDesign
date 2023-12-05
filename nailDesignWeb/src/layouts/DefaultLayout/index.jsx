@@ -11,6 +11,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useStores } from '../../stores';
 import * as Sc from './styles';
 import SideMenu from "../../components/Navigation/SideMenu";
+import { Header } from "../../components/Header";
 // import ToastAlert from "components/ToastAlert";
 
 export function DefaultLayout() {
@@ -56,24 +57,55 @@ export function DefaultLayout() {
   // }, [showToast]);
 
   return (
+//     <Sc.LayoutContainer>
+//       {/* <DeleteModal />
+//       <ModalNewClient />
+//       <ModalEditClient />
+//       <ConfirmModal />
+//       <ModalLogout /> */}
+//      {/* {screenWidth > 1000 ? */}
+//         {/* <Sc.HeaderPage /> :
+//         <Sc.MobileContainer >
+//         <MobileMenu />
+//       </Sc.MobileContainer> */}
+//       {/* } */}
+//       <Sc.AsideNavibar>
+//         <SideMenu />
+//       </Sc.AsideNavibar>
+//       <Sc.Main>
+//         <Outlet />
+//       </Sc.Main>
+//     </Sc.LayoutContainer>
+//   )
+// }
+  <>
     <Sc.LayoutContainer>
       {/* <DeleteModal />
       <ModalNewClient />
       <ModalEditClient />
       <ConfirmModal />
       <ModalLogout /> */}
-     {/* {screenWidth > 1000 ? */}
-        {/* :
+      {screenWidth > 1080 ?
+        // <Sc.HeaderPage>
+          <Header />
+        // </Sc.HeaderPage>
+        :
         <Sc.MobileContainer >
-        <MobileMenu />
-      </Sc.MobileContainer> */}
-      {/* } */}
+         <MobileMenu />
+        </Sc.MobileContainer>
+      }
       <Sc.AsideNavibar>
         <SideMenu />
       </Sc.AsideNavibar>
       <Sc.Main>
+        {/* {(pathname === '/home' || pathname === '/clients') &&
+          <Sc.MobileContainer >
+            <SearchInput />
+          </Sc.MobileContainer>
+        } */}
         <Outlet />
       </Sc.Main>
     </Sc.LayoutContainer>
+    </>
   )
 }
