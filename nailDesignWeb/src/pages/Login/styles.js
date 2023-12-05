@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import backgroundImg from '../../assets/mockup1.jpeg';
 
 export const Container = styled.div`
@@ -12,18 +12,23 @@ export const Container = styled.div`
   flex-wrap: wrap;
 `;
 
+
 export const LeftContent = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FFE7D3;
+  background-color: ${(props) => (props.theme.background.primary)};
   @media (max-width: 768px) {
     header {
       padding: 0rem 3rem;
     }
   }
+
+${(props) => props.background && css`
+${() => (props.theme.background)};
+`}
 
   @media (max-width: 1366px) {
     header {
@@ -47,7 +52,10 @@ export const FormContent = styled.form`
   flex-direction: column;
   margin-top: 5rem;
   gap: 1.6rem;
-  color: #52475C;
+  color: ${(props) => (props.theme.color.primary)};
+  ${(props) => props.color && css`
+    ${() => (props.theme.color)};
+  `}
   @media(max-width: 768px) {
     width: 100%;
     padding: 0 3.2rem;
@@ -64,8 +72,8 @@ export const FormContent = styled.form`
     justify-content: center;
     align-items: center;
     padding: 1rem 3rem;
-    color: #FFFFFF;
-    background: #F08080;
+    color: ${(props) => (props.theme.background.white)};;
+    background: ${(props) => (props.theme.background.button)};;
     border-radius: 4px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -73,6 +81,10 @@ export const FormContent = styled.form`
     font-size: 2rem;
     line-height: 2rem;
     text-align: center;
+
+    ${(props) => props.background && css`
+    ${() => (props.theme.background)};
+    `}
     &:not(:disabled):hover{
       cursor: pointer;
       opacity: 0.7;
@@ -109,7 +121,10 @@ export const InputGroup = styled.div`
     font-size: 1.4rem;
     line-height: 2.2rem;
     font-feature-settings: 'calt' off;
-    color: #52475C;
+    color: ${(props) => (props.theme.color.primary)};
+    ${(props) => props.color && css`
+      ${() => (props.theme.color)};
+    `}
   }
 `;
 
@@ -126,7 +141,10 @@ export const Input = styled.input`
     line-height: 2.2rem;
     letter-spacing: -0.02rem;
     font-feature-settings: 'calt' off;
-    color: #555555;
+    color: ${(props) => (props.theme.color.primary)};
+  ${(props) => props.color && css`
+    ${() => (props.theme.color)};
+  `}
     &:focus {
       outline: 0;
       box-shadow: 0 0 0 0.8px  #A7A7A9;
@@ -145,7 +163,10 @@ export const InputGroupRow = styled(InputGroup)`
     font-size: 1.6rem;
     line-height: 2.2rem;
     letter-spacing: -0.02em;
-    color: #000000;
+    color: ${(props) => (props.theme.color.primary)};
+    ${(props) => props.color && css`
+      ${() => (props.theme.color)};
+    `}
   }
 `;
 
@@ -166,7 +187,10 @@ export const LinkForgotPassword = styled(Link)`
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 2rem;
-  color: #002C50;
+  color: ${(props) => (props.theme.color.primary)};
+  ${(props) => props.color && css`
+    ${() => (props.theme.color)};
+  `}
   &:hover {
     opacity: 0.95;
     transition: color 0.2s;
@@ -183,10 +207,13 @@ export const CheckBoxConteiner = styled.div`
   justify-content: space-between;
   label {
     font-size: 1.6rem;
-    color: #4A4A4A;
+    color: ${(props) => (props.theme.color.primary)};
     margin-bottom: 0;
     letter-spacing: -0.02rem;
     font-feature-settings: 'calt' off;
+    ${(props) => props.color && css`
+    ${() => (props.theme.color)};
+  `}
     &:hover {
       cursor: pointer;
     }
@@ -212,18 +239,6 @@ export const RightContent = styled.div`
     display: none;
   }
 
-  h2 {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 3.2rem;
-    line-height: 3.6rem;
-    text-align: center;
-    font-feature-settings: 'calt' off;
-    color: #FFFFFF;
-    margin-top: 4.58rem;
-  }
-
   span {
     max-width: 31.875rem;
     font-family: 'Roboto';
@@ -234,38 +249,12 @@ export const RightContent = styled.div`
     text-align: center;
     letter-spacing: -0.02rem;
     font-feature-settings: 'calt' off;
-    color: #FFFFFF;
     margin-top: 1.6rem;
-  }
-`;
-
-export const FormFooter = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  row-gap: 0.8rem;
-  column-gap: 0.5rem;
-  span, a {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.02rem;
-    font-feature-settings: 'calt' off;
-    color: #000000;
-  }
-
-  a {
-    font-weight: 700;
-    text-decoration: none;
-    &:hover {
-      opacity: 0.8;
-    }
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 0.8px  #A7A7A9;
-    }
+    color: #FFFFFF;
+    color: ${(props) => (props.theme.color.white)};
+  ${(props) => props.color && css`
+    ${() => (props.theme.color)};
+  `}
   }
 `;
 
@@ -276,8 +265,11 @@ export const ErrorMessage = styled.span`
   font-size: 1.4rem;
   line-height: 2.2rem;
   font-feature-settings: 'calt' off;
-  color: #E93F66;
   padding: 0.8rem 0.4rem 0;
+  color: ${(props) => (props.theme.alert.warning)};
+  ${(props) => props.alert && css`
+    ${() => (props.theme.alert)};
+  `}
 `;
 
 export const LinkContainer = styled.div`

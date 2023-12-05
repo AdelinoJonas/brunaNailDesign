@@ -87,7 +87,7 @@ export function Login() {
         <header>
           <Sc.Image
             src={logo}
-            alt="logo do mais adv"
+            alt="logo Bruna pereira"
           />
         </header>
         <Sc.FormContent

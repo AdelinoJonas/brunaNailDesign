@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const LayoutContainer = styled.div`
-  display: grid;
-  grid-template-columns: 20% 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+display: grid;
+grid-template-columns: 20rem;
+grid-template-rows: 0fr;
+grid-column-gap: 0px;
+grid-row-gap: 0px;
 
   @media(max-width: 1080px){
     /* display: grid;
@@ -16,19 +16,21 @@ export const LayoutContainer = styled.div`
   }
 `;
 
+export const HeaderPage = styled.div`
+  background-color: yellow;
+  grid-area: 1 / 2 / 2 / 3;
+`;
+
 export const AsideNavibar = styled.aside`
-  top: 0;
-  bottom: 0;
   position: fixed;
-  grid-area: 1 / 1 / 2 / 2;
-  /* background-color:blue; */
-  width: 100%;
+  grid-area: 1 / 1 / 3 / 2;
 `;
 
 export const Main = styled.main`
-  grid-area: 1 / 2 / 2 / 3;
+  grid-area: 2 / 2 / 3 / 3;
   display: flex;
   flex-wrap: wrap;
+  max-width: 100%;
   @media(max-width: 1000px){
     width: 100%;
   }

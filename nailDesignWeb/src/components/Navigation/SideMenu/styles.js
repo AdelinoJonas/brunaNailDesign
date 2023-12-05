@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 20%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #FBC4AB;
-  .logo{
-    padding: 1rem;
-  }
+  background-color: #FFE7D3;
+  position: fixed;
   .footerMenu {
     margin-bottom: 1rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     color: #52475C;
+  }
+  img{
+    width: 19vw;
   }
 `;
 export const LinkContainer = styled.ul`
@@ -23,17 +23,20 @@ export const LinkContainer = styled.ul`
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  margin-top: -9rem;
+  margin-top: -10rem;
 `;
 export const LinkList = styled.li`
   color: #52475C;
   list-style: none;
   padding-left: 2rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   height: 100%;
+  .img{
+    margin-right: 1rem;
+  }
   &:hover {
     color: #9a5108;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
     opacity: 0.8;
     transition: all 0.3s;

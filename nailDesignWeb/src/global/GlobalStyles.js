@@ -15,7 +15,7 @@ body {
   font-size: 16px;
   line-height: 22px;
   letter-spacing: -0.02em;
-  color: #000;
+  color: #52475C;
 }
 
 input[type=radio] {
