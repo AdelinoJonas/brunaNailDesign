@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Sc from './styles';
+import { AiOutlineHome } from "react-icons/ai";
 import { IoMdCalendar } from "react-icons/io";
 import { IoPeople } from "react-icons/io5";
 import { FaHandHoldingHeart } from "react-icons/fa";
@@ -12,23 +13,33 @@ export default function SideMenu() {
       <img src={logo} className='logo' alt="Bruna Nail design" />
       <Sc.LinkContainer>
         <Sc.LinkList>
+          <AiOutlineHome className='img' />
           <span className="navigation">
-          <IoMdCalendar /> Agendamentos
+           Home
           </span> 
         </Sc.LinkList>
         <Sc.LinkList>
+          <IoMdCalendar className='img'/>
           <span className="navigation">
-          <IoPeople /> Clientes
+           Agendamentos
+          </span> 
+        </Sc.LinkList>
+        <Sc.LinkList>
+          <IoPeople className='img'/>
+          <span className="navigation">
+           Clientes
           </span>
         </Sc.LinkList>
         <Sc.LinkList>
+          <FaHandHoldingHeart className='img'/>
           <span className="navigation">
-          <FaHandHoldingHeart /> Serviços
+           Serviços
           </span>
         </Sc.LinkList>
         <Sc.LinkList>
+          <BsClock className='img'/>
           <span className="navigation">
-          <BsClock /> Horários
+           Horários
           </span>
         </Sc.LinkList>
       </Sc.LinkContainer>

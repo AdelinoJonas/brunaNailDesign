@@ -12,38 +12,31 @@ export const Container = styled.div`
     margin-left: 0;
   }
 `;
-
 export const Input = styled.input`
   width: 100%;
   height: 4rem;
   padding: 1rem 1.6rem 1rem 4rem;
-  border: none;
+  border: 1px solid #973f20;
   border-radius: ${(prop) => prop.showList ? "20px 20px 0 0" : "20px"};
-  background-color: ${({ theme }) => theme.background.secundary};
-
+  /* background-color: ${({ theme }) => theme.background.secundary}; */
   color: #555555;
-
     &:focus {
       outline: 0;
   }
-
   &::placeholder {
     color: #555555;
   }
-
   @media(max-width: 1080px){
     width: 100%;
     background-color: transparent;
     border: 1px solid #929292;
     margin-left: 0;
-
     &:focus {
       outline: 0;
       background-color: #F8FAFC;
   }
   }
 `
-
 export const SearchIcon = styled(BiSearch).attrs(({ theme }) => ({ size: 20, color: '#555555' }))`
   position: absolute;
   z-index: 1;
@@ -78,11 +71,8 @@ export const DropdownList = styled.div`
   left: 0px;
   right: 0px;
   max-height: 20rem;
-
   transform: translate(0px, -1rem);
   transition: all 0.9s;
-
-
   `;
 
 export const ListItems = styled.ul`

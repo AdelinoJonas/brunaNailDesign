@@ -23,7 +23,7 @@ export const LinkContainer = styled.ul`
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  margin-top: -3rem;
+  margin-top: -10rem;
 `;
 export const LinkList = styled.li`
   color: #52475C;
@@ -31,6 +31,9 @@ export const LinkList = styled.li`
   padding-left: 2rem;
   font-size: 2rem;
   height: 100%;
+  .img{
+    margin-right: 1rem;
+  }
   &:hover {
     color: #9a5108;
     font-size: 2rem;

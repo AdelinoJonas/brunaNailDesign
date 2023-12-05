@@ -1,7 +1,7 @@
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { SearchInput } from '../SearchInput';
-import logo from '../../assets/logoColor.png';
+import Button from '../Button';
 import * as Sc from './styles';
 
 export function Header() {
@@ -35,7 +35,6 @@ export function Header() {
   return (
     <Sc.Header>
       <Sc.Nav>
-      {/* <img src={logo} className='logo' alt="Bruna Nail design" /> */}
       <Sc.LeftGroup>
         <div>
           {pathname === '/schedules' &&
@@ -59,14 +58,13 @@ export function Header() {
       </Sc.LeftGroup>
       <Sc.RightGroup>
         {pathname === '/home' &&
-          // <Button
-          //   plus
-          //   typeNew
-          //   mediumDark
-          //   title="Nova audiência"
-          //   onClick={() => { handleToggleModal('newAudience') }}
-          // />
-          <button>Novo agendamento</button>
+          <Button
+            plus
+            medium= "true"
+            title="Agendamento"
+            // onClick={() => { handleToggleModal('newAudience') }}
+          />
+          // <button>Novo agendamento</button>
         }
         {pathname === '/schedules' &&
           // <Button

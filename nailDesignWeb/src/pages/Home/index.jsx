@@ -5,7 +5,7 @@ import * as Sc from './styles';
 export default function Home() {
   return (
     <Sc.Container>
-      <h1>AGENDAMENTOS</h1>
+      <h1>AGENDAMENTOS DO DIA</h1>
       <ScheduleTable/>
     </Sc.Container>  
   )
