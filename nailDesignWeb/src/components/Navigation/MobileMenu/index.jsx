@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function ScheduleTable() {
+export default function MobileMenu() {
   return (
-    <div>ScheduleTable</div>
+    <div>MobileMenu</div>
   )
 }

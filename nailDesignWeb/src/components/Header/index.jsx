@@ -1,6 +1,7 @@
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { SearchInput } from '../SearchInput';
+import logo from '../../assets/logoColor.png';
 import * as Sc from './styles';
 
 export function Header() {
@@ -34,6 +35,7 @@ export function Header() {
   return (
     <Sc.Header>
       <Sc.Nav>
+      {/* <img src={logo} className='logo' alt="Bruna Nail design" /> */}
       <Sc.LeftGroup>
         <div>
           {pathname === '/schedules' &&

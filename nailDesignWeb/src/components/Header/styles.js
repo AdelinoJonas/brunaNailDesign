@@ -3,15 +3,15 @@ import styled from "styled-components";
 export const Header = styled.header`
    width: 100%;
   box-shadow: 0px 2px 4px rgba(74, 74, 74, 0.15);
-  padding: 2.2rem 3.6rem;
-  /* background-color: #FFE7D3; */
-  grid-area: 1 / 2 / 2 / 3;
+  padding: 2rem 3.5rem;
+  background-color: #FFE7D3;
+  /* grid-area: 1 / 2 / 2 / 3; */
  
 
   @media(max-width: 1080px){
     background-color: transparent;
     box-shadow: none;
-    padding: 1.6rem 1.6rem 0;
+    padding: 2.6rem 3.6rem;
     display: none;
   }
 `;
@@ -21,6 +21,12 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   height: 6rem;
+  /* img{
+    width: 17vw;
+    margin-right: 6rem;
+    margin-top: 2rem;
+    background-color: #FFE7D3;
+  } */
   `;
 
 export const LeftGroup = styled.div`

@@ -86,9 +86,9 @@ export function DefaultLayout() {
       <ConfirmModal />
       <ModalLogout /> */}
       {screenWidth > 1080 ?
-        // <Sc.HeaderPage>
+        <Sc.HeaderPage>
           <Header />
-        // </Sc.HeaderPage>
+        </Sc.HeaderPage>
         :
         <Sc.MobileContainer >
          <MobileMenu />

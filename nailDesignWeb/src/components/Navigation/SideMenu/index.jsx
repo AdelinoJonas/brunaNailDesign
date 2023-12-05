@@ -1,11 +1,10 @@
 import React from 'react';
 import * as Sc from './styles';
-import logo from '../../../assets/logoColor.png';
 import { IoMdCalendar } from "react-icons/io";
 import { IoPeople } from "react-icons/io5";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { BsClock } from "react-icons/bs";
-
+import logo from '../../../assets/logoColor.png';
 
 export default function SideMenu() {
   return (
@@ -14,7 +13,7 @@ export default function SideMenu() {
       <Sc.LinkContainer>
         <Sc.LinkList>
           <span className="navigation">
-          <IoMdCalendar /> Agendamento
+          <IoMdCalendar /> Agendamentos
           </span> 
         </Sc.LinkList>
         <Sc.LinkList>
