@@ -37,33 +37,25 @@ export default function SchedulesTable() {
 
   const columns = [
     {
-      title: "ID",
-      width: 100,
-      sort: (a, b) => a[orderBy] - b[orderBy],
+      title: "ID"
     },
     {
-      title: "IMAGEM",
-      width: 200,
+      title: "IMAGEM"
     },
     {
-      title: "SERVICE",
-      width: 150,
+      title: "SERVIÇOS"
     },
     {
-      title: "DESCRIÇÃO",
-      width: 300,
+      title: "DESCRIÇÃO"
     },
     {
-      title: "TIME",
-      width: 100,
+      title: "DURAÇÃO"
     },
     {
-      title: "PRICE",
-      width: 100,
+      title: "PREÇO"
     },
     {
-      title: "OPÇÕES",
-      width: 100,
+      title: "OPÇÕES"
     },
   ];
 
@@ -71,13 +63,13 @@ export default function SchedulesTable() {
     <tr key={schedule.id}>
       <td>{schedule.id}</td>
       <td>{schedule.image}</td>
-      <td>{schedule.service}</td>
-      <td>{schedule.description}</td>
+      <td className="service">{schedule.service}</td>
+      <td className="description">{schedule.description}</td>
       <td>{schedule.time}</td>
       <td>{schedule.price}</td>
       <td >
         <CiEdit className="icon"/>
-        <RiDeleteBin5Line className="icon" />
+        <RiDeleteBin5Line className="iconRight" />
       </td>
     </tr>
   ));

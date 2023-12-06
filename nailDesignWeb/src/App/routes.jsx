@@ -38,7 +38,6 @@ export function MyRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      {/* <Route path="/forgotPassword" element={<ForgotPassword />} /> */}
       <Route element={<ProtectedRoutes redirectTo="/" />} >
         <Route path="/" element={<DefaultLayout />} >
           <Route path="/home" element={<Home />}/>

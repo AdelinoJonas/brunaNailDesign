@@ -1,7 +1,11 @@
-import React from 'react'
+import React from 'react';
+import ScheduleTable from '../../components/Tables/ScheduleTable';
+import * as Sc from './styles';
 
 export default function Schedule() {
   return (
-    <div>Schedule</div>
+    <Sc.Container>
+      <ScheduleTable/>
+    </Sc.Container> 
   )
 }
