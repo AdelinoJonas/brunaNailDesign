@@ -11,8 +11,8 @@ export function useAdminUser() {
   const [activeOffice, setActiveOffice] = useState([]);
   const [inactiveOffice, setInactiveOffice] = useState([]);
   const [statusResponse, setStatusResponse] = useState();
-  const [message, setMessage] = useState('');
-  const [showToast, setShowToast] = useState(null);
+  // const [message, setMessage] = useState('');
+  // const [showToast, setShowToast] = useState(null);
 
 
   async function handleNewUser(newUser, token) {
@@ -123,8 +123,8 @@ export function useAdminUser() {
     inactiveOffice,
     statusResponse,
     message,
-    showToast,
-    setShowToast
+    // showToast,
+    // setShowToast
   }
 }
 
