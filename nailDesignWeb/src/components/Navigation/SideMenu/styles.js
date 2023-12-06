@@ -19,18 +19,17 @@ export const Container = styled.div`
 `;
 export const LinkContainer = styled.ul`
   width: 100%;
-  height: 40%;
+  height: 50%;
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
-  margin-top: -10rem;
+  gap: 2rem;
 `;
 export const LinkList = styled.li`
   color: #52475C;
   list-style: none;
   padding-left: 2rem;
   font-size: 2rem;
-  height: 100%;
   .img{
     margin-right: 1rem;
   }
