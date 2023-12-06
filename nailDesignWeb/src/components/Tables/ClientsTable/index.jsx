@@ -34,27 +34,22 @@ export default function ClientsTable() {
   const columns = [
     {
       title: "ID",
-      width: 100,
     },
     {
       title: "CADASTRO",
-      width: 100,
     },
     {
       title: "NAME",
-      width: 200,
+
     },
     {
       title: "E-MAIL",
-      width: 200,
     },
     {
       title: "TELEFONE",
-      width: 150,
     },
     {
       title: "OPÇÕES",
-      width: 100,
     },
   ];
 

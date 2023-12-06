@@ -22,7 +22,7 @@ export function Header() {
       title = 'Agendamentos';
       break;
     case '/services':
-      title = 'Services';
+      title = 'Serviços';
       break;
     case `/schedules/${id}`:
       title = 'Agendamento';
@@ -53,6 +53,14 @@ export function Header() {
               />
             </Sc.BackLink>
           }
+          {pathname === '/services' &&
+            <Sc.BackLink onClick={() => navigate(-1)}>
+              <MdArrowBackIosNew
+                size={24}
+                color="#555555"
+              />
+            </Sc.BackLink>
+          }
           <Sc.Title>{title}</Sc.Title>
         </div>
       </Sc.LeftGroup>
@@ -66,20 +74,26 @@ export function Header() {
           />
         }
         {pathname === '/schedules' &&
-          // <Button
-          //   plus
-          //   typeNew
-          //   mediumDark
-          //   title="Nova audiência"
-          //   onClick={() => { handleToggleModal('newAudience') }}
-          // />
-          <button>Novo agendamento</button>
+          <Button
+          plus
+          medium= "true"
+          title="Agendamento"
+          // onClick={() => { handleToggleModal('newAudience') }}
+        />
         }
         {pathname === '/clients' &&
           <Button
           plus
           medium= "true"
           title="Cliente"
+          // onClick={() => { handleToggleModal('newAudience') }}
+        />
+        }
+        {pathname === '/services' &&
+          <Button
+          plus
+          medium= "true"
+          title="Serviço"
           // onClick={() => { handleToggleModal('newAudience') }}
         />
         }
