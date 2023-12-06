@@ -91,7 +91,7 @@ export function DefaultLayout() {
         </Sc.HeaderPage>
         :
         <Sc.MobileContainer >
-         <MobileMenu />
+          <MobileMenu />
         </Sc.MobileContainer>
       }
       <Sc.AsideNavibar>

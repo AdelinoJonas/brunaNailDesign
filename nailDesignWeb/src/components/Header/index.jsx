@@ -64,7 +64,6 @@ export function Header() {
             title="Agendamento"
             // onClick={() => { handleToggleModal('newAudience') }}
           />
-          // <button>Novo agendamento</button>
         }
         {pathname === '/schedules' &&
           // <Button
@@ -77,14 +76,12 @@ export function Header() {
           <button>Novo agendamento</button>
         }
         {pathname === '/clients' &&
-          // <Button
-          //   plus
-          //   typeNew
-          //   mediumDark
-          //   title="Novo cliente"
-          //   onClick={() => handleToggleModal('ModalNewClient')}
-          // />
-          <button>Novo cliente</button>
+          <Button
+          plus
+          medium= "true"
+          title="Cliente"
+          // onClick={() => { handleToggleModal('newAudience') }}
+        />
         }
         <SearchInput />
       </Sc.RightGroup>

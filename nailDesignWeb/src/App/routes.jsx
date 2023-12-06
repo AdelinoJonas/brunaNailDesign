@@ -19,7 +19,7 @@ import Page404 from '../pages/Page404';
 // import EditUser from '../pages/admin/pages/EditUser';
 // import ViewUser from '../pages/admin/pages/ViewUser';
 // import Home from '../pages/Home';
-// import Clients from '../pages/Clients';
+import Clients from '../pages/Clients';
 // import ClientArea from '../pages/ClientArea';
 // import NewClient from '../pages/ClientArea/pages/NewClient';
 // import ViewClient from '../pages/ClientArea/pages/ViewClient';
@@ -45,9 +45,9 @@ export function MyRoutes() {
           {/* <Route path="/schedules" element={<Schedules />}>
             <Route path="/schedules/newSchedule" element={<NewSchedule />} /> */}
           {/* </Route> */}
-          {/* <Route path="/schedules/:id" element={<MobileViewSchedule />} />
+           {/* <Route path="/schedules/:id" element={<MobileViewSchedule />} /> */}
           <Route path="/clients" element={<Clients />} />
-          <Route path="/clients/new-client" element={<NewClient />} />
+          {/*<Route path="/clients/new-client" element={<NewClient />} />
           <Route path="/clients/:id" element={<ClientArea />} />
           <Route path="/clients/:id/view-client" element={<ViewClient />} />
           <Route path="/clients/:id/edit-client" element={<EditClient />} />
