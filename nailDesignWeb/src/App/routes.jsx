@@ -20,6 +20,8 @@ import Page404 from '../pages/Page404';
 // import ViewUser from '../pages/admin/pages/ViewUser';
 // import Home from '../pages/Home';
 import Clients from '../pages/Clients';
+import Schedule from '../pages/Schedule';
+import ServiceList from '../pages/ServicesList';
 // import ClientArea from '../pages/ClientArea';
 // import NewClient from '../pages/ClientArea/pages/NewClient';
 // import ViewClient from '../pages/ClientArea/pages/ViewClient';
@@ -41,8 +43,8 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" />} >
         <Route path="/" element={<DefaultLayout />} >
           <Route path="/home" element={<Home />}/>
-          {/* <Route path="/schedules" element={<Schedules />}>
-            <Route path="/schedules/newSchedule" element={<NewSchedule />} /> */}
+          <Route path="/schedules" element={<Schedule />} />
+           {/* <Route path="/schedules/newSchedule" element={<NewSchedule />} /> */}
           {/* </Route> */}
            {/* <Route path="/schedules/:id" element={<MobileViewSchedule />} /> */}
           <Route path="/clients" element={<Clients />} />
@@ -51,7 +53,8 @@ export function MyRoutes() {
           <Route path="/clients/:id/view-client" element={<ViewClient />} />
           <Route path="/clients/:id/edit-client" element={<EditClient />} />
           <Route path="/clients/:id/documents" element={<ViewDocuments />} />
-          <Route path="/clients/:id/audiences" element={<ClientAudiences />} /> */}
+        <Route path="/clients/:id/audiences" element={<ClientAudiences />} /> */}
+          <Route path="/services" element={<ServiceList />} />
         </Route>
         {/* <Route path="/dashboard" element={<AdminLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
