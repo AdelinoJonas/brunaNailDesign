@@ -38,36 +38,27 @@ export default function SchedulesTable() {
   const columns = [
     {
       title: "ID",
-      width: 100,
     },
     {
       title: "CADASTRO",
-      width: 100,
     },
     {
       title: "DATA",
-      width: 150,
-      sort: (a, b) => a[orderBy] - b[orderBy],
     },
     {
       title: "HORA",
-      width: 100,
     },
     {
       title: "SERVIÇO",
-      width: 200,
     },
     {
       title: "CLIENTE",
-      width: 200,
     },
     {
       title: "TELEFONE",
-      width: 150,
     },
     {
       title: "OPÇÕES",
-      width: 100,
     },
   ];
 
