@@ -33,6 +33,10 @@ export default function ClientsTable() {
 
   const columns = [
     {
+      title: "ID",
+      width: 100,
+    },
+    {
       title: "CADASTRO",
       width: 100,
     },
@@ -56,6 +60,7 @@ export default function ClientsTable() {
 
   const rows = schedules.map((schedule) => (
     <tr key={schedule.id}>
+      <td>{schedule.id}</td>
       <td>{schedule.cadastro}</td>
       <td>{schedule.name}</td>
       <td>{schedule.email}</td>

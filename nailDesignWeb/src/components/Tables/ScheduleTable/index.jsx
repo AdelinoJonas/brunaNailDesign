@@ -37,6 +37,10 @@ export default function SchedulesTable() {
 
   const columns = [
     {
+      title: "ID",
+      width: 100,
+    },
+    {
       title: "CADASTRO",
       width: 100,
     },
@@ -69,6 +73,7 @@ export default function SchedulesTable() {
 
   const rows = schedules.map((schedule) => (
     <tr key={schedule.id}>
+      <td>{schedule.id}</td>
       <td>{schedule.cadastro}</td>
       <td>{schedule.data}</td>
       <td>{schedule.hora}</td>
