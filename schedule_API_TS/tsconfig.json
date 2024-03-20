@@ -109,5 +109,5 @@
   "include": [
     "src",
     "test"
-, "knexfile.js"  ]
+, "knexfile.ts"  ]
 }
