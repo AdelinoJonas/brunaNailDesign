@@ -7,8 +7,10 @@ Este é um sistema de agendamento para uma nail designer, composto por uma plata
 - Node
 - Javascript
 - Docker
+- Docker compose
 - MySQL
 - Jest
+- TDD
 
 # FRONT-END WEB
 - Node
