@@ -1,40 +1,45 @@
-//@ts-nocheck
 import express from "express";
-import CreateClient from "./application/usecase/CreateClient";
-// import GetClient from "./application/usecase/GetClient";
-// import ClientRepositoryDataBase from "./infra/repository/ClientRepositoryDataBase";
+const knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host : '0.0.0.0',
+    port : 3318,
+    user : 'jonas',
+    password : '123456',
+    database : 'appbrunanail_db'
+  },
+  useNullAsDefault: true
+});
 
 const app = express();
 app.use(express.json());
 
 app.post("/client", async function (req, res) {
   try {
-    const { name, email, phone, adress } = req.body;
-    await knex('appbrunanail_db').insert({
+    const { name, email, phone, password } = req.body;
+    const client = await knex('clients').insert({
       name,
       email,
       phone,
-      adress
+      password,
+      is_admin: false
     });
-    res.json({ clientId });
+    console.log("client", client);
+    
+    res.json(client[0]);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// app.get("/client/:clientId",async function (req, res) {
-//   try {
-//     const useCase = new GetClient(new ClientRepositoryDataBase());
-//     const output = await useCase.execute({ clientId: req.params.clientId });    
-//     if (!output) {
-//       return res.status(404).json({ error: "client not found" });
-//     }
-//     return res.json(output);
-//   } catch (e: any) {
-//     return res.status(422).send(e.message);
-//   }
-// });
+app.post("/admin", async function (req, res) {
+  try {
+    
+  } catch (error) {
+
+  }
+});
 
 app.listen(3000, () => {
   console.log(`Servidor ouvindo na porta http://localhost:3000/`);

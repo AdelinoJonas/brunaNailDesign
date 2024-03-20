@@ -10,21 +10,21 @@ DROP table schedules;
 DROP table appointment;
 
 
-CREATE TABLE users (
+CREATE TABLE clients (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    password VARCHAR(60) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    phone VARCHAR(20) UNIQUE,
+    password VARCHAR(20) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     is_admin BOOLEAN
 );
 
 CREATE TABLE services (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL UNIQUE,
-    price NUMERIC(10, 2) NOT NULL,
-    duration TIME NOT NULL,
+    title VARCHAR(255) UNIQUE,
+    price NUMERIC(10, 2),
+    duration TIME,
     description TEXT,
     image VARCHAR(255),
     is_course BOOLEAN
@@ -33,21 +33,21 @@ CREATE TABLE services (
 
 CREATE TABLE schedules (
     id SERIAL PRIMARY KEY,
-    days_available VARCHAR(255) NOT NULL UNIQUE,
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
-    created_at TIMESTAMP DEFAULT NOW() NOT NULL
+    days_available VARCHAR(255) UNIQUE,
+    start_time TIME,
+    end_time TIME,
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE appointments (
     id SERIAL PRIMARY KEY,
     schedule_id INT REFERENCES schedules(id),
-    time TIME NOT NULL,
+    time TIME,
     service_id INT REFERENCES services(id),
-    user_id INT REFERENCES users(id),
+    client_id INT REFERENCES clients(id),
     CONSTRAINT fk_schedule FOREIGN KEY (schedule_id) REFERENCES schedules(id),
     CONSTRAINT fk_service FOREIGN KEY (service_id) REFERENCES services(id),
-    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_client FOREIGN KEY (client_id) REFERENCES clients(id)
 );
 
 ALTER TABLE appointments ALTER COLUMN user_id TYPE integer;
