@@ -33,6 +33,14 @@ app.post("/client", async function (req, res) {
   }
 });
 
+app.post("/admin", async function (req, res) {
+  try {
+    
+  } catch (error) {
+
+  }
+});
+
 app.listen(3000, () => {
   console.log(`Servidor ouvindo na porta http://localhost:3000/`);
 });
