@@ -1,4 +1,5 @@
 import express from "express";
+const bcrypt = require("bcrypt");
 const knex = require('knex')({
   client: 'mysql',
   connection: {
@@ -17,11 +18,12 @@ app.use(express.json());
 app.post("/user", async function (req, res) {
   try {
     const { name, email, phone, password } = req.body;
+    const passHashed = await bcrypt.hash(`${password}`, 10);
     const client = await knex('users').insert({
       name,
       email,
       phone,
-      password,
+      password: passHashed,
       is_admin: false
     });   
     res.json(client[0]);

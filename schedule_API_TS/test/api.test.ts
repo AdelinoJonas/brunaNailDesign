@@ -11,7 +11,7 @@ test("Deve cadastrar um cliente", async function () {
 	expect(output1).toBeDefined();
 });
 
-test.only("Deve obter um usuário", async function() {
+test("Deve obter um usuário", async function() {
 	const input = {
 		name: "John Doe",
 		email: "john.doe@gmail.com",
