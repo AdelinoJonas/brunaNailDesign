@@ -11,7 +11,7 @@ DROP table appointment;
 
 
 CREATE TABLE users (
-    client_id int not null primary key AUTO_INCREMENT,
+    user_id int not null primary key AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(20) NOT NULL,
