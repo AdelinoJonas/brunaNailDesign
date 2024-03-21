@@ -1,5 +1,4 @@
 import axios from "axios";
-
 test("Deve cadastrar um cliente", async function () {
 	const input = {
 		name: "John Doe",

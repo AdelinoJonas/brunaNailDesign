@@ -17,15 +17,13 @@ app.use(express.json());
 app.post("/client", async function (req, res) {
   try {
     const { name, email, phone, password } = req.body;
-    const client = await knex('clients').insert({
+    const client = await knex('users').insert({
       name,
       email,
       phone,
       password,
       is_admin: false
-    });
-    console.log("client", client);
-    
+    });   
     res.json(client[0]);
   } catch (error) {
     console.error(error);
@@ -33,7 +31,7 @@ app.post("/client", async function (req, res) {
   }
 });
 
-app.post("/admin", async function (req, res) {
+app.post("/service", async function (req, res) {
   try {
     
   } catch (error) {

@@ -10,15 +10,18 @@ DROP table schedules;
 DROP table appointment;
 
 
-CREATE TABLE clients (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE users (
+    client_id int not null primary key AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE,
-    phone VARCHAR(20) UNIQUE,
-    password VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     is_admin BOOLEAN
 );
+
+
+drop table users
 
 CREATE TABLE services (
     id SERIAL PRIMARY KEY,

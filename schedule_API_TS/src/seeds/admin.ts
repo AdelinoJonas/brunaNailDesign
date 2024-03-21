@@ -1,7 +1,7 @@
 import knex from 'knex';
 const bcrypt = require("bcrypt");
 
-const db = knex({
+export const db = knex({
   client: 'mysql',
   connection: {
     host : '0.0.0.0',
@@ -13,16 +13,19 @@ const db = knex({
   useNullAsDefault: true
 });
 
-export async function seed(): Promise<void> {
+export async function seed(): Promise<any> {
   const password = await bcrypt.hash("password", 8);
   await db("users").del();
-  await db("users").insert([
-    {         
+  const client = await db("users").insert([
+    { 
       name: "Bruna Pereira",
       email: "brunapereira@studio.com.br",
       phone: "4100000099",
       password,
       is_admin: true
     },
-  ]);
+
+]);
+return (client);
+   
 };
