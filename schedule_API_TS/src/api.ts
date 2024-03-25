@@ -24,17 +24,14 @@ app.post("/login", async function (req, res) {
   }
   try {
     const user = await knex("users").where({ email }).first();
-    console.log("found", user.email);
     if (!user) {
       return res.status(404).json("Usuário não encontrado.");
     }
     const correctPass = await bcrypt.compare(password, user.password);
-    console.log("correctPass", correctPass);
     if (!correctPass) {
       return res.status(401).json("Credenciais inválidas.");
     }
     const { password: _, ...userLogin } = user;
-    console.log("data", userLogin);
     
     const token = jwt.sign(
       {
@@ -44,7 +41,6 @@ app.post("/login", async function (req, res) {
       },
       "SECRET"
       );
-      console.log("token", token);
       return res.status(200).json({
       user: userLogin,
       token,
