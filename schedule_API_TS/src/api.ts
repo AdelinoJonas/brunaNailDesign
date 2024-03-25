@@ -1,4 +1,6 @@
 import express from "express";
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 const bcrypt = require("bcrypt");
 const knex = require('knex')({
   client: 'mysql',
@@ -14,6 +16,43 @@ const knex = require('knex')({
 
 const app = express();
 app.use(express.json());
+
+app.post("/login", async function (req, res) {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json("O campo email e senha são obrigatórios.");
+  }
+  try {
+    const user = await knex("users").where({ email }).first();
+    console.log("found", user.email);
+    if (!user) {
+      return res.status(404).json("Usuário não encontrado.");
+    }
+    const correctPass = await bcrypt.compare(password, user.password);
+    console.log("correctPass", correctPass);
+    if (!correctPass) {
+      return res.status(401).json("Credenciais inválidas.");
+    }
+    const { password: _, ...userLogin } = user;
+    console.log("data", userLogin);
+    
+    const token = jwt.sign(
+      {
+        id: user.user_id,
+        name: user.name,
+        email: user.email,
+      },
+      "SECRET"
+      );
+      console.log("token", token);
+      return res.status(200).json({
+      user: userLogin,
+      token,
+    });
+  } catch (error:any) {
+    return res.status(400).json(error.message);
+  }
+});
 
 app.post("/user", async function (req, res) {
   try {

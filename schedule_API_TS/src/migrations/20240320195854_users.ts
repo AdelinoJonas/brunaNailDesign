@@ -1,20 +1,18 @@
-//@ts-nocheck
 import knex from 'knex';
-import { BaseRepository } from "@cubos/knex-repository";
 
 const db = knex({
   client: 'mysql',
   connection: {
-    host : '0.0.0.0',
-    port : 3318,
-    user : 'jonas',
-    password : '123456',
-    database : 'appbrunanail_db'
+    host: '0.0.0.0',
+    port: 3318,
+    user: 'jonas',
+    password: '123456',
+    database: 'appbrunanail_db'
   },
   useNullAsDefault: true
 });
 
-export async function up(knex: knex): Promise<void> {
+export async function up(): Promise<void> {
   await db.schema.createTable("users", (table) => {
     table.increments("user_id").primary();
     table.string("name", 255).notNullable();
@@ -26,6 +24,6 @@ export async function up(knex: knex): Promise<void> {
   });
 }
 
-export async function down(knex: knex): Promise<void> {
-  await BaseRepository.dropTable(knex, "users");
+export async function down(): Promise<void> {
+  await db.schema.dropTableIfExists("users");
 }
