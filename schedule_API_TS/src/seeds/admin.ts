@@ -14,7 +14,7 @@ export const db = knex({
 });
 
 export async function seed(): Promise<any> {
-  const password = await bcrypt.hash("password", 10);
+  const password = await bcrypt.hash("Bruna24", 10);
   await db("users").del();
   const client = await db("users").insert([
     { 
