@@ -17,7 +17,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@cubos/knex-repository": "^0.0.0-dev.20210120191809",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "axios": "^1.6.7",

@@ -17,14 +17,13 @@ export default class UserRepositoryDataBase implements UserRepository {
 
   async save (user: User) {
     const { name, email, password, phone } = user;
-    const passHashed = await bcrypt.hash(`${password}`, 10);
+    const passHashed = await bcrypt.hash(`${password.value}`, 10);
     const userData = await knex('users').insert({
       name,
-      email,
-      phone,
-      password: passHashed,
-      is_admin: false
-    });   
+      email: email.value,
+      phone: phone.value,
+      password: passHashed
+    });  
     return (userData[0]);
   }
 

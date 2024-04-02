@@ -15,7 +15,6 @@ export default class User {
   }
 
   static create (name: string, email: string, phone: string, password: string) {
-   
     return new User(name, email, phone, password);
   }
 }

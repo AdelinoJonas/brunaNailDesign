@@ -1,4 +1,6 @@
 import express from "express";
+import CreateUser from "./application/usecase/CreateUser";
+import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const bcrypt = require("bcrypt");
@@ -51,21 +53,9 @@ app.post("/login", async function (req, res) {
 });
 
 app.post("/user", async function (req, res) {
-  try {
-    const { name, email, phone, password } = req.body;
-    const passHashed = await bcrypt.hash(`${password}`, 10);
-    const client = await knex('users').insert({
-      name,
-      email,
-      phone,
-      password: passHashed,
-      is_admin: false
-    });   
-    res.json(client[0]);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    const useCase = new CreateUser(new UserRepositoryDataBase());
+    const output = await useCase.execute(req.body);
+    return res.json(output);
 });
 
 app.get("/user/:userId", async function (req, res) {
@@ -76,7 +66,7 @@ app.get("/user/:userId", async function (req, res) {
     .where('user_id', userId)
     .first()
     if (!userData) {
-      return res.status(404).json({error: "User not found"})
+      return res.status(404).json({error: "Usuário não encontrado"})
     }
     return res.json({message: userData})
   } catch (e) {

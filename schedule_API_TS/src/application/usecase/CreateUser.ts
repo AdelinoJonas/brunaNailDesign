@@ -8,7 +8,6 @@ export default class CreateUser {
   async execute (input: Input): Promise<Output> {
     const user = User.create(input.name, input.email, input.phone, input.password);
     const data = await this.userRepository.save(user);
-    
     return {user_id: data};
   }
 }

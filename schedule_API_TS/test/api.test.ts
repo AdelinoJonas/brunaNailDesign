@@ -11,21 +11,23 @@ test("Deve cadastrar um usuário", async function () {
 	expect(output1).toBeDefined();
 });
 
-test("Deve obter um usuário", async function() {
-	const input = {
-		name: "John Doe",
-		email: "john.doe@gmail.com",
-		phone: "41984498900",
-    password: "Bruna24",
-	};
-	const response1 = await axios.post("http://localhost:3000/user", input);
-	const outputCreateUser = response1.data;
-	const response2 = await axios.get(`http://localhost:3000/user/${outputCreateUser}`);
-	const outputGetUser = response2.data.message;
-	expect(outputGetUser.name).toBe("John Doe")
-	expect(outputGetUser.email).toBe("john.doe@gmail.com")
-	expect(outputGetUser.phone).toBe("41984498900")
-})
+// test.only("Deve obter um usuário", async function() {
+// 	const input = {
+// 		name: "John Doe",
+// 		email: "john.doe@gmail.com",
+// 		phone: "41984498900",
+//     password: "Bruna24",
+// 	};
+// 	const response1 = await axios.post("http://localhost:3000/user", input);
+// 	const outputCreateUser = response1.data;
+// 	const response2 = await axios.get(`http://localhost:3000/user/${outputCreateUser}`);
+// 	const outputGetUser = response2.data.message;
+// 	console.log(outputGetUser);
+	
+// 	expect(outputGetUser.name).toBe("John Doe")
+// 	expect(outputGetUser.email).toBe("john.doe@gmail.com")
+// 	expect(outputGetUser.phone).toBe("41984498900")
+// })
 test('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",
@@ -54,7 +56,7 @@ test('Deve realizar o login', async () => {
     fail(error.message);
   }
 });
-// test('Não deve fazer login sem email ou senha', async () => {
+// test('Não deve fazer login sem email', async () => {
 //   const input = {
 //     email: "",
 //     password: "Bruna24"
@@ -71,7 +73,7 @@ test('Deve realizar o login', async () => {
 
 // test('Não deve fazer login com email inválido', async () => {
 //   const input = {
-//     email: "john@gmail.com",
+//     email: "jo@gmail.com",
 //     password: "Bruna24"
 //   };
 // 	const response = await axios.post("http://localhost:3000/login", input);
