@@ -28,11 +28,11 @@ export default class UserRepositoryDataBase implements UserRepository {
   }
 
   async get (userId: string) {
+    console.log(userId);
     const userData = await knex('users')
     .select()
     .where('user_id', userId)
     .first();
-    
     return {
       userId: userData.user_id,
       name: userData.name,

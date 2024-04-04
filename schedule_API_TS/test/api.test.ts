@@ -11,7 +11,7 @@ test("Deve cadastrar um usuário", async function () {
 	expect(output1).toBeDefined();
 });
 
-// test.only("Deve obter um usuário", async function() {
+// test("Deve obter um usuário", async function() {
 // 	const input = {
 // 		name: "John Doe",
 // 		email: "john.doe@gmail.com",
@@ -61,14 +61,14 @@ test('Deve realizar o login', async () => {
 //     email: "",
 //     password: "Bruna24"
 //   };
-// 	try {
+// 	 try {
 // 		const response = await axios.post("http://localhost:3000/login", input);
 // 		console.log('teste login', response);
 // 		expect(response.status).toBe(400);
-// 		expect(response).toBe("O campo email e senha são obrigatórios.");
-// 	} catch (error:any) {
-// 		fail(error.message);
-// 	}
+		// expect(response).toBe("O campo email e senha são obrigatórios.");
+	// } catch (error:any) {
+	// 	fail(error.message);
+	// }
 // });
 
 // test('Não deve fazer login com email inválido', async () => {
