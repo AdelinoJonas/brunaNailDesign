@@ -11,23 +11,21 @@ test("Deve cadastrar um usuário", async function () {
 	expect(output1).toBeDefined();
 });
 
-// test("Deve obter um usuário", async function() {
-// 	const input = {
-// 		name: "John Doe",
-// 		email: "john.doe@gmail.com",
-// 		phone: "41984498900",
-//     password: "Bruna24",
-// 	};
-// 	const response1 = await axios.post("http://localhost:3000/user", input);
-// 	const outputCreateUser = response1.data;
-// 	const response2 = await axios.get(`http://localhost:3000/user/${outputCreateUser}`);
-// 	const outputGetUser = response2.data.message;
-// 	console.log(outputGetUser);
-	
-// 	expect(outputGetUser.name).toBe("John Doe")
-// 	expect(outputGetUser.email).toBe("john.doe@gmail.com")
-// 	expect(outputGetUser.phone).toBe("41984498900")
-// })
+test("Deve obter um usuário", async function() {
+	const input = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		phone: "41984498900",
+    password: "Bruna24",
+	};
+	const response1 = await axios.post("http://localhost:3000/user", input);
+	const outputCreateUser = response1.data.user_id;
+	const response2 = await axios.get(`http://localhost:3000/user/${outputCreateUser}`);
+	const outputGetUser = response2.data;
+	expect(outputGetUser.name).toBe("John Doe")
+	expect(outputGetUser.email).toBe("john.doe@gmail.com")
+	expect(outputGetUser.phone).toBe("41984498900")
+})
 test('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",

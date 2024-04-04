@@ -1,13 +1,16 @@
-require('dotenv').config()
-const path = require('path')
+import {Knex} from 'knex';
+import path from 'path';
+import dotenv from 'dotenv';
 
-module.exports = {
+dotenv.config();
+
+const config: Knex.Config = {
     client: "mysql",
     connection: {
         host: process.env.DB_HOST,
         port: parseInt(process.env.DB_PORT ?? "5432", 10),
         database: process.env.DB_DATABASE,
-        user: process.env.DB_USERNAME,
+        user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
     },
     migrations: {
@@ -18,3 +21,5 @@ module.exports = {
         directory:path.resolve(__dirname, 'src', 'seeds')
     }
 };
+
+export default config;

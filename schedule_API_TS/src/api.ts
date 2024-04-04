@@ -75,7 +75,7 @@ app.get("/user/:userId", async function (req, res) {
   // }
   // try {
     const useCase = new GetUser(new UserRepositoryDataBase());
-    console.log(useCase);
+
     
     const output = await useCase.execute({ userId: req.params.userId });    
     if (!output) {
