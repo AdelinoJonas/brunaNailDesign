@@ -1,4 +1,4 @@
-import { validate } from "../src/EmailValidator";
+import { validate } from "../../src/EmailValidator";
 
 test("Deve validar o email", function() {
   const email = "jhon.doe@gmail.com";

@@ -1,4 +1,4 @@
-import { validate } from "../src/PhoneValidator";
+import { validate } from "../../src/PhoneValidator";
 
 test("Deve validar o telefone", function() {
   const phone = "41984498900";

@@ -1,4 +1,4 @@
-import { validate } from "../src/PasswordValidator";
+import { validate } from "../../src/PasswordValidator";
 
 test("Deve validar a senha", function() {
   const password = "Bruna24";
