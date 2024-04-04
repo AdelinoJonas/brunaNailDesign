@@ -31,4 +31,10 @@ export default class UserRepositoryDataBase implements UserRepository {
       phone: userData.phone,
     };
   }
+  async delete (userId: string) {
+    const userData = await knex('users')
+    .where('user_id', userId)
+    .del()
+    return {message: "User deleted successfully"}
+  }
 }

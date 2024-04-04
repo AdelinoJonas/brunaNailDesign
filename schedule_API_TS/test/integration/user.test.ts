@@ -1,4 +1,5 @@
 import CreateUser from "../../src/application/usecase/CreateUser";
+import DeleteUser from "../../src/application/usecase/DeleteUser";
 import GetUser from "../../src/application/usecase/GetUser";
 import UserRepositoryDataBase from "../../src/infra/repository/UserRepositoryDataBase";
 test("Deve cadastrar um Usuário", async function(){
@@ -57,4 +58,18 @@ test("Deve obter um usuário", async function(){
   expect(output1.name).toBe("John Doe");
   expect(output1.email).toBe("john.doe@gmail.com");
   expect(output1.phone).toBe("41984498900");
+});
+test('Deve deletar um usuário existente', async () => {
+	const input = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		phone: "41984498900",
+    password: "Bruna24",
+	};
+  const usecase = new CreateUser(new UserRepositoryDataBase());
+  const output = await usecase.execute(input); 
+  const usecase1 = new DeleteUser(new UserRepositoryDataBase());
+  const output1 = await usecase1.execute({userId: output.user_id});
+	const deletedUser = output1.message;
+	expect(deletedUser).toBe("User deleted successfully");
 });
