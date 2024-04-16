@@ -4,6 +4,8 @@ import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
 import GetUser from "./application/usecase/GetUser";
 import DeleteUser from "./application/usecase/DeleteUser";
 import knex from "../knex";
+import LoginUser from "./application/usecase/Login";
+import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase";
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const bcrypt = require("bcrypt");
@@ -43,6 +45,14 @@ app.post("/login", async function (req, res) {
     return res.status(400).json(error.message);
   }
 });
+// app.post("/login", async function (req, res) {
+//   const useCase = new LoginUser(new LoginRepositoryDataBase());
+//   console.log('api', useCase);
+  
+//   const output = await useCase.execute(req.body);
+//   console.log('api', output);
+//   return res.json(output);
+// });
 
 app.post("/user", async function (req, res) {
     const useCase = new CreateUser(new UserRepositoryDataBase());

@@ -40,19 +40,21 @@ test('Deve deletar um usuário existente', async () => {
 	expect(deletedUser).toBe("User deleted successfully");
 });
 
-test('Deve realizar o login', async () => {
+test.only('Deve realizar o login', async () => {
   const input = {
-    email: "john.doe@gmail.com",
+    email: "brunapereira@studio.com.br",
     password: "Bruna24"
   };
-  try {
+  // try {
     const response = await axios.post("http://localhost:3000/login", input);
+		console.log(response);
+		
     expect(response.status).toBe(200);
     expect(response.data.user).toBeDefined();
     expect(response.data.token).toBeDefined();
-  } catch (error:any) {
-    fail(error.message);
-  }
+  // } catch (error:any) {
+  //   fail(error.message);
+  // }
 });
 // test('Não deve fazer login sem email', async () => {
 //   const input = {

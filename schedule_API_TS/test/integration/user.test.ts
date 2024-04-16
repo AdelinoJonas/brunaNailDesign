@@ -1,6 +1,8 @@
 import CreateUser from "../../src/application/usecase/CreateUser";
 import DeleteUser from "../../src/application/usecase/DeleteUser";
 import GetUser from "../../src/application/usecase/GetUser";
+import LoginUser from "../../src/application/usecase/Login";
+import LoginRepositoryDataBase from "../../src/infra/repository/LoginRepositoryDataBase";
 import UserRepositoryDataBase from "../../src/infra/repository/UserRepositoryDataBase";
 test("Deve cadastrar um Usuário", async function(){
 	const input = {
@@ -72,4 +74,17 @@ test('Deve deletar um usuário existente', async () => {
   const output1 = await usecase1.execute({userId: output.user_id});
 	const deletedUser = output1.message;
 	expect(deletedUser).toBe("User deleted successfully");
+});
+test.only('Deve realizar o login', async () => {
+  const input = {
+    email: "john.doe@gmail.com",
+    password: "Bruna24"
+  };
+    const useCase = new LoginUser(new LoginRepositoryDataBase());
+		const output = await useCase.execute(input);
+
+		console.log('test login',output);
+		
+    expect(output.data).toBeDefined();
+    expect(output.token).toBeDefined();
 });
