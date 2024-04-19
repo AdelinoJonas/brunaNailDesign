@@ -45,16 +45,10 @@ test('Deve realizar o login', async () => {
     email: "brunapereira@studio.com.br",
     password: "Bruna24"
   };
-  // try {
-    const response = await axios.post("http://localhost:3000/login", input);
-		console.log(response);
-		
-    expect(response.status).toBe(200);
-    expect(response.data.user).toBeDefined();
-    expect(response.data.token).toBeDefined();
-  // } catch (error:any) {
-  //   fail(error.message);
-  // }
+	const response = await axios.post("http://localhost:3000/login", input);	
+	expect(response.status).toBe(200);
+	expect(response.data.user).toBeDefined();
+	expect(response.data.token).toBeDefined();
 });
 // test('Não deve fazer login sem email', async () => {
 //   const input = {

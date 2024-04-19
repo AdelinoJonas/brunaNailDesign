@@ -23,7 +23,6 @@ export default class UserRepositoryDataBase implements UserRepository {
     .select()
     .where('user_id', userId)
     .first();
-
     return {
       userId: userData.user_id,
       name: userData.name,

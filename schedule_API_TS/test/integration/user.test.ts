@@ -82,9 +82,6 @@ test('Deve realizar o login', async () => {
   };
     const useCase = new LoginUser(new LoginRepositoryDataBase());
 		const output = await useCase.execute(input);
-
-		console.log('test login',output);
-		
     expect(output.user).toBeDefined();
     expect(output.token).toBeDefined();
 });

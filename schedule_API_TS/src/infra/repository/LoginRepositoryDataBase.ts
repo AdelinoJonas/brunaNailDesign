@@ -20,7 +20,6 @@ export default class LoginRepositoryDataBase {
       return {message: "Credenciais inválidas."};
     }
     const { password: _, ...userLogin } = user;
-    
     const token = jwt.sign(
       {
         id: user.user_id,
@@ -29,8 +28,6 @@ export default class LoginRepositoryDataBase {
       },
       "SECRET"
       );
-      console.log('repDB', user, token);
-      
       return{
       user: userLogin,
       token,
