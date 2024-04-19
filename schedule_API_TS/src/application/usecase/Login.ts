@@ -6,13 +6,13 @@ export default class LoginUser {
   }
 
   async execute (input: Input): Promise<Output> {
-    const user = new Login(input.email, input.password);
+    const userData = new Login(input.email, input.password);
+    console.log('usecase', userData);
+    
+    const user = await this.loginRepository.login(userData);
     console.log('usecase', user);
     
-    const data = await this.loginRepository.login(user);
-    console.log('usecase', data);
-    
-    return data;
+    return user;
   }
 }
 
@@ -22,6 +22,6 @@ type Input = {
 }
 
 type Output = {
-  data: string,
+  user: string,
   token: string,
 }

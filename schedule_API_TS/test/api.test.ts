@@ -40,7 +40,7 @@ test('Deve deletar um usuário existente', async () => {
 	expect(deletedUser).toBe("User deleted successfully");
 });
 
-test.only('Deve realizar o login', async () => {
+test('Deve realizar o login', async () => {
   const input = {
     email: "brunapereira@studio.com.br",
     password: "Bruna24"
@@ -73,7 +73,7 @@ test.only('Deve realizar o login', async () => {
 
 // test('Não deve fazer login com email inválido', async () => {
 //   const input = {
-//     email: "jo@gmail.com",
+//     email: "jo@gmail",
 //     password: "Bruna24"
 //   };
 // 	const response = await axios.post("http://localhost:3000/login", input);
@@ -85,7 +85,7 @@ test.only('Deve realizar o login', async () => {
 // test('Não deve fazer login com senha inválida', async () => {
 //   const input = {
 //     email: "john.doe@gmail.com",
-//     password: "12"
+//     password: "123456748"
 //   };
 // 	const response = await axios.post("http://localhost:3000/login", input);
 // 	console.log('teste login', response);

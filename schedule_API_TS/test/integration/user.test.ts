@@ -75,9 +75,9 @@ test('Deve deletar um usuário existente', async () => {
 	const deletedUser = output1.message;
 	expect(deletedUser).toBe("User deleted successfully");
 });
-test.only('Deve realizar o login', async () => {
+test('Deve realizar o login', async () => {
   const input = {
-    email: "john.doe@gmail.com",
+    email: "brunapereira@studio.com.br",
     password: "Bruna24"
   };
     const useCase = new LoginUser(new LoginRepositoryDataBase());
@@ -85,6 +85,6 @@ test.only('Deve realizar o login', async () => {
 
 		console.log('test login',output);
 		
-    expect(output.data).toBeDefined();
+    expect(output.user).toBeDefined();
     expect(output.token).toBeDefined();
 });

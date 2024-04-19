@@ -11,11 +11,11 @@ export default class LoginRepositoryDataBase {
     if (!email || !password) {
       return {message: "O campo email e senha são obrigatórios."};
     }
-    const user = await knex("users").where({ email }).first();
+    const user = await knex("users").where({ email: email.value }).first();
     if (!user) {
       return {message:"Usuário não encontrado."};
     }
-    const correctPass = await bcrypt.compare(password, user.password);
+    const correctPass = await bcrypt.compare(password.value, user.password);
     if (!correctPass) {
       return {message: "Credenciais inválidas."};
     }

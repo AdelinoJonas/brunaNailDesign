@@ -10,6 +10,5 @@ export default class Login {
     
     this.email = new Email(emailLogin);
     this.password = new Password(password);    
-    return new Login(emailLogin, password);
   }
 }
