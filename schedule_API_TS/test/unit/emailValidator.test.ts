@@ -12,6 +12,7 @@ test("Não deve validar o email inválido", function() {
   const isValid = validate(email);
   expect(isValid).toBeFalsy();
 })
+
 test("Deve validar o email", function() {
   const email = "jhon.doe@gmail.com";
   const isValid = new Email(email);

@@ -50,39 +50,3 @@ test('Deve realizar o login', async () => {
 	expect(response.data.user).toBeDefined();
 	expect(response.data.token).toBeDefined();
 });
-// test('Não deve fazer login sem email', async () => {
-//   const input = {
-//     email: "",
-//     password: "Bruna24"
-//   };
-// 	 try {
-// 		const response = await axios.post("http://localhost:3000/login", input);
-// 		console.log('teste login', response);
-// 		expect(response.status).toBe(400);
-		// expect(response).toBe("O campo email e senha são obrigatórios.");
-	// } catch (error:any) {
-	// 	fail(error.message);
-	// }
-// });
-
-// test('Não deve fazer login com email inválido', async () => {
-//   const input = {
-//     email: "jo@gmail",
-//     password: "Bruna24"
-//   };
-// 	const response = await axios.post("http://localhost:3000/login", input);
-// 	console.log('teste login', response);
-// 	expect(response.status).toBe(404);
-// 	expect(response).toBe("Usuário não encontrado.");
-// });
-
-// test('Não deve fazer login com senha inválida', async () => {
-//   const input = {
-//     email: "john.doe@gmail.com",
-//     password: "123456748"
-//   };
-// 	const response = await axios.post("http://localhost:3000/login", input);
-// 	console.log('teste login', response);
-// 	expect(response.status).toBe(401);
-// 	expect(response).toBe("Credenciais inválidas.");
-// });
