@@ -26,6 +26,27 @@ test("Deve obter um usuário", async function() {
 	expect(outputGetUser.email).toBe("john.doe@gmail.com")
 	expect(outputGetUser.phone).toBe("41984498900")
 })
+test("Deve editar um usuário", async function() {
+	const input = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		phone: "41984498900",
+		password: "Bruna24",
+};
+const inputUpdated = {
+		name: "Joana Darc",
+		email: "joana.dark@gmail.com",
+		phone: "41984494689",
+		password: "Joana32",
+};
+const responseCreate = await axios.post("http://localhost:3000/user", input);
+const userId = responseCreate.data.user_id;
+const responseUpdate = await axios.patch(`http://localhost:3000/user/${userId}`, inputUpdated);
+const output = responseUpdate.data;
+expect(output.name).toBe("Joana Darc");
+expect(output.email).toBe("joana.dark@gmail.com");
+expect(output.phone).toBe("41984494689");
+})
 test('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",

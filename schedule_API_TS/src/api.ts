@@ -5,6 +5,7 @@ import GetUser from "./application/usecase/GetUser";
 import DeleteUser from "./application/usecase/DeleteUser";
 import LoginUser from "./application/usecase/Login";
 import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase";
+import UpdateUser from "./application/usecase/UpdateUser";
 
 const app = express();
 app.use(express.json());
@@ -28,6 +29,14 @@ app.get("/user/:userId", async function (req, res) {
       return res.status(404).json({ error: "user not found" });
     }
     return res.json(output);
+})
+app.patch("/user/:userId", async function (req, res) {
+  const useCase = new UpdateUser(new UserRepositoryDataBase());
+  const output = await useCase.execute({ userId: req.params.userId, data: req.body });    
+  if (!output) {
+    return res.status(404).json({ error: "user not found" });
+  }
+  return res.json(output);
 })
 
 app.delete("/user/:userId", async function (req, res) {

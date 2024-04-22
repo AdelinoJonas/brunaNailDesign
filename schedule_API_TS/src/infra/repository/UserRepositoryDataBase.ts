@@ -30,6 +30,20 @@ export default class UserRepositoryDataBase implements UserRepository {
       phone: userData.phone,
     };
   }
+
+  async update(userId: string, user: Partial<User>) {
+    const { name, email, phone, password } = user;
+    await knex('users')
+      .where('user_id', userId)
+      .update({
+        name,
+        email: email?.value,
+        phone: phone?.value,
+        password: password?.value,
+      });
+    return user;
+  }
+
   async delete (userId: string) {
     const userData = await knex('users')
     .where('user_id', userId)
