@@ -6,7 +6,7 @@ export default class ServiceRepositoryDataBase implements ServiceRepository {
 
   async save (service: Service) {
     const { title, price, duration, description, image, is_course } = service;
-    const userData = await knex('services').insert({
+    const serviceData = await knex('services').insert({
       title,
       price, 
       duration, 
@@ -14,40 +14,44 @@ export default class ServiceRepositoryDataBase implements ServiceRepository {
       image, 
       is_course
     });   
-    return (userData[0]);
+    return (serviceData[0]);
   }
 
-  // async get (userId: string) {
-  //   const userData = await knex('users')
-  //   .select()
-  //   .where('user_id', userId)
-  //   .first();
-  //   return {
-  //     userId: userData.user_id,
-  //     name: userData.name,
-  //     email: userData.email,
-  //     phone: userData.phone,
-  //   };
-  // }
+  async get (serviceId: string) {
+    const serviceData = await knex('services')
+    .select()
+    .where('service_id', serviceId)
+    .first();
+    return {
+      serviceId: serviceData.service_id,
+      title: serviceData.title,
+      price: serviceData.price, 
+      duration: serviceData.duration, 
+      description: serviceData.description, 
+      image: serviceData.image, 
+      is_course: serviceData.is_course
+    };
+  }
 
-  // async update(userId: string, user: Partial<User>) {
-  //   const { name, email, phone, password} = user;
-  //   const passHashed = await bcrypt.hash(`${password}`, 10);
-  //   await knex('users')
-  //     .where('user_id', userId)
-  //     .update({
-  //       name,
-  //       email: email?.value,
-  //       phone: phone?.value,
-  //       password: passHashed?.value,
-  //     });
-  //   return user;
-  // }
+  async update(serviceId: string, service: Partial<Service>) {
+    const { title, price, duration, description, image, is_course } = service;
+    await knex('services')
+      .where('service_id', serviceId)
+      .update({
+        title,
+        price, 
+        duration, 
+        description, 
+        image, 
+        is_course
+      });
+    return service;
+  }
 
-  // async delete (userId: string) {
-  //   await knex('users')
-  //   .where('user_id', userId)
-  //   .del()
-  //   return {message: "User deleted successfully"}
-  // }
+  async delete (serviceId: string) {
+    await knex('services')
+    .where('service_id', serviceId)
+    .del()
+    return {message: "Service deleted successfully"}
+  }
 }

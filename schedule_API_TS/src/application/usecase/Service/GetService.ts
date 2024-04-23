@@ -1,28 +1,34 @@
-import UserRepository from "../../repository/UserRepository";
+import ServiceRepository from "../../repository/ServiceRepository";
 
-export default class GetUser {
-  constructor (readonly userRepository: UserRepository) {
+export default class GetService {
+  constructor (readonly serviceRepository: ServiceRepository) {
   }
   
   async execute (input: Input): Promise<Output> {
-    const user = await this.userRepository.get(input.userId);
+    const service = await this.serviceRepository.get(input.serviceId);
     
     return {
-      userId: user.user_id,
-      name: user.name,
-      email: user.email,
-      phone:user.phone
+      serviceId: service.service_id,
+      title: service.title,
+      price: service.price, 
+      duration: service.duration, 
+      description: service.description, 
+      image: service.image, 
+      is_course: service.is_course
     }
   }
 }
 
 type Input = {
-  userId: string,
+  serviceId: string,
 }
 
 type Output = {
-  userId: string,
-  name: string,
-  email: string,
-  phone: string
+  serviceId: string,
+  title: string,
+  price: string, 
+  duration: string, 
+  description: string, 
+  image: string, 
+  is_course: boolean
 }

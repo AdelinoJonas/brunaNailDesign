@@ -1,32 +1,23 @@
-import User from "../../../domain/User";
-import UserRepository from "../../repository/UserRepository";
+import Service from "../../../domain/Service";
+import ServiceRepository from "../../repository/ServiceRepository";
 
-type Email = string;
-type Phone = string;
-type Password = string;
+export default class UpdateService {
+  constructor(readonly serviceRepository: ServiceRepository) {}
 
-interface PartialUserData {
-  name?: string;
-  email?: Email;
-  phone?: Phone;
-  password?: Password;
-}
-
-export default class UpdateUser {
-  constructor(readonly userRepository: UserRepository) {}
-
-  async execute(input: { userId: string; data: PartialUserData }): Promise<User> {
-    const existingUser = await this.userRepository.get(input.userId);
-    if (!existingUser) {
-      throw new Error("User not found");
+  async execute(input: { serviceId: string; data: any }): Promise<Service> {
+    const existingService = await this.serviceRepository.get(input.serviceId);
+    if (!existingService) {
+      throw new Error("Service not found");
     }
-    const updatedUser = { ...existingUser, ...input.data };
-    const data = await this.userRepository.update(input.userId, updatedUser);
+    const updatedService = { ...existingService, ...input.data };
+    const data = await this.serviceRepository.update(input.serviceId, updatedService);
     return {
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      password: data.password
+      title: data.title,
+      price: data.price, 
+      duration: data.duration, 
+      description: data.description, 
+      image: data.image, 
+      is_course: data.is_course
     };
   }
 }
