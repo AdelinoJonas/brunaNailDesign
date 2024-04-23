@@ -1,4 +1,5 @@
 import LoginUser from "../../src/application/usecase/Login";
+import CreateSchedule from "../../src/application/usecase/Schedule/CreateShedule";
 import CreateService from "../../src/application/usecase/Service/CreateService";
 import DeleteService from "../../src/application/usecase/Service/DeleteService";
 import GetService from "../../src/application/usecase/Service/GetService";
@@ -8,6 +9,7 @@ import DeleteUser from "../../src/application/usecase/User/DeleteUser";
 import GetUser from "../../src/application/usecase/User/GetUser";
 import UpdateUser from "../../src/application/usecase/User/UpdateUser";
 import LoginRepositoryDataBase from "../../src/infra/repository/LoginRepositoryDataBase";
+import ScheduleRepositoryDataBase from "../../src/infra/repository/ScheduleRepositoryDataBase";
 import ServiceRepositoryDataBase from "../../src/infra/repository/ServiceRepositoryDataBase";
 import UserRepositoryDataBase from "../../src/infra/repository/UserRepositoryDataBase";
 
@@ -22,6 +24,7 @@ test("Deve cadastrar um Usuário", async function(){
   const output = await usecase.execute(input);  
   expect(output).toBeDefined();
 });
+
 test("Não deve cadastrar um usuário com e-mail inválido", async function(){
 	const input = {
 		name: "John Doe",
@@ -32,6 +35,7 @@ test("Não deve cadastrar um usuário com e-mail inválido", async function(){
   const usecase = new CreateUser(new UserRepositoryDataBase());
   await expect(() => usecase.execute(input)).rejects.toThrow(new Error("Invalid email"));  
 });
+
 test("Não deve cadastrar um usuário com telefone inválido", async function(){
 	const input = {
 		name: "John Doe",
@@ -42,6 +46,7 @@ test("Não deve cadastrar um usuário com telefone inválido", async function(){
   const usecase = new CreateUser(new UserRepositoryDataBase());
   await expect(() => usecase.execute(input)).rejects.toThrow(new Error("Invalid Phone"));  
 });
+
 test("Não deve cadastrar um usuário com senha inválido", async function(){
 	const input = {
 		name: "John Doe",
@@ -105,6 +110,7 @@ test('Deve deletar um usuário existente', async () => {
 	const deletedUser = output1.message;
 	expect(deletedUser).toBe("User deleted successfully");
 });
+
 test('Deve realizar o login', async () => {
   const input = {
     email: "brunapereira@studio.com.br",
@@ -151,6 +157,7 @@ test("Deve obter um serviço", async function() {
 	expect(output1.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
 	expect(output1.is_course).toBeTruthy();
 })
+
 test("Deve editar um serviço", async function() {
 	const input = {
 		title: "Unha Gel",
@@ -179,6 +186,7 @@ test("Deve editar um serviço", async function() {
 	expect(output1.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
 	expect(output1.is_course).toBeFalsy();
 })
+
 test('Deve deletar um serviço existente', async () => {
 	const input = {
 		title: "Unha Gel",
@@ -194,4 +202,16 @@ test('Deve deletar um serviço existente', async () => {
   const output1 = await usecase1.execute({serviceId: output.service_id});
 	const deletedService = output1.message;
 	expect(deletedService).toBe("Service deleted successfully");
+});
+
+test.only("Deve cadastrar um horário", async function () {
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "09:00",
+		end_time: "11:00"
+	};
+	const useCase = new CreateSchedule(new ScheduleRepositoryDataBase());
+	const output = await useCase.execute(input);
+	const output1 = output.schedule_id;
+	expect(output1).toBeDefined();
 });

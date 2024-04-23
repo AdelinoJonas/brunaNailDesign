@@ -9,6 +9,7 @@ test('Deve realizar o login', async () => {
 	expect(response.data.user).toBeDefined();
 	expect(response.data.token).toBeDefined();
 });
+
 test("Deve cadastrar um usuário", async function () {
 	const input = {
 		name: "John Doe",
@@ -36,6 +37,7 @@ test("Deve obter um usuário", async function() {
 	expect(outputGetUser.email).toBe("john.doe@gmail.com")
 	expect(outputGetUser.phone).toBe("41984498900")
 })
+
 test("Deve editar um usuário", async function() {
 	const input = {
 		name: "John Doe",
@@ -57,6 +59,7 @@ expect(output.name).toBe("Joana Darc");
 expect(output.email).toBe("joana.dark@gmail.com");
 expect(output.phone).toBe("41984494689");
 })
+
 test('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",
@@ -105,6 +108,7 @@ test("Deve obter um serviço", async function() {
 	expect(outputGetService.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
 	expect(outputGetService.is_course).toBeTruthy();
 })
+
 test("Deve editar um serviço", async function() {
 	const input = {
 		title: "Unha Gel",
@@ -133,6 +137,7 @@ expect(output.description).toBe("MOdelo lindo.");
 expect(output.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
 expect(output.is_course).toBeFalsy();
 })
+
 test('Deve deletar um serviço existente', async () => {
 	const input = {
 		title: "Unha Gel",
@@ -147,4 +152,15 @@ test('Deve deletar um serviço existente', async () => {
 	const response2 = await axios.delete(`http://localhost:3000/service/${outputCreateService}`);
 	const deletedService = response2.data.message;
 	expect(deletedService).toBe("Service deleted successfully");
+});
+
+test.only("Deve cadastrar um horário", async function () {
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "09:00",
+		end_time: "11:00"
+	};
+	const response1 = await axios.post("http://localhost:3000/schedule", input);
+	const output1 = response1.data;
+	expect(output1).toBeDefined();
 });
