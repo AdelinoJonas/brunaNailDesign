@@ -1,10 +1,21 @@
-import UserRepository from "../repository/UserRepository";
-import User from "../../domain/User";
+import User from "../../../domain/User";
+import UserRepository from "../../repository/UserRepository";
+
+type Email = string;
+type Phone = string;
+type Password = string;
+
+interface PartialUserData {
+  name?: string;
+  email?: Email;
+  phone?: Phone;
+  password?: Password;
+}
 
 export default class UpdateUser {
   constructor(readonly userRepository: UserRepository) {}
 
-  async execute(input: { userId: string; data: Partial<User> }): Promise<Output> {
+  async execute(input: { userId: string; data: PartialUserData }): Promise<User> {
     const existingUser = await this.userRepository.get(input.userId);
     if (!existingUser) {
       throw new Error("User not found");
@@ -13,16 +24,9 @@ export default class UpdateUser {
     const data = await this.userRepository.update(input.userId, updatedUser);
     return {
       name: data.name,
-      email:data.email,
-      phone:data.phone,
+      email: data.email,
+      phone: data.phone,
       password: data.password
-    }
+    };
   }
 }
-
-type Output = {
-  name: string,
-  email: string,
-  phone: string,
-  password: string
-};

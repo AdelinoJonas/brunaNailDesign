@@ -1,9 +1,12 @@
-import CreateUser from "../../src/application/usecase/CreateUser";
-import DeleteUser from "../../src/application/usecase/DeleteUser";
-import GetUser from "../../src/application/usecase/GetUser";
 import LoginUser from "../../src/application/usecase/Login";
+import CreateUser from "../../src/application/usecase/User/CreateUser";
+import DeleteUser from "../../src/application/usecase/User/DeleteUser";
+import GetUser from "../../src/application/usecase/User/GetUser";
+import UpdateUser from "../../src/application/usecase/User/UpdateUser";
+import User from "../../src/domain/User";
 import LoginRepositoryDataBase from "../../src/infra/repository/LoginRepositoryDataBase";
 import UserRepositoryDataBase from "../../src/infra/repository/UserRepositoryDataBase";
+
 test("Deve cadastrar um Usuário", async function(){
 	const input = {
 		name: "John Doe",
@@ -61,6 +64,29 @@ test("Deve obter um usuário", async function(){
   expect(output1.email).toBe("john.doe@gmail.com");
   expect(output1.phone).toBe("41984498900");
 });
+
+test("Deve editar um usuário", async function() {
+	const input = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		phone: "41984498900",
+		password: "Bruna24",
+};
+const inputUpdated = {
+		name: "Joana Darc",
+		email: "joana.dark@gmail.com",
+		phone: "41984494689",
+		password: "Joana32",
+};
+const usecase = new CreateUser(new UserRepositoryDataBase());
+const output = await usecase.execute(input); 
+const usecase1 = new  UpdateUser(new UserRepositoryDataBase());
+const output1 = await usecase1.execute({userId:output.user_id, data:inputUpdated}); 
+expect(output1.name).toBe("Joana Darc");
+expect(output1.email).toBe("joana.dark@gmail.com");
+expect(output1.phone).toBe("41984494689");
+})
+
 test('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",

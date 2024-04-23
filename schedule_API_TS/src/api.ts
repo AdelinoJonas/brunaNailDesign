@@ -1,11 +1,11 @@
 import express from "express";
-import CreateUser from "./application/usecase/CreateUser";
-import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
-import GetUser from "./application/usecase/GetUser";
-import DeleteUser from "./application/usecase/DeleteUser";
 import LoginUser from "./application/usecase/Login";
+import CreateUser from "./application/usecase/User/CreateUser";
+import DeleteUser from "./application/usecase/User/DeleteUser";
+import GetUser from "./application/usecase/User/GetUser";
+import UpdateUser from "./application/usecase/User/UpdateUser";
 import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase";
-import UpdateUser from "./application/usecase/UpdateUser";
+import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
 
 const app = express();
 app.use(express.json());

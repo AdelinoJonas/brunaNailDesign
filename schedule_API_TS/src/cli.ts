@@ -1,4 +1,4 @@
-import CreateUser from "./application/usecase/CreateUser";
+import CreateUser from "./application/usecase/User/CreateUser";
 import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
 
 process.stdin.on("data", async function(chunk){

@@ -1,4 +1,4 @@
-import UserRepository from "../repository/UserRepository";
+import UserRepository from "../../repository/UserRepository";
 
 export default class GetUser {
   constructor (readonly userRepository: UserRepository) {

@@ -32,20 +32,21 @@ export default class UserRepositoryDataBase implements UserRepository {
   }
 
   async update(userId: string, user: Partial<User>) {
-    const { name, email, phone, password } = user;
+    const { name, email, phone, password} = user;
+    const passHashed = await bcrypt.hash(`${password}`, 10);
     await knex('users')
       .where('user_id', userId)
       .update({
         name,
         email: email?.value,
         phone: phone?.value,
-        password: password?.value,
+        password: passHashed?.value,
       });
     return user;
   }
 
   async delete (userId: string) {
-    const userData = await knex('users')
+    await knex('users')
     .where('user_id', userId)
     .del()
     return {message: "User deleted successfully"}
