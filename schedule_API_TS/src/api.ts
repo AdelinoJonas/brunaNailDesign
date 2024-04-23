@@ -6,6 +6,8 @@ import GetUser from "./application/usecase/User/GetUser";
 import UpdateUser from "./application/usecase/User/UpdateUser";
 import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase";
 import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
+import CreateService from "./application/usecase/Service/CreateService";
+import ServiceRepositoryDataBase from "./infra/repository/ServiceRepositoryDataBase";
 
 const app = express();
 app.use(express.json());
@@ -50,11 +52,9 @@ app.delete("/user/:userId", async function (req, res) {
 })
 
 app.post("/service", async function (req, res) {
-  try {
-    
-  } catch (error) {
-
-  }
+  const useCase = new CreateService(new ServiceRepositoryDataBase());
+  const output = await useCase.execute(req.body);
+  return res.json(output);
 });
 
 app.listen(3000, () => {
