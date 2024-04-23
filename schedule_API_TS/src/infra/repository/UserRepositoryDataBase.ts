@@ -14,7 +14,7 @@ export default class UserRepositoryDataBase implements UserRepository {
       email: email.value,
       phone: phone.value,
       password: passHashed
-    });
+    });   
     return (userData[0]);
   }
 
