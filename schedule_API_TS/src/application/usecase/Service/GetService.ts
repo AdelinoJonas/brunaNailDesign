@@ -6,7 +6,6 @@ export default class GetService {
   
   async execute (input: Input): Promise<Output> {
     const service = await this.serviceRepository.get(input.serviceId);
-    
     return {
       serviceId: service.service_id,
       title: service.title,

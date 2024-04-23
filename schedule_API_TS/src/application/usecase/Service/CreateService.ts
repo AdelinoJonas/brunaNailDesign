@@ -14,7 +14,7 @@ export default class CreateService {
       input.image,
       input.is_course
     );
-    const serviceId = await this.serviceRepository.save(service);
+    const serviceId = await this.serviceRepository.save(service);  
     return {service_id: serviceId};
   }
 }

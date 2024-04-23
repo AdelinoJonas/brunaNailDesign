@@ -34,7 +34,8 @@ app.get("/user/:userId", async function (req, res) {
       return res.status(404).json({ error: "user not found" });
     }
     return res.json(output);
-})
+});
+
 app.patch("/user/:userId", async function (req, res) {
   const useCase = new UpdateUser(new UserRepositoryDataBase());
   const output = await useCase.execute({ userId: req.params.userId, data: req.body });    
@@ -42,7 +43,7 @@ app.patch("/user/:userId", async function (req, res) {
     return res.status(404).json({ error: "user not found" });
   }
   return res.json(output);
-})
+});
 
 app.delete("/user/:userId", async function (req, res) {
   try {
@@ -52,7 +53,7 @@ app.delete("/user/:userId", async function (req, res) {
   } catch (e) {
     return res.status(500).json({ e: 'Internal server error'})
   }
-})
+});
 
 app.post("/service", async function (req, res) {
   const useCase = new CreateService(new ServiceRepositoryDataBase());
@@ -67,15 +68,16 @@ app.get("/service/:serviceId", async function (req, res) {
     return res.status(404).json({ error: "Service not found" });
   }
   return res.json(output);
-})
+});
+
 app.patch("/service/:serviceId", async function (req, res) {
-const useCase = new UpdateService(new ServiceRepositoryDataBase());
-const output = await useCase.execute({ serviceId: req.params.serviceId, data: req.body });    
-if (!output) {
-  return res.status(404).json({ error: "Service not found" });
-}
-return res.json(output);
-})
+  const useCase = new UpdateService(new ServiceRepositoryDataBase());
+  const output = await useCase.execute({ serviceId: req.params.serviceId, data: req.body });    
+  if (!output) {
+    return res.status(404).json({ error: "Service not found" });
+  }
+  return res.json(output);
+});
 
 app.delete("/service/:serviceId", async function (req, res) {
 try {
@@ -85,7 +87,7 @@ try {
 } catch (e) {
   return res.status(500).json({ e: 'Internal server error'})
 }
-})
+});
 
 app.listen(3000, () => {
   console.log(`Servidor ouvindo na porta http://localhost:3000/`);
