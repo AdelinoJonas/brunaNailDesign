@@ -1,17 +1,17 @@
-import ServiceRepository from "../../repository/ServiceRepository";
+import ScheduleRepository from "../../repository/ScheduleRepository";
 
-export default class DeleteService {
-  constructor (readonly serviceRepository: ServiceRepository) {
+export default class DeleteSchedule {
+  constructor (readonly scheduleRepository: ScheduleRepository) {
   }
   
   async execute (input: Input): Promise<Output> {
-    const service = await this.serviceRepository.delete(input.serviceId);
-    return service;
+    const schedule = await this.scheduleRepository.delete(input.scheduleId);
+    return schedule;
   }
 }
 
 type Input = {
-  serviceId: string,
+  scheduleId: string,
 }
 
 type Output = {

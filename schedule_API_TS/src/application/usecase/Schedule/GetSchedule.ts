@@ -1,33 +1,27 @@
-import ServiceRepository from "../../repository/ServiceRepository";
+import ScheduleRepository from "../../repository/ScheduleRepository";
 
-export default class GetService {
-  constructor (readonly serviceRepository: ServiceRepository) {
+export default class GetSchedule {
+  constructor (readonly scheduleRepository: ScheduleRepository) {
   }
   
   async execute (input: Input): Promise<Output> {
-    const service = await this.serviceRepository.get(input.serviceId);
+    const schedule = await this.scheduleRepository.get(input.scheduleId);
     return {
-      serviceId: service.service_id,
-      title: service.title,
-      price: service.price, 
-      duration: service.duration, 
-      description: service.description, 
-      image: service.image, 
-      is_course: service.is_course
+      scheduleId: schedule.schedule_id,
+      available_day: schedule.available_day, 
+      start_time: schedule.start_time,
+      end_time: schedule.end_time
     }
   }
 }
 
 type Input = {
-  serviceId: string,
+  scheduleId: string,
 }
 
 type Output = {
-  serviceId: string,
-  title: string,
-  price: string, 
-  duration: string, 
-  description: string, 
-  image: string, 
-  is_course: boolean
+  scheduleId: string,
+  available_day: string, 
+  start_time: string,
+  end_time: string
 }

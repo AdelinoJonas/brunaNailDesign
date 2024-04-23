@@ -154,7 +154,7 @@ test('Deve deletar um serviço existente', async () => {
 	expect(deletedService).toBe("Service deleted successfully");
 });
 
-test.only("Deve cadastrar um horário", async function () {
+test("Deve cadastrar um horário", async function () {
 	const input = {
 		available_day: "Segunda-feira",
 		start_time: "09:00",
@@ -163,4 +163,53 @@ test.only("Deve cadastrar um horário", async function () {
 	const response1 = await axios.post("http://localhost:3000/schedule", input);
 	const output1 = response1.data;
 	expect(output1).toBeDefined();
+});
+
+test("Deve obter um schedule", async function() {
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "08:00",
+		end_time: "10:00"
+	};
+	const response1 = await axios.post("http://localhost:3000/schedule", input);
+  const outputCreateSchedule = response1.data.schedule_id;
+	const response2 = await axios.get(`http://localhost:3000/schedule/${outputCreateSchedule}`);
+	const output1 = response2.data;
+	expect(output1.available_day).toBe("Segunda-feira");
+	expect(output1.start_time).toBe("08:00:00");
+	expect(output1.end_time).toBe("10:00:00");
+})
+
+test("Deve editar um schedule", async function() {
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "08:00",
+		end_time: "10:00"
+	};
+	const inputUpdated = {
+		available_day: "Segunda-feira",
+		start_time: "14:00",
+		end_time: "15:30"
+	};
+	const responseCreate = await axios.post("http://localhost:3000/schedule", input);
+	const scheduleId = responseCreate.data.schedule_id;
+	const responseUpdate = await axios.patch(`http://localhost:3000/schedule/${scheduleId}`, inputUpdated);
+	const output1 = responseUpdate.data;
+	expect(output1.available_day).toBe("Segunda-feira");
+	expect(output1.start_time).toBe("14:00");
+	expect(output1.end_time).toBe("15:30"
+  );
+})
+
+test('Deve deletar um schedule existente', async () => {
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "14:00",
+		end_time: "15:30"
+	};
+	const response1 = await axios.post("http://localhost:3000/schedule", input);
+	const outputCreateSchedule = response1.data;
+	const response2 = await axios.delete(`http://localhost:3000/schedule/${outputCreateSchedule}`);
+	const deletedSchedule = response2.data.message;
+	expect(deletedSchedule).toBe("Schedule deleted successfully");
 });

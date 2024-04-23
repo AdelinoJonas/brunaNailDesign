@@ -13,41 +13,35 @@ export default class ScheduleRepositoryDataBase implements ScheduleRepositoryDat
     return (scheduleId[0]);
   }
 
-  // async get (serviceId: string) {
-  //   const serviceData = await knex('services')
-  //   .select()
-  //   .where('service_id', serviceId)
-  //   .first();
-  //   return {
-  //     serviceId: serviceData.service_id,
-  //     title: serviceData.title,
-  //     price: serviceData.price, 
-  //     duration: serviceData.duration, 
-  //     description: serviceData.description, 
-  //     image: serviceData.image, 
-  //     is_course: serviceData.is_course
-  //   };
-  // }
+  async get (scheduleId: string) {
+    const scheduleData = await knex('schedules')
+    .select()
+    .where('schedule_id', scheduleId)
+    .first();
+    return {
+      scheduleId: scheduleData.schedule_id,
+      available_day: scheduleData.available_day, 
+      start_time: scheduleData.start_time,
+      end_time: scheduleData.end_time
+    };
+  }
 
-  // async update(serviceId: string, service: Partial<Service>) {
-  //   const { title, price, duration, description, image, is_course } = service;
-  //   await knex('services')
-  //     .where('service_id', serviceId)
-  //     .update({
-  //       title,
-  //       price, 
-  //       duration, 
-  //       description, 
-  //       image, 
-  //       is_course
-  //     });
-  //   return service;
-  // }
+  async update(scheduleId: string, schedule: Partial<Schedule>) {
+    const { available_day, start_time, end_time } = schedule;
+    await knex('schedules')
+      .where('schedule_id', scheduleId)
+      .update({
+        available_day, 
+        start_time,
+        end_time
+      });
+    return schedule;
+  }
 
-  // async delete (serviceId: string) {
-  //   await knex('services')
-  //   .where('service_id', serviceId)
-  //   .del()
-  //   return {message: "Service deleted successfully"}
-  // }
+  async delete (scheduleId: string) {
+    await knex('schedules')
+    .where('schedule_id', scheduleId)
+    .del()
+    return {message: "Schedule deleted successfully"}
+  }
 }

@@ -1,23 +1,20 @@
-import Service from "../../../domain/Service";
-import ServiceRepository from "../../repository/ServiceRepository";
+import Schedule from "../../../domain/Schedule";
+import ScheduleRepository from "../../repository/ScheduleRepository";
 
-export default class UpdateService {
-  constructor(readonly serviceRepository: ServiceRepository) {}
+export default class UpdateSchedule {
+  constructor(readonly scheduleRepository: ScheduleRepository) {}
 
-  async execute(input: { serviceId: string; data: any }): Promise<Service> {
-    const existingService = await this.serviceRepository.get(input.serviceId);
-    if (!existingService) {
-      throw new Error("Service not found");
+  async execute(input: { scheduleId: string; data: any }): Promise<Schedule> {
+    const existingSchedule = await this.scheduleRepository.get(input.scheduleId);
+    if (!existingSchedule) {
+      throw new Error("Schedule not found");
     }
-    const updatedService = { ...existingService, ...input.data };
-    const data = await this.serviceRepository.update(input.serviceId, updatedService);
+    const updatedSchedule = { ...existingSchedule, ...input.data };
+    const data = await this.scheduleRepository.update(input.scheduleId, updatedSchedule);
     return {
-      title: data.title,
-      price: data.price, 
-      duration: data.duration, 
-      description: data.description, 
-      image: data.image, 
-      is_course: data.is_course
+      available_day: data.available_day, 
+      start_time: data.start_time,
+      end_time: data.end_time
     };
   }
 }
