@@ -28,6 +28,8 @@ export default class LoginRepositoryDataBase {
       },
       "SECRET"
       );
+      console.log("LOGIN", user, token);
+      
       return{
       user: userLogin,
       token,

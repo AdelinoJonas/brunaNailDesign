@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response} from "express";
 import jwt from "jsonwebtoken";
 import LoginRepositoryDataBase from "../infra/repository/LoginRepositoryDataBase";
 import LoginUser from "../application/usecase/Login";
@@ -10,7 +10,7 @@ interface DecodedToken {
 const jwtSecret: string = process.env.JWT_SECRET || "Brunanail";
 const LoginRepository = new LoginRepositoryDataBase();
 
-async function tokenVerify(request: Request, response: Response): Promise<void> {
+async function tokenVerify(request: Request, response: Response, next: Function): Promise<void> {
   const authorization = request.headers.authorization;
   if (!authorization) {
     response.status(401).json({
@@ -36,7 +36,8 @@ async function tokenVerify(request: Request, response: Response): Promise<void> 
     }
     const { ...user } = userExists;
     (request.cookies as any).user = user;
-  } catch (error:any) {
+    next();
+  } catch (error: any) {
     if (error.name === "TokenExpiredError") {
       response
         .status(500)

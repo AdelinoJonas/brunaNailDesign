@@ -1,14 +1,15 @@
 import axios from "axios";
-test('Deve realizar o login', async () => {
-  const input = {
-    email: "brunapereira@studio.com.br",
-    password: "Bruna24"
-  };
-	const response = await axios.post("http://localhost:3000/login", input);	
-	expect(response.status).toBe(200);
-	expect(response.data.user).toBeDefined();
-	expect(response.data.token).toBeDefined();
-});
+import User from "../src/domain/User";
+// test.skip('Deve realizar o login', async () => {
+//   const input = {
+//     email: "brunapereira@studio.com.br",
+//     password: "Bruna24"
+//   };
+// 	const response = await axios.post("http://localhost:3000/login", input);	
+// 	expect(response.status).toBe(200);
+// 	expect(response.data.user).toBeDefined();
+// 	expect(response.data.token).toBeDefined();
+// });
 
 test("Deve cadastrar um usuário", async function () {
 	const input = {
@@ -75,18 +76,63 @@ test('Deve deletar um usuário existente', async () => {
 });
 
 test("Deve cadastrar um Serviço", async function () {
-	const input = {
-		title: "Unha Gel",
+  const inputLogin = {
+    email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+  };
+
+  const response = await axios.post("http://localhost:3000/login", inputLogin);
+	console.log(response);
+	const token = response.data.token;
+	console.log(token);
+  const headers = { authorization: `Bearer ${token}` };
+	console.log("headers", headers);
+  const input = {
+    title: "Unha Gel",
     price: "190,00",
-    duration:"1:30",
+    duration: "1:30",
     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
     image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
-    is_course: true
-	};
-	const response1 = await axios.post("http://localhost:3000/service", input);
-	const output1 = response1.data;
-	expect(output1).toBeDefined();
+    is_course: true,
+  };
+    const response1 = await axios.post("http://localhost:3000/service", input, {headers});
+		console.log(response1);
+    const output1 = response1.data;
+    expect(output1).toBeDefined();
+    expect(output1.id).toBeGreaterThan(0);
+    expect(output1.title).toBe("Unha Gel");
+    expect(output1.price).toBe("190,00");
+    expect(output1.duration).toBe("1:30");
+    expect(output1.description).toEqual(input.description);
+    expect(output1.image).toEqual(input.image);
+    expect(output1.is_course).toBe(true);
+
 });
+
+
+// test.only("Deve cadastrar um Serviço", async function () {
+// 	const inputLogin = {
+//     email: "brunapereira@studio.com.br",
+//     password: "Bruna24"
+//   };
+// 	const response = await axios.post("http://localhost:3000/login", inputLogin);
+// 	console.log(response);
+// 	const token = response.data.token;
+// 	console.log(token);
+// 	const headers = { Authorization: `Bearer ${token}` };
+// 	const input = {
+// 		title: "Unha Gel",
+//     price: "190,00",
+//     duration:"1:30",
+//     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
+//     image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+//     is_course: true
+// 	};
+// 	const response1 =	await axios.post("http://localhost:3000/service", input, { headers });
+// 	console.log(response1);
+// 	const output1 = response1.data;
+// 	expect(output1).toBeDefined();
+// });
 
 test("Deve obter um serviço", async function() {
 	const input = {

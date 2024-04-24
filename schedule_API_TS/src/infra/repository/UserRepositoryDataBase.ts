@@ -28,6 +28,7 @@ export default class UserRepositoryDataBase implements UserRepository {
       name: userData.name,
       email: userData.email,
       phone: userData.phone,
+     is_admin: userData.is_admin,
     };
   }
 

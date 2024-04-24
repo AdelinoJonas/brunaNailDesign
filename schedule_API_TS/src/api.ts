@@ -21,15 +21,20 @@ import AppointmentRepositoryDataBase from "./infra/repository/AppointmentReposit
 import GetAppointment from "./application/usecase/Appointment/GetAppointment";
 import UpdateAppointment from "./application/usecase/Appointment/UpdateAppointment";
 import DeleteAppointment from "./application/usecase/Appointment/DeleteAppointment";
+import { tokenVerify } from "./middlewares/tokenVerify";
+import adminVerify from "./middlewares/adminVerify";
 
 const app = express();
 app.use(express.json());
+
 
 app.post("/login", async function (req, res) {
   const useCase = new LoginUser(new LoginRepositoryDataBase());
   const output = await useCase.execute(req.body);
   return res.json(output);
 });
+
+app.use(tokenVerify);
 
 app.post("/user", async function (req, res) {
     const useCase = new CreateUser(new UserRepositoryDataBase());
@@ -65,18 +70,20 @@ app.delete("/user/:userId", async function (req, res) {
   }
 });
 
-app.post("/service", async function (req, res) {
-  const useCase = new CreateService(new ServiceRepositoryDataBase());
-  const output = await useCase.execute(req.body);
-  return res.json(output);
-});
-
 app.get("/service/:serviceId", async function (req, res) {
   const useCase = new GetService(new ServiceRepositoryDataBase());
   const output = await useCase.execute({ serviceId: req.params.serviceId });    
   if (!output) {
     return res.status(404).json({ error: "Service not found" });
   }
+  return res.json(output);
+});
+
+app.use(adminVerify);
+
+app.post("/service", async function (req, res) {
+  const useCase = new CreateService(new ServiceRepositoryDataBase());
+  const output = await useCase.execute(req.body);
   return res.json(output);
 });
 
@@ -132,6 +139,7 @@ try {
   return res.status(500).json({ e: 'Internal server error'})
 }
 });
+
 app.post("/appointment", async function (req, res) {
   const useCase = new CreateAppointment(new AppointmentRepositoryDataBase());
   const output = await useCase.execute(req.body);

@@ -11,7 +11,8 @@ export default class GetUser {
       userId: user.user_id,
       name: user.name,
       email: user.email,
-      phone:user.phone
+      phone:user.phone,
+      is_admin: user.is_admin
     }
   }
 }
@@ -25,4 +26,5 @@ type Output = {
   name: string,
   email: string,
   phone: string
+  is_admin: boolean
 }

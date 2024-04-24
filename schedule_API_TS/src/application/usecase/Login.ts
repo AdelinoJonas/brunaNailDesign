@@ -7,7 +7,7 @@ export default class LoginUser {
 
   async execute (input: Input): Promise<Output> {
     const userData = new Login(input.email, input.password);
-    const user = await this.loginRepository.login(userData);
+    const user = await this.loginRepository.login(userData);  
     return user;
   }
 }
