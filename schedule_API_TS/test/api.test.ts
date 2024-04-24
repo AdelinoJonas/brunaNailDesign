@@ -213,3 +213,62 @@ test('Deve deletar um schedule existente', async () => {
 	const deletedSchedule = response2.data.message;
 	expect(deletedSchedule).toBe("Schedule deleted successfully");
 });
+
+test("Deve cadastrar um agendamento", async function () {
+	const input = {
+    user_id: "4",
+    service_id: "1",
+    schedule_id: "1",
+	};
+	const response1 = await axios.post("http://localhost:3000/appointment", input);
+	const output1 = response1.data.appointment_id;
+	expect(output1).toBeDefined();
+});
+
+test("Deve obter um appointment", async function() {
+	const input = {
+    user_id: "4",
+    service_id: "1",
+    schedule_id: "1",
+	};
+	const response1 = await axios.post("http://localhost:3000/appointment", input);
+	const output_id = response1.data.appointment_id;
+	const response2 = await axios.get(`http://localhost:3000/appointment/${output_id}`);
+	const output1 = response2.data;
+	expect(output1.user_id).toBe("4");
+	expect(output1.service_id).toBe("1");
+	expect(output1.schedule_id).toBe("1");
+})
+
+test("Deve editar um appointment", async function() {
+	const input = {
+    user_id: "4",
+    service_id: "1",
+    schedule_id: "1",
+	};
+	const inputUpdated = {
+    user_id: "3",
+    service_id: "1",
+    schedule_id: "1",
+	};
+	const response1 = await axios.post("http://localhost:3000/appointment", input);
+	const output_id = response1.data.appointment_id;
+	const response2 = await axios.patch(`http://localhost:3000/appointment/${output_id}`, inputUpdated);
+	const output1 = response2.data; 
+	expect(output1.user_id).toBe("3");
+	expect(output1.service_id).toBe("1");
+	expect(output1.schedule_id).toBe("1");
+})
+
+test('Deve deletar um appointment existente', async () => {
+	const input = {
+    user_id: "4",
+    service_id: "1",
+    schedule_id: "1",
+	};
+	const response1 = await axios.post("http://localhost:3000/appointment", input);
+	const output_id = response1.data.appointment_id;
+	const response2 = await axios.delete(`http://localhost:3000/appointment/${output_id}`);
+	const deletedAppointment = response2.data.message;
+	expect(deletedAppointment).toBe("Appointment deleted successfully");
+});

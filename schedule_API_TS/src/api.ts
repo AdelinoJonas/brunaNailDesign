@@ -1,21 +1,26 @@
 import express from "express";
 import LoginUser from "./application/usecase/Login";
+import CreateSchedule from "./application/usecase/Schedule/CreateShedule";
+import DeleteSchedule from "./application/usecase/Schedule/DeleteSchedule";
+import GetSchedule from "./application/usecase/Schedule/GetSchedule";
+import UpdateSchedule from "./application/usecase/Schedule/UpdateSchedule";
+import CreateService from "./application/usecase/Service/CreateService";
+import DeleteService from "./application/usecase/Service/DeleteService";
+import GetService from "./application/usecase/Service/GetService";
+import UpdateService from "./application/usecase/Service/UpdateService";
 import CreateUser from "./application/usecase/User/CreateUser";
 import DeleteUser from "./application/usecase/User/DeleteUser";
 import GetUser from "./application/usecase/User/GetUser";
 import UpdateUser from "./application/usecase/User/UpdateUser";
 import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase";
-import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
-import CreateService from "./application/usecase/Service/CreateService";
-import ServiceRepositoryDataBase from "./infra/repository/ServiceRepositoryDataBase";
-import GetService from "./application/usecase/Service/GetService";
-import DeleteService from "./application/usecase/Service/DeleteService";
-import UpdateService from "./application/usecase/Service/UpdateService";
 import ScheduleRepositoryDataBase from "./infra/repository/ScheduleRepositoryDataBase";
-import CreateSchedule from "./application/usecase/Schedule/CreateShedule";
-import GetSchedule from "./application/usecase/Schedule/GetSchedule";
-import UpdateSchedule from "./application/usecase/Schedule/UpdateSchedule";
-import DeleteSchedule from "./application/usecase/Schedule/DeleteSchedule";
+import ServiceRepositoryDataBase from "./infra/repository/ServiceRepositoryDataBase";
+import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
+import CreateAppointment from "./application/usecase/Appointment/CreateAppointment";
+import AppointmentRepositoryDataBase from "./infra/repository/AppointmentRepositoryDataBase";
+import GetAppointment from "./application/usecase/Appointment/GetAppointment";
+import UpdateAppointment from "./application/usecase/Appointment/UpdateAppointment";
+import DeleteAppointment from "./application/usecase/Appointment/DeleteAppointment";
 
 const app = express();
 app.use(express.json());
@@ -122,6 +127,39 @@ app.delete("/schedule/:scheduleId", async function (req, res) {
 try {
   const useCase = new DeleteSchedule(new ScheduleRepositoryDataBase());
   const output = await useCase.execute({ scheduleId: req.params.scheduleId }); 
+  return res.json(output)
+} catch (e) {
+  return res.status(500).json({ e: 'Internal server error'})
+}
+});
+app.post("/appointment", async function (req, res) {
+  const useCase = new CreateAppointment(new AppointmentRepositoryDataBase());
+  const output = await useCase.execute(req.body);
+  return res.json(output);
+});
+
+app.get("/appointment/:appointmentId", async function (req, res) {
+  const useCase = new GetAppointment(new AppointmentRepositoryDataBase());
+  const output = await useCase.execute({ appointmentId: req.params.appointmentId });    
+  if (!output) {
+    return res.status(404).json({ error: "Appointment not found" });
+  }
+  return res.json(output);
+});
+
+app.patch("/appointment/:appointmentId", async function (req, res) {
+  const useCase = new UpdateAppointment(new AppointmentRepositoryDataBase());
+  const output = await useCase.execute({ appointmentId: req.params.appointmentId, data: req.body });    
+  if (!output) {
+    return res.status(404).json({ error: "Appointment not found" });
+  }
+  return res.json(output);
+});
+
+app.delete("/appointment/:appointmentId", async function (req, res) {
+try {
+  const useCase = new DeleteAppointment(new AppointmentRepositoryDataBase());
+  const output = await useCase.execute({ appointmentId: req.params.appointmentId }); 
   return res.json(output)
 } catch (e) {
   return res.status(500).json({ e: 'Internal server error'})
