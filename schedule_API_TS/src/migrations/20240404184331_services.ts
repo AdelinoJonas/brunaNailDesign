@@ -7,7 +7,7 @@ export async function up(): Promise<void> {
     table.string("price", 255).notNullable();
     table.string("duration", 255).notNullable();
     table.string("description", 600).notNullable();
-    table.string("image", 255);
+    table.string("image_url", 255);
     table.boolean("is_course");
   });
 }

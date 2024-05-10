@@ -28,7 +28,7 @@ export default class ServiceRepositoryDataBase implements ServiceRepository {
       price: serviceData.price, 
       duration: serviceData.duration, 
       description: serviceData.description, 
-      image: serviceData.image, 
+      image_url: serviceData.image, 
       is_course: serviceData.is_course
     };
   }

@@ -34,13 +34,13 @@ app.post("/login", async function (req, res) {
   return res.json(output);
 });
 
-app.use(tokenVerify);
-
 app.post("/user", async function (req, res) {
-    const useCase = new CreateUser(new UserRepositoryDataBase());
-    const output = await useCase.execute(req.body);
-    return res.json(output);
+  const useCase = new CreateUser(new UserRepositoryDataBase());
+  const output = await useCase.execute(req.body);
+  return res.json(output);
 });
+
+app.use('/user', tokenVerify);
 
 app.get("/user/:userId", async function (req, res) {
     const useCase = new GetUser(new UserRepositoryDataBase());
@@ -79,9 +79,9 @@ app.get("/service/:serviceId", async function (req, res) {
   return res.json(output);
 });
 
-app.use(adminVerify);
+app.use('/admin', adminVerify);
 
-app.post("/service", async function (req, res) {
+app.post("/admin/service", async function (req, res) {
   const useCase = new CreateService(new ServiceRepositoryDataBase());
   const output = await useCase.execute(req.body);
   return res.json(output);
