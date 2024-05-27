@@ -7,11 +7,11 @@ dotenv.config();
 const config: Knex.Config = {
     client: "mysql",
     connection: {
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT ?? "5432", 10),
-        database: process.env.DB_DATABASE,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST ?? '0.0.0.0',
+        port: parseInt(process.env.DB_PORT ?? "3318", 10),
+        database: process.env.DB_DATABASE ?? 'appbrunanail_db',
+        user: process.env.DB_USER ?? 'root',
+        password: process.env.DB_PASSWORD ?? '123456',
     },
     migrations: {
         directory: "src/migrations",

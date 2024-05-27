@@ -2,9 +2,9 @@ import axios from "axios";
 test("Deve cadastrar um usuário", async function () {
 	const input = {
 		name: "John Doe",
-		email: "john.doe@gmail.com",
+		email: "john.doe@gmail.net",
 		phone: "41984498900",
-    password: "Bruna24",
+        password: "Bruna24",
 	};
 	const response1 = await axios.post("http://localhost:3000/user", input);
 	const output1 = response1.data;
