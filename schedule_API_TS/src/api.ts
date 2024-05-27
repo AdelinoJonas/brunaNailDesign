@@ -16,6 +16,22 @@ import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase"
 import ScheduleRepositoryDataBase from "./infra/repository/ScheduleRepositoryDataBase";
 import ServiceRepositoryDataBase from "./infra/repository/ServiceRepositoryDataBase";
 import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
+import GetUser from "./application/usecase/GetUser";
+import DeleteUser from "./application/usecase/DeleteUser";
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
+const bcrypt = require("bcrypt");
+const knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host : '0.0.0.0',
+    port : 3318,
+    user : 'jonas',
+    password : '123456',
+    database : 'appbrunanail_db'
+  },
+  useNullAsDefault: true
+});
 import CreateAppointment from "./application/usecase/Appointment/CreateAppointment";
 import AppointmentRepositoryDataBase from "./infra/repository/AppointmentRepositoryDataBase";
 import GetAppointment from "./application/usecase/Appointment/GetAppointment";
@@ -49,7 +65,7 @@ app.get("/user/:userId", async function (req, res) {
       return res.status(404).json({ error: "user not found" });
     }
     return res.json(output);
-});
+})
 
 app.patch("/user/:userId", async function (req, res) {
   const useCase = new UpdateUser(new UserRepositoryDataBase());

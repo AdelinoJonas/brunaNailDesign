@@ -7,8 +7,10 @@ Este é um sistema de agendamento para uma nail designer, composto por uma plata
 - Node
 - Javascript
 - Docker
+- Docker compose
 - MySQL
 - Jest
+- TDD
 
 # FRONT-END WEB
 - Node
@@ -16,13 +18,13 @@ Este é um sistema de agendamento para uma nail designer, composto por uma plata
 - ReactJS
 - Cypress
 
-# FRONT-END WEB
+<!--# FRONT-END MOBILE
 - Node
 - Javascript
 - React Native
-- Cypress
+- Cypress-->
   
-## `Como executar o projeto`
+## `Como executar o projeto BACK END`
 
 ### `git clone`
 Para clonar o projeto para sua máquina.
@@ -35,6 +37,17 @@ Execute o projeto com o comando npm run dev
 
 ### `docker compose up`
 Para executar este comando, é necessário ter o docker compose instalado na máquina
+
+## `Como executar o projeto FRONT END`
+
+### `git clone`
+Para clonar o projeto para sua máquina.
+
+### `npm install`
+Instale as dependências com o comando npm install
+
+### `npm run start`
+Execute o projeto com o comando npm run start
 
 ## Contato
 **Se você gostou do meu trabalho e quer entrar em contato comigo, pode me encontrar em:**

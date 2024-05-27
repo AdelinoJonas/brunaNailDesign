@@ -31,7 +31,7 @@ export default class UserRepositoryDataBase implements UserRepository {
      is_admin: userData.is_admin,
     };
   }
-
+  
   async update(userId: string, user: Partial<User>) {
     const { name, email, phone, password} = user;
     const passHashed = await bcrypt.hash(`${password}`, 10);
