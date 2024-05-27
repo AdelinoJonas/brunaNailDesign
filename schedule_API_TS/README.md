@@ -12,18 +12,6 @@ Este é um sistema de agendamento para uma nail designer, composto por uma plata
 - Jest
 - TDD
 
-# FRONT-END WEB
-- Node
-- Javascript
-- ReactJS
-- Cypress
-
-# FRONT-END WEB
-- Node
-- Javascript
-- React Native
-- Cypress
-  
 ## `Como executar o projeto`
 
 ### `git clone`
