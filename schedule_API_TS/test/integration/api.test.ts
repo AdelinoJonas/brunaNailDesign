@@ -2,7 +2,7 @@ import axios from "axios";
 test("Deve cadastrar um usuário", async function () {
 	const input = {
 		name: "John Doe",
-		email: "john.doe@gmail.com",
+		email: "john.done@gmail.com",
 		phone: "41984498900",
     password: "Bruna24",
 	};
@@ -14,7 +14,7 @@ test("Deve cadastrar um usuário", async function () {
 test("Deve obter um usuário", async function() {
 	const input = {
 		name: "John Doe",
-		email: "john.doe@gmail.com",
+		email: "john.doe@gmail.net",
 		phone: "41984498900",
     password: "Bruna24",
 	};
@@ -23,13 +23,13 @@ test("Deve obter um usuário", async function() {
 	const response2 = await axios.get(`http://localhost:3000/user/${outputCreateUser}`);
 	const outputGetUser = response2.data;
 	expect(outputGetUser.name).toBe("John Doe")
-	expect(outputGetUser.email).toBe("john.doe@gmail.com")
+	expect(outputGetUser.email).toBe("john.doe@gmail.net")
 	expect(outputGetUser.phone).toBe("41984498900")
 })
-test('Deve deletar um usuário existente', async () => {
+test.only('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",
-		email: "john.doe@gmail.com",
+		email: "john.done@gmail.net",
 		phone: "41984498900",
     password: "Bruna24",
 	};
@@ -42,7 +42,7 @@ test('Deve deletar um usuário existente', async () => {
 
 test('Deve realizar o login', async () => {
   const input = {
-    email: "john.doe@gmail.com",
+    email: "john.done@gmail.com",
     password: "Bruna24"
   };
   try {

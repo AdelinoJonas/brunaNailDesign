@@ -2,6 +2,7 @@ import express from "express";
 import CreateUser from "./application/usecase/CreateUser";
 import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
 import GetUser from "./application/usecase/GetUser";
+import DeleteUser from "./application/usecase/DeleteUser";
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const bcrypt = require("bcrypt");
@@ -60,44 +61,21 @@ app.post("/user", async function (req, res) {
 });
 
 app.get("/user/:userId", async function (req, res) {
-  // try {
-  //   const userId = req.params.userId;
-  //   const userData = await knex('users')
-  //   .select()
-  //   .where('user_id', userId)
-  //   .first()
-  //   if (!userData) {
-  //     return res.status(404).json({error: "Usuário não encontrado"})
-  //   }
-  //   return res.json({message: userData})
-  // } catch (e) {
-  //   return res.status(500).json({ e: 'Internal server error'})
-  // }
-  // try {
     const useCase = new GetUser(new UserRepositoryDataBase());
-
-    
     const output = await useCase.execute({ userId: req.params.userId });    
     if (!output) {
       return res.status(404).json({ error: "user not found" });
     }
     return res.json(output);
-  // } catch (e: any) {
-  //   return res.status(422).send(e.message);
-  // }
 })
 
 app.delete("/user/:userId", async function (req, res) {
-  try {
-    const userId = req.params.userId;
-    await knex('users')
-    .where('user_id', userId)
-    .del()
-    return res.json({message: "User deleted successfully"})
-  } catch (e) {
-    return res.status(500).json({ e: 'Internal server error'})
-  }
-})
+    const useCase = new DeleteUser(new UserRepositoryDataBase());
+    const output = await useCase.execute(req.body);
+    console.log(output);
+    
+    return res.json(output);
+});
 
 app.post("/service", async function (req, res) {
   try {

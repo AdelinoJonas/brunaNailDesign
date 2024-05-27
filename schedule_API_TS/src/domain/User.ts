@@ -1,7 +1,6 @@
 import Email from "./Email";
 import Password from "./Password";
-import Phone from "./Phone";
-
+import Phone from "./phone";
 
 export default class User {
   email: Email;
