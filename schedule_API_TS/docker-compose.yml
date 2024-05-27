@@ -1,14 +1,15 @@
-version: '3'
+version: '3.8'
 
 services:
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: mysql
     environment:
       MYSQL_DATABASE: 'appbrunanail_db'
       MYSQL_USER: 'jonas'
       MYSQL_PASSWORD: '123456'
       MYSQL_ROOT_PASSWORD: '123456'
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
     ports:
       - "3318:3306"
     volumes:
