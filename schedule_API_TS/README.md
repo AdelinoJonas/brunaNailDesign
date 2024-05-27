@@ -38,3 +38,6 @@ Para rodar a seed e criar um usuário adminstrador do sistema
 - Email: adelino.jonas.dev@gmail.com
 - [LinkedIn](https://www.linkedin.com/in/jonas-adelino-168830179/)
 - [GitHub](https://github.com/AdelinoJonas)
+
+
+

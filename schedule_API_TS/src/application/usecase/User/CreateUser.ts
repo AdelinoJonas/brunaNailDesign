@@ -1,5 +1,5 @@
-import User from "../../domain/User";
-import UserRepository from "../repository/UserRepository";
+import User from "../../../domain/User";
+import UserRepository from "../../repository/UserRepository";
 
 export default class CreateUser {
   constructor ( readonly userRepository: UserRepository) {

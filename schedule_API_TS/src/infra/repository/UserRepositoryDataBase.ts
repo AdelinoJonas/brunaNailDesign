@@ -14,7 +14,7 @@ export default class UserRepositoryDataBase implements UserRepository {
       email: email.value,
       phone: phone.value,
       password: passHashed
-    });
+    });   
     return (userData[0]);
   }
 
@@ -23,21 +23,33 @@ export default class UserRepositoryDataBase implements UserRepository {
     .select()
     .where('user_id', userId)
     .first();
-
     return {
       userId: userData.user_id,
       name: userData.name,
       email: userData.email,
       phone: userData.phone,
+     is_admin: userData.is_admin,
     };
+  }
+  
+  async update(userId: string, user: Partial<User>) {
+    const { name, email, phone, password} = user;
+    const passHashed = await bcrypt.hash(`${password}`, 10);
+    await knex('users')
+      .where('user_id', userId)
+      .update({
+        name,
+        email: email?.value,
+        phone: phone?.value,
+        password: passHashed?.value,
+      });
+    return user;
   }
 
   async delete (userId: string) {
-    const userData = await knex('users')
-      .where('user_id', userId)
-      .del();
-console.log(userData);
-
-    return {message: "Usuário deletado com sucesso!"};
+    await knex('users')
+    .where('user_id', userId)
+    .del()
+    return {message: "User deleted successfully"}
   }
 }
