@@ -26,6 +26,12 @@ Execute o projeto com o comando npm run dev
 ### `docker compose up`
 Para executar este comando, é necessário ter o docker compose instalado na máquina
 
+### `npm run migration:run`
+Para rodar as migrations e criar as tabelas do banco de dados
+
+### `npm run seeder:run`
+Para rodar a seed e criar um usuário adminstrador do sistema
+
 ## Contato
 **Se você gostou do meu trabalho e quer entrar em contato comigo, pode me encontrar em:**
 
