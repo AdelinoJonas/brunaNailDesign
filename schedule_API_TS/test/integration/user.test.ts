@@ -1,7 +1,7 @@
 import CreateUser from "../../src/application/usecase/CreateUser";
 import GetUser from "../../src/application/usecase/GetUser";
 import UserRepositoryDataBase from "../../src/infra/repository/UserRepositoryDataBase";
-test("Deve cadastrar um Usuário", async function(){
+test.only("Deve cadastrar um Usuário", async function(){
 	const input = {
 		name: "John Doe",
 		email: "john.doe@gmail.com",
