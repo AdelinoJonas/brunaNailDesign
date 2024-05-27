@@ -47,7 +47,7 @@ Para clonar o projeto para sua máquina.
 Instale as dependências com o comando npm install
 
 ### `npm run start`
-Execute o projeto com o comando npm run dev
+Execute o projeto com o comando npm run start
 
 ## Contato
 **Se você gostou do meu trabalho e quer entrar em contato comigo, pode me encontrar em:**
