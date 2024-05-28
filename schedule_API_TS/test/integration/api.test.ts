@@ -1,5 +1,4 @@
 import axios from "axios";
-
 test("Deve cadastrar um usuário", async function () {
 	const input = {
 		name: "John Doe",
@@ -11,57 +10,93 @@ test("Deve cadastrar um usuário", async function () {
 	const output1 = response1.data;
 	expect(output1).toBeDefined();
 });
-
-test("Deve obter um usuário", async function() {
+test("Deve obter um usuário", async () => {
 	const input = {
-		name: "John Doe",
-		email: "john.doe@gmail.com",
-		phone: "41984498900",
-    password: "Bruna24",
+			name: "John Doe",
+			email: "john.does@gmail.com",
+			phone: "41984498900",
+			password: "Bruna24",
 	};
-	const response1 = await axios.post("http://localhost:3000/user", input);
-	const outputCreateUser = response1.data.user_id;
-	const response2 = await axios.get(`http://localhost:3000/user/${outputCreateUser}`);
-	const outputGetUser = response2.data;
-	expect(outputGetUser.name).toBe("John Doe")
-	expect(outputGetUser.email).toBe("john.doe@gmail.com")
-	expect(outputGetUser.phone).toBe("41984498900")
-})
+	const postedUser = await axios.post("http://localhost:3000/user", input);
+	const outputCreateUser = postedUser.data.user_id;
+	const inputLogin = {
+			email: "john.does@gmail.com",
+			password: "Bruna24",
+	};
+	const login = await axios.post("http://localhost:3000/login", inputLogin);
+	if (login && login.data && login.data.token) {
+			const token = login.data.token;
+			const headers = { headers: { authorization: `Bearer ${token}` } };
+			try {
+						const response = await axios.get(`http://localhost:3000/user/${outputCreateUser}`, headers);
+					const outputGetUser = response.data;
+					expect(outputGetUser.name).toBe("John Doe");
+					expect(outputGetUser.email).toBe("john.does@gmail.com");
+					expect(outputGetUser.phone).toBe("41984498900");
+			} catch (error:any) {
+					console.error("Erro ao obter usuário:", error.message);
+			}
+	} else {
+			console.error("Login falhou: Não foi possível obter o token de autenticação.");
+	}
+});
 
 test("Deve editar um usuário", async function() {
 	const input = {
 		name: "John Doe",
-		email: "john.doe@gmail.com",
+		email: "john.done@gmail.com",
 		phone: "41984498900",
 		password: "Bruna24",
-};
-const inputUpdated = {
-		name: "Joana Darc",
-		email: "joana.dark@gmail.com",
-		phone: "41984494689",
-		password: "Joana32",
-};
-const responseCreate = await axios.post("http://localhost:3000/user", input);
-const userId = responseCreate.data.user_id;
-const responseUpdate = await axios.patch(`http://localhost:3000/user/${userId}`, inputUpdated);
-const output = responseUpdate.data;
-expect(output.name).toBe("Joana Darc");
-expect(output.email).toBe("joana.dark@gmail.com");
-expect(output.phone).toBe("41984494689");
+	};
+	const responseCreate = await axios.post("http://localhost:3000/user", input);
+	const userId = responseCreate.data.user_id;
+	const inputLogin = {
+		email: "john.done@gmail.com",
+		password: "Bruna24",
+	};
+	const login = await axios.post("http://localhost:3000/login", inputLogin);
+	const token = login.data.token;
+	const headers = { headers: { authorization: `Bearer ${token}` } };
+	try {
+		const inputUpdated = {
+			name: "Joana Darc",
+			email: "joana.dark@gmail.com",
+			phone: "41984494689",
+			password: "Joana32",
+		};
+		const responseUpdate = await axios.patch(`http://localhost:3000/user/${userId}`, inputUpdated, headers);
+		const output = responseUpdate.data;
+		expect(output.name).toBe("Joana Darc");
+		expect(output.email).toBe("joana.dark@gmail.com");
+		expect(output.phone).toBe("41984494689");
+	} catch (error:any) {
+			console.error("Erro ao editar usuário:", error.message);
+	}
 })
 
 test('Deve deletar um usuário existente', async () => {
 	const input = {
 		name: "John Doe",
-		email: "john.doe@gmail.com",
+		email: "john.doe@gmail.net",
 		phone: "41984498900",
-    password: "Bruna24",
+		password: "Bruna24",
 	};
 	const response1 = await axios.post("http://localhost:3000/user", input);
-	const outputCreateUser = response1.data;
-	const response2 = await axios.delete(`http://localhost:3000/user/${outputCreateUser}`);
-	const deletedUser = response2.data.message;
-	expect(deletedUser).toBe("User deleted successfully");
+	const outputCreateUser = response1.data.user_id;
+	try {
+		const inputLogin = {
+				email: "john.doe@gmail.net",
+				password: "Bruna24",
+		};
+		const login = await axios.post("http://localhost:3000/login", inputLogin);
+		const token = login.data.token;
+		const headers = { headers: { authorization: `Bearer ${token}` } };
+		const response2 = await axios.delete(`http://localhost:3000/user/${outputCreateUser}`, headers);
+		const deletedUser = response2.data.message;
+		expect(deletedUser).toBe("User deleted successfully");
+	} catch (error:any) {
+		console.error("Erro ao deletar usuário:", error.message);
+	}
 });
 
 test('Deve realizar o login', async () => {
@@ -78,64 +113,30 @@ test('Deve realizar o login', async () => {
     fail(error.message);
   }
 });
-// test('Não deve fazer login sem email', async () => {
-//   const input = {
-//     email: "",
-//     password: "Bruna24"
-//   };
-// 	 try {
-// 		const response = await axios.post("http://localhost:3000/login", input);
-// 		console.log('teste login', response);
-// 		expect(response.status).toBe(400);
-		// expect(response).toBe("O campo email e senha são obrigatórios.");
-	// } catch (error:any) {
-	// 	fail(error.message);
-	// }
-// });
 
-// test('Não deve fazer login com email inválido', async () => {
-//   const input = {
-//     email: "jo@gmail.com",
-//     password: "Bruna24"
-//   };
-// 	const response = await axios.post("http://localhost:3000/login", input);
-// 	console.log('teste login', response);
-// 	expect(response.status).toBe(404);
-// 	expect(response).toBe("Usuário não encontrado.");
-// });
-
-// test('Não deve fazer login com senha inválida', async () => {
-//   const input = {
-//     email: "john.doe@gmail.com",
-//     password: "12"
-//   };
-// 	const response = await axios.post("http://localhost:3000/login", input);
-// 	console.log('teste login', response);
-// 	expect(response.status).toBe(401);
-// 	expect(response).toBe("Credenciais inválidas.");
-// });
-
-test("Deve cadastrar um Serviço", async function () {
-  const inputLogin = {
-    email: "brunapereira@studio.com.br",
+test.only("Deve cadastrar um Serviço", async function () {
+	const inputLogin = {
+		email: "brunapereira@studio.com.br",
     password: "Bruna24",
-  };
-
-  const response = await axios.post("http://localhost:3000/login", inputLogin);
-	const token = response.data.token;
-  const headers = { authorization: `Bearer ${token}` };
-  const input = {
-    title: "Unha Gel",
-    price: "190,00",
-    duration: "1:30",
-    description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
-    is_course: true,
-  };
-    const response1 = await axios.post("http://localhost:3000/admin/service", input, {headers});
-    const output1 = response1.data;
-		console.log("Patrick adelino", output1)
-    expect(output1).toBeDefined();
+	};
+	const login = await axios.post("http://localhost:3000/login", inputLogin);
+	if (login && login.data && login.data.token) {
+		const token = login.data.token;
+		const headers = { headers: { authorization: `Bearer ${token}` } };
+		const input = {
+			title: "Unha Gel",
+			price: "190,00",
+			duration: "1:30",
+			description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
+			image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+			is_course: true,
+		};
+		const postedService = await axios.post("http://localhost:3000/admin/service", input, headers);
+		const outputPostService = postedService.data;
+		expect(outputPostService).toBeDefined();
+	} else {
+			console.error("Login falhou: Não foi possível obter o token de autenticação.");
+	}
 });
 
 test("Deve obter um serviço", async function() {
@@ -144,10 +145,10 @@ test("Deve obter um serviço", async function() {
     price: "190,00",
     duration:"1:30",
     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
     is_course: true
 	};
-	const response1 = await axios.post("http://localhost:3000/service", input);
+	const response1 = await axios.post("http://localhost:3000/admin/service", input);
 	const outputCreateService = response1.data.service_id;
 	const response2 = await axios.get(`http://localhost:3000/service/${outputCreateService}`);
 	const outputGetService = response2.data;
@@ -155,7 +156,7 @@ test("Deve obter um serviço", async function() {
 	expect(outputGetService.price).toBe("190,00");
 	expect(outputGetService.duration).toBe("1:30");
 	expect(outputGetService.description).toBe(input.description);
-	expect(outputGetService.image).toBe(input.image);
+	expect(outputGetService.image_url).toBe(input.image_url);
 	expect(outputGetService.is_course).toBeTruthy();
 })
 

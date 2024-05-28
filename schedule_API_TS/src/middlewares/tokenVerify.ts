@@ -23,7 +23,6 @@ async function tokenVerify(request: Request, response: Response, next: Function)
     let id: string | undefined;
     const decodedToken = jwt.verify(token, jwtSecret) as DecodedToken;
     id = decodedToken.userId;
-    console.log('patrick adelino', decodedToken)
     if (!id) {
       response.status(401).json({
         message: "Token inválido ou ausente.",
@@ -45,5 +44,4 @@ async function tokenVerify(request: Request, response: Response, next: Function)
     response.status(500).json(error);
   }
 }
-
 export { tokenVerify };

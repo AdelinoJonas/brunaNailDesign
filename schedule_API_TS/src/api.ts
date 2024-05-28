@@ -16,8 +16,7 @@ import LoginRepositoryDataBase from "./infra/repository/LoginRepositoryDataBase"
 import ScheduleRepositoryDataBase from "./infra/repository/ScheduleRepositoryDataBase";
 import ServiceRepositoryDataBase from "./infra/repository/ServiceRepositoryDataBase";
 import UserRepositoryDataBase from "./infra/repository/UserRepositoryDataBase";
-import GetUser from "./application/usecase/GetUser";
-import DeleteUser from "./application/usecase/DeleteUser";
+
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const bcrypt = require("bcrypt");

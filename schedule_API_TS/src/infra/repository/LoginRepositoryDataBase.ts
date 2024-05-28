@@ -27,9 +27,7 @@ export default class LoginRepositoryDataBase {
         email: user.email,
       },
       process.env.JWT_SECRET || "Brunanail"
-      );
-      console.log("LOGIN", user, token);
-      
+      );    
       return{
       user: userLogin,
       token,

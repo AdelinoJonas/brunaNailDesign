@@ -11,7 +11,7 @@ export default class CreateService {
       input.price,
       input.duration,
       input.description,
-      input.image,
+      input.image_url,
       input.is_course
     );
     const serviceId = await this.serviceRepository.save(service);  
@@ -24,7 +24,7 @@ type Input = {
   price: string,
   duration: string,
   description: string,
-  image: string,
+  image_url: string,
   is_course: boolean
 }
 

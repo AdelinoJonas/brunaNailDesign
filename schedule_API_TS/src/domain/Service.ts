@@ -6,7 +6,7 @@ export default class Service {
     readonly price: string,
     readonly duration: string,
     readonly description: string,
-    readonly image: string,
+    readonly image_url: string,
     readonly is_course: boolean  ) {
   }
 
