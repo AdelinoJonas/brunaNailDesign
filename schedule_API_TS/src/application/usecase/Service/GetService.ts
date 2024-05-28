@@ -12,7 +12,7 @@ export default class GetService {
       price: service.price, 
       duration: service.duration, 
       description: service.description, 
-      image: service.image, 
+      image_url: service.image_url, 
       is_course: service.is_course
     }
   }
@@ -28,6 +28,6 @@ type Output = {
   price: string, 
   duration: string, 
   description: string, 
-  image: string, 
+  image_url: string, 
   is_course: boolean
 }

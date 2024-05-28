@@ -1,4 +1,5 @@
 import axios from "axios";
+import Service from "../../src/domain/Service";
 test("Deve cadastrar um usuário", async function () {
 	const input = {
 		name: "John Doe",
@@ -114,7 +115,7 @@ test('Deve realizar o login', async () => {
   }
 });
 
-test.only("Deve cadastrar um Serviço", async function () {
+test("Deve cadastrar um Serviço", async function () {
 	const inputLogin = {
 		email: "brunapereira@studio.com.br",
     password: "Bruna24",
@@ -139,25 +140,78 @@ test.only("Deve cadastrar um Serviço", async function () {
 	}
 });
 
-test("Deve obter um serviço", async function() {
-	const input = {
-		title: "Unha Gel",
-    price: "190,00",
-    duration:"1:30",
-    description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
-    is_course: true
+test("Não deve cadastrar um Serviço sem ser admin", async function () {
+	const inputLogin = {
+		email: "john.doe@gmail.net",
+		password: "Bruna24",
 	};
-	const response1 = await axios.post("http://localhost:3000/admin/service", input);
-	const outputCreateService = response1.data.service_id;
-	const response2 = await axios.get(`http://localhost:3000/service/${outputCreateService}`);
-	const outputGetService = response2.data;
-	expect(outputGetService.title).toBe("Unha Gel");
-	expect(outputGetService.price).toBe("190,00");
-	expect(outputGetService.duration).toBe("1:30");
-	expect(outputGetService.description).toBe(input.description);
-	expect(outputGetService.image_url).toBe(input.image_url);
-	expect(outputGetService.is_course).toBeTruthy();
+	try {
+		const login = await axios.post("http://localhost:3000/login", inputLogin);
+		if (login && login.data && login.data.token) {
+			const token = login.data.token;
+			const headers = { headers: { authorization: `Bearer ${token}` } };
+			const input = {
+				title: "Unha Gel",
+				price: "190,00",
+				duration: "1:30",
+				description: "Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
+				image_url: "https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+				is_course: true,
+			};
+			await axios.post("http://localhost:3000/admin/service", input, headers);
+		} else {
+			console.error("Login falhou: Não foi possível obter o token de autenticação.");
+		}
+	} catch (error:any) {
+			expect(error.response.data.message).toBe("Usuário não tem permissão para acessar.");
+	}
+});
+test("Deve obter um serviço", async function() {
+	const inputLoginAdm = {
+		email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+	};
+	const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+	if (loginAdm && loginAdm.data && loginAdm.data.token) {
+		const token = loginAdm.data.token;
+		const headers = { headers: { authorization: `Bearer ${token}` } };
+		const input = {
+			title: "Unha Gel",
+			price: "190,00",
+			duration: "1:30",
+			description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
+			image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+			is_course: true,
+		};
+		const postedService = await axios.post("http://localhost:3000/admin/service", input, headers);
+		const outputCreateService = postedService.data.service_id;
+		const inputPostUser = {
+			name: "John Doe",
+			email: "john.does@gmail.com",
+			phone: "41984498900",
+			password: "Bruna24",
+		};
+		await axios.post("http://localhost:3000/user", inputPostUser);
+		const inputLoginUser = {
+			email: "john.does@gmail.com",
+			password: "Bruna24",
+		};
+		const login = await axios.post("http://localhost:3000/login", inputLoginUser);
+		if (login && login.data && login.data.token) {
+			const token = login.data.token;
+			const headers = { headers: { authorization: `Bearer ${token}` } };
+			const getService = await axios.get(`http://localhost:3000/service/${outputCreateService}`, headers);
+			const outputGetService = getService.data;
+			expect(outputGetService.title).toBe("Unha Gel");
+			expect(outputGetService.price).toBe("190,00");
+			expect(outputGetService.duration).toBe("1:30");
+			expect(outputGetService.description).toBe(input.description);
+			expect(outputGetService.image_url).toBe(input.image_url);
+			expect(outputGetService.is_course).toBeTruthy();
+		}
+	} else {
+		console.error("Login falhou: Não foi possível obter o token de autenticação.");
+	}
 })
 
 test("Deve editar um serviço", async function() {

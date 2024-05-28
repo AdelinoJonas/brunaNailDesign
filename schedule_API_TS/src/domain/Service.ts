@@ -10,7 +10,7 @@ export default class Service {
     readonly is_course: boolean  ) {
   }
 
-  static create (title: string, price: string, duration: string, description: string, image: string, is_course: boolean ) {
-    return new Service(title, price, duration, description, image, is_course);
+  static create (title: string, price: string, duration: string, description: string, image_url: string, is_course: boolean ) {
+    return new Service(title, price, duration, description, image_url, is_course);
   }
 }

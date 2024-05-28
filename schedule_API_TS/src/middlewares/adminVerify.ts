@@ -15,7 +15,6 @@ async function adminVerify(request: Request, response: Response, next: Function)
     });
     return;
   }
-  console.log('HEADERS',authorization);
   try {
     const token: string = authorization.replace("Bearer ", "").trim();
     let id: string | JwtPayload;
