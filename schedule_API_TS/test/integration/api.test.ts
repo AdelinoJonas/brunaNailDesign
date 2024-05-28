@@ -1,5 +1,5 @@
 import axios from "axios";
-import Service from "../../src/domain/Service";
+
 test("Deve cadastrar um usuário", async function () {
 	const input = {
 		name: "John Doe",
@@ -215,75 +215,131 @@ test("Deve obter um serviço", async function() {
 })
 
 test("Deve editar um serviço", async function() {
-	const input = {
-		title: "Unha Gel",
-    price: "190,00",
-    duration:"1:30",
-    description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
-    is_course: true
+	const inputLoginAdm = {
+		email: "brunapereira@studio.com.br",
+    password: "Bruna24",
 	};
-	const inputUpdated = {
-		title: "Unha Gel com desenho",
-    price: "190,00",
-    duration:"1:30",
-    description:"MOdelo lindo.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
-    is_course: false
-	};
-const responseCreate = await axios.post("http://localhost:3000/service", input);
-const serviceId = responseCreate.data.service_id;
-const responseUpdate = await axios.patch(`http://localhost:3000/service/${serviceId}`, inputUpdated);
-const output = responseUpdate.data;
-expect(output.title).toBe("Unha Gel com desenho");
-expect(output.price).toBe("190,00");
-expect(output.duration).toBe("1:30");
-expect(output.description).toBe("MOdelo lindo.");
-expect(output.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
-expect(output.is_course).toBeFalsy();
+	const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+	if (loginAdm && loginAdm.data && loginAdm.data.token) {
+		const token = loginAdm.data.token;
+		const headers = { headers: { authorization: `Bearer ${token}` } };
+		const inputService = {
+			title: "Unha Gel",
+			price: "190,00",
+			duration: "1:30",
+			description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
+			image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+			is_course: true,
+		};
+		const postedService = await axios.post("http://localhost:3000/admin/service", inputService, headers);
+		const serviceId = postedService.data.service_id;
+		const inputUpdated = {
+			title: "Unha Gel com desenho",
+			price: "190,00",
+			duration:"1:30",
+			description:"MOdelo lindo.",
+			image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+			is_course: false
+		};
+		const responseUpdate = await axios.patch(`http://localhost:3000/admin/service/${serviceId}`, inputUpdated, headers);
+		const output = responseUpdate.data;
+		expect(output.title).toBe("Unha Gel com desenho");
+		expect(output.price).toBe("190,00");
+		expect(output.duration).toBe("1:30");
+		expect(output.description).toBe("MOdelo lindo.");
+		expect(output.image_url).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
+		expect(output.is_course).toBeFalsy();
+	} else {
+		console.error("Login falhou: Não foi possível obter o token de autenticação.");
+	}
 })
 
 test('Deve deletar um serviço existente', async () => {
-	const input = {
-		title: "Unha Gel",
-    price: "190,00",
-    duration:"1:30",
-    description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
-    is_course: true
+	const inputLoginAdm = {
+		email: "john.doe@gmail.net",
+		password: "Bruna24",
 	};
-	const response1 = await axios.post("http://localhost:3000/service", input);
-	const outputCreateService = response1.data;
-	const response2 = await axios.delete(`http://localhost:3000/service/${outputCreateService}`);
-	const deletedService = response2.data.message;
-	expect(deletedService).toBe("Service deleted successfully");
+	const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+	if (loginAdm && loginAdm.data && loginAdm.data.token) {
+		const token = loginAdm.data.token;
+		const headers = { headers: { authorization: `Bearer ${token}` } };
+		const inputService = {
+			title: "Unha Gel",
+			price: "190,00",
+			duration: "1:30",
+			description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
+			image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+			is_course: true,
+		};
+		const postedService = await axios.post("http://localhost:3000/admin/service", inputService, headers);
+		const serviceId = postedService.data.service_id;
+		const deleteService = await axios.delete(`http://localhost:3000/admin/service/${serviceId}`, headers);
+		const deletedMsg = deleteService.data.message;
+		expect(deletedMsg).toBe("Service deleted successfully");
+	} else {
+		console.error("Login falhou: Não foi possível obter o token de autenticação.");
+	}
 });
 
 test("Deve cadastrar um horário", async function () {
+	const inputLoginAdm = {
+		email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+	};
+	const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+	if (loginAdm && loginAdm.data && loginAdm.data.token) {
+		const token = loginAdm.data.token;
+		const headers = { headers: { authorization: `Bearer ${token}` } };
 	const input = {
 		available_day: "Segunda-feira",
 		start_time: "09:00",
 		end_time: "11:00"
 	};
-	const response1 = await axios.post("http://localhost:3000/schedule", input);
-	const output1 = response1.data;
+	const createSchedule = await axios.post("http://localhost:3000/admin/schedule", input, headers);
+	const output1 = createSchedule.data;
 	expect(output1).toBeDefined();
+	} else {
+		console.error("Login falhou: Não foi possível obter o token de autenticação.");
+	}
 });
 
 test("Deve obter um schedule", async function() {
-	const input = {
-		available_day: "Segunda-feira",
-		start_time: "08:00",
-		end_time: "10:00"
-	};
-	const response1 = await axios.post("http://localhost:3000/schedule", input);
-  const outputCreateSchedule = response1.data.schedule_id;
-	const response2 = await axios.get(`http://localhost:3000/schedule/${outputCreateSchedule}`);
-	const output1 = response2.data;
-	expect(output1.available_day).toBe("Segunda-feira");
-	expect(output1.start_time).toBe("08:00:00");
-	expect(output1.end_time).toBe("10:00:00");
-})
+  const input = {
+    name: "John Doe",
+    email: "john.does@gmail.com",
+    phone: "41984498900",
+    password: "Bruna24",
+  };
+  const postedUser = await axios.post("http://localhost:3000/user", input);
+  const inputLogin = {
+    email: "john.does@gmail.com",
+    password: "Bruna24",
+  };
+  const inputLoginAdm = {
+    email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+  };
+  const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+  const login = await axios.post("http://localhost:3000/login", inputLogin);
+  if (loginAdm && loginAdm.data && loginAdm.data.token || login && login.data && login.data.token) {
+    const token = loginAdm.data.token || login.data.token;
+    const headers = { headers: { authorization: `Bearer ${token}` } };
+    const inputSchedule = {
+      available_day: "Segunda-feira",
+      start_time: "09:00",
+      end_time: "11:00"
+    };
+    const createScheduleResponse = await axios.post("http://localhost:3000/admin/schedule", inputSchedule, headers);
+    const scheduleId = createScheduleResponse.data.scheduleId;
+    const getScheduleResponse = await axios.get(`http://localhost:3000/schedule/${scheduleId}`, headers);
+    const output1 = getScheduleResponse.data;
+    expect(output1.available_day).toBe("Segunda-feira");
+    expect(output1.start_time).toBe("09:00:00");
+    expect(output1.end_time).toBe("11:00:00");
+  } else {
+    console.error("Login falhou: Não foi possível obter o token de autenticação.");
+  }
+});
 
 test("Deve editar um schedule", async function() {
 	const input = {

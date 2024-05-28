@@ -42,7 +42,6 @@ import adminVerify from "./middlewares/adminVerify";
 const app = express();
 app.use(express.json());
 
-
 app.post("/login", async function (req, res) {
   const useCase = new LoginUser(new LoginRepositoryDataBase());
   const output = await useCase.execute(req.body);
@@ -58,12 +57,12 @@ app.post("/user", async function (req, res) {
 app.use('/user', tokenVerify);
 
 app.get("/user/:userId", async function (req, res) {
-    const useCase = new GetUser(new UserRepositoryDataBase());
-    const output = await useCase.execute({ userId: req.params.userId });    
-    if (!output) {
-      return res.status(404).json({ error: "user not found" });
-    }
-    return res.json(output);
+  const useCase = new GetUser(new UserRepositoryDataBase());
+  const output = await useCase.execute({ userId: req.params.userId });    
+  if (!output) {
+    return res.status(404).json({ error: "user not found" });
+  }
+  return res.json(output);
 })
 
 app.patch("/user/:userId", async function (req, res) {
@@ -94,6 +93,23 @@ app.get("/service/:serviceId", async function (req, res) {
   return res.json(output);
 });
 
+app.get("/schedule/:scheduleId", async function (req, res) {
+  const useCase = new GetSchedule(new ScheduleRepositoryDataBase());
+  const output = await useCase.execute({ scheduleId: req.params.scheduleId });    
+  if (!output) {
+    return res.status(404).json({ error: "Schedule not found" });
+  }
+  return res.json(output);
+});
+
+app.patch("/schedule/:scheduleId", async function (req, res) {
+  const useCase = new UpdateSchedule(new ScheduleRepositoryDataBase());
+  const output = await useCase.execute({ scheduleId: req.params.scheduleId, data: req.body });    
+  if (!output) {
+    return res.status(404).json({ error: "Schedule not found" });
+  }
+  return res.json(output);
+});
 
 app.post("/appointment", async function (req, res) {
   const useCase = new CreateAppointment(new AppointmentRepositoryDataBase());
@@ -159,24 +175,6 @@ try {
 app.post("/admin/schedule", async function (req, res) {
   const useCase = new CreateSchedule(new ScheduleRepositoryDataBase());
   const output = await useCase.execute(req.body);
-  return res.json(output);
-});
-
-app.get("/schedule/:scheduleId", async function (req, res) {
-  const useCase = new GetSchedule(new ScheduleRepositoryDataBase());
-  const output = await useCase.execute({ scheduleId: req.params.scheduleId });    
-  if (!output) {
-    return res.status(404).json({ error: "Schedule not found" });
-  }
-  return res.json(output);
-});
-
-app.patch("/admin/schedule/:scheduleId", async function (req, res) {
-  const useCase = new UpdateSchedule(new ScheduleRepositoryDataBase());
-  const output = await useCase.execute({ scheduleId: req.params.scheduleId, data: req.body });    
-  if (!output) {
-    return res.status(404).json({ error: "Schedule not found" });
-  }
   return res.json(output);
 });
 

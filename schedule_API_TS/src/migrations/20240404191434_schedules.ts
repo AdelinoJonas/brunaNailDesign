@@ -7,6 +7,7 @@ export async function up(): Promise<void> {
     table.time("start_time");
     table.time("end_time");
     table.timestamp("created_at").defaultTo(knex.fn.now());
+    table.boolean("is_free").defaultTo(true);
   });
 }
 

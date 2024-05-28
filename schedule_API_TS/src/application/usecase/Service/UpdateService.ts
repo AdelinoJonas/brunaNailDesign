@@ -16,7 +16,7 @@ export default class UpdateService {
       price: data.price, 
       duration: data.duration, 
       description: data.description, 
-      image_url: data.image, 
+      image_url: data.image_url, 
       is_course: data.is_course
     };
   }

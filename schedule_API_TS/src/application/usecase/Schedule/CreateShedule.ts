@@ -11,8 +11,13 @@ export default class CreateSchedule {
       input.start_time,
       input.end_time
     );
-    const scheduleId = await this.scheduleRepository.save(schedule);  
-    return {schedule_id: scheduleId};
+    const scheduleData = await this.scheduleRepository.save(schedule);  
+    return {
+      scheduleId: scheduleData.scheduleId,
+      available_day: scheduleData.available_day, 
+      start_time: scheduleData.start_time,
+      end_time: scheduleData.end_time
+    };
   }
 }
 
@@ -23,5 +28,8 @@ type Input = {
 }
 
 type Output = {
-  schedule_id: any
+  scheduleId: string,
+  available_day: string, 
+  start_time: string,
+  end_time: string
 }
