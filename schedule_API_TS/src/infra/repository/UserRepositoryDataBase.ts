@@ -31,6 +31,19 @@ export default class UserRepositoryDataBase implements UserRepository {
      is_admin: userData.is_admin,
     };
   }
+
+  async getAllUsers(): Promise<User[]> {
+    const userData = await knex('users').select('*');
+    const users: User[] = userData.map(data => ({
+      userId: data.user_id,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+    }));
+
+    return users;
+  }
   
   async update(userId: string, user: Partial<User>) {
     const { name, email, phone, password} = user;

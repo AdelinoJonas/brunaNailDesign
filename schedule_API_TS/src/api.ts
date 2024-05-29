@@ -38,6 +38,7 @@ import UpdateAppointment from "./application/usecase/Appointment/UpdateAppointme
 import DeleteAppointment from "./application/usecase/Appointment/DeleteAppointment";
 import { tokenVerify } from "./middlewares/tokenVerify";
 import adminVerify from "./middlewares/adminVerify";
+import GetAllUsers from "./application/usecase/User/GetAllUsers";
 
 const app = express();
 app.use(express.json());
@@ -146,6 +147,17 @@ try {
 });
 
 app.use('/admin', adminVerify);
+
+app.get("/users", async function (req, res) {
+  const useCase = new GetAllUsers(new UserRepositoryDataBase());
+  try {
+    const output = await useCase.execute();
+    return res.json(output);
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 app.post("/admin/service", async function (req, res) {
   const useCase = new CreateService(new ServiceRepositoryDataBase());
