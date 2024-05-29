@@ -4,7 +4,7 @@ test("Deve cadastrar um usuário", async function () {
 		name: "John Doe",
 		email: "john.done@gmail.com",
 		phone: "41984498900",
-    password: "Bruna24",
+        password: "Bruna24",
 	};
 	const response1 = await axios.post("http://localhost:3000/user", input);
 	const output1 = response1.data;
