@@ -255,6 +255,61 @@ test("Deve editar um serviço", async function() {
 	}
 })
 
+test("Não deve editar um Serviço sem ser admin", async function () {
+  const inputLoginAdm = {
+    email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+  };
+  const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+    if (loginAdm && loginAdm.data && loginAdm.data.token) {
+    const token = loginAdm.data.token;
+    const headers = { headers: { authorization: `Bearer ${token}` } };
+    const input = {
+      title: "Unha Gel",
+      price: "190,00",
+      duration: "1:30",
+      description: "Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo. Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza. Seja iniciante ou experiente.",
+      image_url: "https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+      is_course: true,
+    };
+    const postedService = await axios.post("http://localhost:3000/admin/service", input, headers);
+    const serviceId = postedService.data.service_id;
+    const inputUser = {
+      name: "John Doe",
+      email: "john.does@gmail.com",
+      phone: "41984498900",
+      password: "Bruna24",
+    };
+    await axios.post("http://localhost:3000/user", inputUser);
+    const inputLogin = {
+      email: "john.does@gmail.com",
+      password: "Bruna24",
+    };
+    try {
+      const login = await axios.post("http://localhost:3000/login", inputLogin);
+      
+      if (login && login.data && login.data.token) {
+        const userToken = login.data.token;
+        const headersUser = { headers: { authorization: `Bearer ${userToken}` } };
+        const inputUpdated = {
+          title: "Unha Gel com desenho",
+          price: "190,00",
+          duration: "1:30",
+          description: "Modelo lindo.",
+          image_url: "https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+          is_course: false,
+        };
+        await axios.patch(`http://localhost:3000/admin/service/${serviceId}`, inputUpdated, headersUser);
+        throw new Error("O usuário não-admin conseguiu editar o serviço, mas não deveria.");
+      } else {
+        console.error("Login falhou: Não foi possível obter o token de autenticação.");
+      }
+    } catch (error:any) {
+      expect(error.response.data.message).toBe("Usuário não tem permissão para acessar.");
+    }
+  }
+});
+
 test('Deve deletar um serviço existente', async () => {
 	const inputLoginAdm = {
 		email: "brunapereira@studio.com.br",
@@ -274,15 +329,55 @@ test('Deve deletar um serviço existente', async () => {
 		};
 		const postedService = await axios.post("http://localhost:3000/admin/service", inputService, headers);
 		const serviceId = postedService.data.service_id;
-		console.log(serviceId);
-		
 		const deleteService = await axios.delete(`http://localhost:3000/admin/service/${serviceId}`, headers);
 		const deletedMsg = deleteService.data.message;
-		console.log('DELETED',deletedMsg);
 		expect(deletedMsg).toBe("Service deleted successfully");
 	} else {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
+});
+
+test("Não deve deletar um Serviço sem ser admin", async function () {
+  const inputLoginAdm = {
+    email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+  };
+  const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+  expect(loginAdm && loginAdm.data && loginAdm.data.token).toBeTruthy();
+  const token = loginAdm.data.token;
+  const headers = { headers: { authorization: `Bearer ${token}` } };
+  const input = {
+    title: "Unha Gel",
+    price: "190,00",
+    duration: "1:30",
+    description: "Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo. Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza. Seja iniciante ou experiente.",
+    image_url: "https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    is_course: true,
+  };
+  const postedService = await axios.post("http://localhost:3000/admin/service", input, headers);
+  expect(postedService && postedService.data && postedService.data.service_id).toBeTruthy();
+  const serviceId = postedService.data.service_id;
+  const inputUser = {
+    name: "John Doe",
+    email: "john.does@gmail.com",
+    phone: "41984498900",
+    password: "Bruna24",
+  };
+  await axios.post("http://localhost:3000/user", inputUser);
+  const inputLogin = {
+    email: "john.does@gmail.com",
+    password: "Bruna24",
+  };
+  const login = await axios.post("http://localhost:3000/login", inputLogin);
+  expect(login && login.data && login.data.token).toBeTruthy();
+  const userToken = login.data.token;
+  const headersUser = { headers: { authorization: `Bearer ${userToken}` } };
+  try {
+    await axios.delete(`http://localhost:3000/admin/service/${serviceId}`, headersUser);
+    throw new Error("O usuário não-admin conseguiu deletar o serviço, mas não deveria.");
+  } catch (error:any) {
+    expect(error.response.data.message).toBe("Usuário não tem permissão para acessar.");
+  }
 });
 
 test("Deve cadastrar um horário", async function () {
@@ -305,6 +400,43 @@ test("Deve cadastrar um horário", async function () {
 	} else {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
+});
+
+test("Não deve cadastrar um Horário sem ser admin", async function () {
+  const inputLoginAdm = {
+    email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+  };
+  const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+  const token = loginAdm.data.token;
+  const headers = { headers: { authorization: `Bearer ${token}` } };
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "09:00",
+		end_time: "11:00"
+	};
+  await axios.post("http://localhost:3000/admin/schedule", input, headers);
+  const inputUser = {
+    name: "John Doe",
+    email: "john.does@gmail.com",
+    phone: "41984498900",
+    password: "Bruna24",
+  };
+  await axios.post("http://localhost:3000/user", inputUser);
+  const inputLogin = {
+    email: "john.does@gmail.com",
+    password: "Bruna24",
+  };
+  const login = await axios.post("http://localhost:3000/login", inputLogin);
+  expect(login && login.data && login.data.token).toBeTruthy();
+  const userToken = login.data.token;
+  const headersUser = { headers: { authorization: `Bearer ${userToken}` } };
+  try {
+    await axios.post("http://localhost:3000/admin/schedule", input, headersUser);
+    throw new Error("O usuário não-admin conseguiu deletar o serviço, mas não deveria.");
+  } catch (error:any) {
+    expect(error.response.data.message).toBe("Usuário não tem permissão para acessar.");
+  }
 });
 
 test("Deve obter um schedule", async function() {
@@ -417,6 +549,43 @@ test('Deve deletar um schedule existente', async () => {
 	} else {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
+});
+
+test("Não deve deletar um Horário sem ser admin", async function () {
+  const inputLoginAdm = {
+    email: "brunapereira@studio.com.br",
+    password: "Bruna24",
+  };
+  const loginAdm = await axios.post("http://localhost:3000/login", inputLoginAdm);
+  const token = loginAdm.data.token;
+  const headers = { headers: { authorization: `Bearer ${token}` } };
+	const input = {
+		available_day: "Segunda-feira",
+		start_time: "09:00",
+		end_time: "11:00"
+	};
+  const scheduleId = await axios.post("http://localhost:3000/admin/schedule", input, headers);
+  const inputUser = {
+    name: "John Doe",
+    email: "john.does@gmail.com",
+    phone: "41984498900",
+    password: "Bruna24",
+  };
+  await axios.post("http://localhost:3000/user", inputUser);
+  const inputLogin = {
+    email: "john.does@gmail.com",
+    password: "Bruna24",
+  };
+  const login = await axios.post("http://localhost:3000/login", inputLogin);
+  expect(login && login.data && login.data.token).toBeTruthy();
+  const userToken = login.data.token;
+  const headersUser = { headers: { authorization: `Bearer ${userToken}` } };
+  try {
+    await axios.delete(`http://localhost:3000/admin/schedule/${scheduleId}`, headersUser);
+    throw new Error("O usuário não-admin conseguiu deletar o serviço, mas não deveria.");
+  } catch (error:any) {
+    expect(error.response.data.message).toBe("Usuário não tem permissão para acessar.");
+  }
 });
 
 test("Deve cadastrar um agendamento", async function () {
