@@ -56,7 +56,7 @@ test("Deve obter um usuário", async function(){
 		name: "John Doe",
 		email: "john.doe@gmail.com",
 		phone: "41984498900",
-    password: "Bruna24",
+		password: "Bruna24",
 	};
   const usecase = new CreateUser(new UserRepositoryDataBase());
   const output = await usecase.execute(input); 
@@ -79,14 +79,21 @@ test("Deve editar um usuário", async function() {
 		email: "joana.dark@gmail.com",
 		phone: "41984494689",
 		password: "Joana32",
+		is_active: false
 	};
 	const usecase = new CreateUser(new UserRepositoryDataBase());
 	const output = await usecase.execute(input); 
+	console.log('OUTPUT', output);
+	
 	const usecase1 = new  UpdateUser(new UserRepositoryDataBase());
 	const output1 = await usecase1.execute({userId:output.user_id, data:inputUpdated}); 
+	console.log('editar', output1);
+	
 	expect(output1.name).toBe("Joana Darc");
 	expect(output1.email).toBe("joana.dark@gmail.com");
 	expect(output1.phone).toBe("41984494689");
+	expect(output1.is_active).toBe(false);
+
 })
 
 test('Deve deletar um usuário existente', async () => {
@@ -94,7 +101,7 @@ test('Deve deletar um usuário existente', async () => {
 		name: "John Doe",
 		email: "john.doe@gmail.com",
 		phone: "41984498900",
-    password: "Bruna24",
+    	password: "Bruna24",
 	};
   const usecase = new CreateUser(new UserRepositoryDataBase());
   const output = await usecase.execute(input); 

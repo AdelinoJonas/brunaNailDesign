@@ -9,6 +9,7 @@ export async function up(): Promise<void> {
     table.string("password", 255).notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.boolean("is_admin").defaultTo(false);
+    table.boolean("is_active").defaultTo(true);
   });
 }
 

@@ -29,6 +29,7 @@ export default class UserRepositoryDataBase implements UserRepository {
       email: userData.email,
       phone: userData.phone,
      is_admin: userData.is_admin,
+     is_active: userData.is_active
     };
   }
 
@@ -40,13 +41,14 @@ export default class UserRepositoryDataBase implements UserRepository {
       email: data.email,
       phone: data.phone,
       password: data.password,
+      is_active: data.is_active
     }));
 
     return users;
   }
   
   async update(userId: string, user: Partial<User>) {
-    const { name, email, phone, password} = user;
+    const { name, email, phone, password, is_active} = user;
     const passHashed = await bcrypt.hash(`${password}`, 10);
     await knex('users')
       .where('user_id', userId)
@@ -55,6 +57,7 @@ export default class UserRepositoryDataBase implements UserRepository {
         email: email?.value,
         phone: phone?.value,
         password: passHashed?.value,
+        is_active
       });
     return user;
   }

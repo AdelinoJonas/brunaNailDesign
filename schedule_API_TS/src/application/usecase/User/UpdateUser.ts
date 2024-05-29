@@ -26,7 +26,8 @@ export default class UpdateUser {
       name: data.name,
       email: data.email,
       phone: data.phone,
-      password: data.password
+      password: data.password,
+      is_active: data.is_active
     };
   }
 }

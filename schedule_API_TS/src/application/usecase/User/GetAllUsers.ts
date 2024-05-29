@@ -12,7 +12,8 @@ export default class GetAllUsers {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      is_admin: user.is_admin
+      is_admin: user.is_admin,
+      is_active: user.is_active
     }));
 
     return output;
@@ -24,5 +25,6 @@ type Output = {
   name: string,
   email: string,
   phone: string,
-  is_admin: boolean
+  is_admin: boolean,
+  is_active:boolean
 }

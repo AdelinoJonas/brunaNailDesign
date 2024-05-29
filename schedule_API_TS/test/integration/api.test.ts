@@ -41,7 +41,7 @@ test("Deve obter um usuário", async () => {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
 });
-test.only("Deve obter todos os usuários", async () => {
+test("Deve obter todos os usuários", async () => {
   try {
     const inputLogin = {
       email: "brunapereira@studio.com.br",
@@ -67,6 +67,7 @@ test("Deve editar um usuário", async function() {
 	};
 	const responseCreate = await axios.post("http://localhost:3000/user", input);
 	const userId = responseCreate.data.user_id;
+	try {
 	const inputLogin = {
 		email: "john.done@gmail.com",
 		password: "Bruna24",
@@ -74,20 +75,24 @@ test("Deve editar um usuário", async function() {
 	const login = await axios.post("http://localhost:3000/login", inputLogin);
 	const token = login.data.token;
 	const headers = { headers: { authorization: `Bearer ${token}` } };
-	try {
+	
 		const inputUpdated = {
 			name: "Joana Darc",
 			email: "joana.dark@gmail.com",
 			phone: "41984494689",
 			password: "Joana32",
+			is_active: false
 		};
 		const responseUpdate = await axios.patch(`http://localhost:3000/user/${userId}`, inputUpdated, headers);
+		console.log("UPDATED",responseUpdate);
+		
 		const output = responseUpdate.data;
 		expect(output.name).toBe("Joana Darc");
 		expect(output.email).toBe("joana.dark@gmail.com");
 		expect(output.phone).toBe("41984494689");
+		expect(output.is_active).toBe(false);
 	} catch (error:any) {
-			console.error("Erro ao editar usuário:", error.message);
+		console.error("Erro ao editar usuário:", error.message);
 	}
 })
 

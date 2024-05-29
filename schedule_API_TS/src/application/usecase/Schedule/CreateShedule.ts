@@ -12,6 +12,7 @@ export default class CreateSchedule {
       input.end_time,
       input.is_free
     );
+    
     const scheduleData = await this.scheduleRepository.save(schedule);  
     return {
       scheduleId: scheduleData.scheduleId,
