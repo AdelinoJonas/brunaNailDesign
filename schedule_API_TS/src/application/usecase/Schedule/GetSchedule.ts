@@ -10,7 +10,8 @@ export default class GetSchedule {
       scheduleId: schedule.schedule_id,
       available_day: schedule.available_day, 
       start_time: schedule.start_time,
-      end_time: schedule.end_time
+      end_time: schedule.end_time,
+      is_free: schedule.is_free,
     }
   }
 }
@@ -23,5 +24,6 @@ type Output = {
   scheduleId: string,
   available_day: string, 
   start_time: string,
-  end_time: string
+  end_time: string,
+  is_free: boolean
 }

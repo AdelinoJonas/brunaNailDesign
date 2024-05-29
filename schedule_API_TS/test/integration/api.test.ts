@@ -392,7 +392,8 @@ test("Deve cadastrar um horário", async function () {
 	const input = {
 		available_day: "Segunda-feira",
 		start_time: "09:00",
-		end_time: "11:00"
+		end_time: "11:00",
+		is_free: false
 	};
 	const createSchedule = await axios.post("http://localhost:3000/admin/schedule", input, headers);
 	const output1 = createSchedule.data;
@@ -413,7 +414,8 @@ test("Não deve cadastrar um Horário sem ser admin", async function () {
 	const input = {
 		available_day: "Segunda-feira",
 		start_time: "09:00",
-		end_time: "11:00"
+		end_time: "11:00",
+		is_free: false
 	};
   await axios.post("http://localhost:3000/admin/schedule", input, headers);
   const inputUser = {
@@ -463,7 +465,8 @@ test("Deve obter um schedule", async function() {
     const inputSchedule = {
       available_day: "Segunda-feira",
       start_time: "09:00",
-      end_time: "11:00"
+      end_time: "11:00",
+			is_free: false
     };
     const createScheduleResponse = await axios.post("http://localhost:3000/admin/schedule", inputSchedule, headers);
     const scheduleId = createScheduleResponse.data.scheduleId;
@@ -501,14 +504,16 @@ test("Deve editar um schedule", async function() {
     const inputSchedule = {
       available_day: "Segunda-feira",
       start_time: "09:00",
-      end_time: "11:00"
+      end_time: "11:00",
+			is_free: false
     };
     const createScheduleResponse = await axios.post("http://localhost:3000/admin/schedule", inputSchedule, headers);
     const scheduleId = createScheduleResponse.data.scheduleId;
 	const inputUpdated = {
 		available_day: "Segunda-feira",
 		start_time: "14:00",
-		end_time: "15:30"
+		end_time: "15:30",
+		is_free: true
 	};
 	const responseUpdate = await axios.patch(`http://localhost:3000/schedule/${scheduleId}`, inputUpdated, headers);
 	const output1 = responseUpdate.data;
@@ -539,7 +544,8 @@ test('Deve deletar um schedule existente', async () => {
     const inputSchedule = {
       available_day: "Segunda-feira",
       start_time: "09:00",
-      end_time: "11:00"
+      end_time: "11:00",
+			is_free: false
     };
     const createScheduleResponse = await axios.post("http://localhost:3000/admin/schedule", inputSchedule, headers);
     const scheduleId = createScheduleResponse.data.scheduleId;
@@ -562,7 +568,8 @@ test("Não deve deletar um Horário sem ser admin", async function () {
 	const input = {
 		available_day: "Segunda-feira",
 		start_time: "09:00",
-		end_time: "11:00"
+		end_time: "11:00",
+		is_free: false
 	};
   const scheduleId = await axios.post("http://localhost:3000/admin/schedule", input, headers);
   const inputUser = {

@@ -23,7 +23,8 @@ export default class ScheduleRepositoryDataBase implements ScheduleRepositoryDat
       scheduleId: scheduleData.schedule_id,
       available_day: scheduleData.available_day,
       start_time: scheduleData.start_time,
-      end_time: scheduleData.end_time
+      end_time: scheduleData.end_time,
+      is_free: scheduleData.is_free
     };
   }
   
@@ -34,7 +35,8 @@ export default class ScheduleRepositoryDataBase implements ScheduleRepositoryDat
       .update({
         available_day, 
         start_time,
-        end_time
+        end_time,
+        is_free: false
       });
     return schedule;
   }

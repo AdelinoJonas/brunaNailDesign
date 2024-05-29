@@ -10,7 +10,7 @@ test("Deve cadastrar um Serviço", async function () {
     price: "190,00",
     duration:"1:30",
     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
     is_course: true
 	};
 	const useCase = new CreateService(new ServiceRepositoryDataBase());
@@ -25,7 +25,7 @@ test("Deve obter um serviço", async function() {
     price: "190,00",
     duration:"1:30",
     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
     is_course: true
 	};
 	const usecase = new CreateService(new ServiceRepositoryDataBase());
@@ -36,7 +36,7 @@ test("Deve obter um serviço", async function() {
 	expect(output1.price).toBe("190,00");
 	expect(output1.duration).toBe("1:30");
 	expect(output1.description).toBe("Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.");
-	expect(output1.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
+	expect(output1.image_url).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
 	expect(output1.is_course).toBeTruthy();
 })
 
@@ -46,7 +46,7 @@ test("Deve editar um serviço", async function() {
     price: "190,00",
     duration:"1:30",
     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
     is_course: true
 	};
 	const inputUpdated = {
@@ -54,7 +54,7 @@ test("Deve editar um serviço", async function() {
     price: "190,00",
     duration:"1:30",
     description:"MOdelo lindo.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
     is_course: false
 	};
 	const usecase = new CreateService(new ServiceRepositoryDataBase());
@@ -65,7 +65,7 @@ test("Deve editar um serviço", async function() {
 	expect(output1.price).toBe("190,00");
 	expect(output1.duration).toBe("1:30");
 	expect(output1.description).toBe("MOdelo lindo.");
-	expect(output1.image).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
+	expect(output1.image_url).toBe("https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html");
 	expect(output1.is_course).toBeFalsy();
 })
 
@@ -75,7 +75,7 @@ test('Deve deletar um serviço existente', async () => {
     price: "190,00",
     duration:"1:30",
     description:"Aplicar unhas em gel com profissionalismo: Domine as etapas essenciais, desde a preparação das unhas até a finalização com estilo.Criar designs incríveis. Inicie ou aprimore sua carreira na área de beleza.Seja iniciante ou experiente.",
-    image:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
+    image_url:"https://pngtree.com/freepng/beautifully-manicured-hands-featuring-natural-nails-with-gel-polish_14113158.html",
     is_course: true
 	};
   const usecase = new CreateService(new ServiceRepositoryDataBase());

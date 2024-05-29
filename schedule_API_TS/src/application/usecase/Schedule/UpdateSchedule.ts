@@ -14,7 +14,8 @@ export default class UpdateSchedule {
     return {
       available_day: data.available_day, 
       start_time: data.start_time,
-      end_time: data.end_time
+      end_time: data.end_time,
+      is_free: data.is_free,
     };
   }
 }
