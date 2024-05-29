@@ -6,7 +6,7 @@ import AppointmentRepositoryDataBase from "../../src/infra/repository/Appointmen
 
 test("Deve cadastrar um agendamento", async function () {
 	const input = {
-    user_id: "4",
+    user_id: "1",
     service_id: "1",
     schedule_id: "1",
 	};
@@ -18,7 +18,7 @@ test("Deve cadastrar um agendamento", async function () {
 
 test("Deve obter um appointment", async function() {
 	const input = {
-    user_id: "4",
+    user_id: "1",
     service_id: "1",
     schedule_id: "1",
 	};
@@ -26,19 +26,19 @@ test("Deve obter um appointment", async function() {
   const output = await useCase.execute(input); 
   const usecase1 = new GetAppointment(new AppointmentRepositoryDataBase());
   const output1 = await usecase1.execute({appointmentId: output.appointment_id}); 
-	expect(output1.user_id).toBe("4");
+	expect(output1.user_id).toBe("1");
 	expect(output1.service_id).toBe("1");
 	expect(output1.schedule_id).toBe("1");
 })
 
 test("Deve editar um appointment", async function() {
 	const input = {
-    user_id: "4",
+    user_id: "1",
     service_id: "1",
     schedule_id: "1",
 	};
 	const inputUpdated = {
-    user_id: "3",
+    user_id: "2",
     service_id: "1",
     schedule_id: "1",
 	};
@@ -46,14 +46,14 @@ test("Deve editar um appointment", async function() {
 	const output = await useCase.execute(input); 
 	const usecase1 = new  UpdateAppointment(new AppointmentRepositoryDataBase());
 	const output1 = await usecase1.execute({appointmentId:output.appointment_id, data:inputUpdated}); 
-	expect(output1.user_id).toBe("3");
+	expect(output1.user_id).toBe("2");
 	expect(output1.service_id).toBe("1");
 	expect(output1.schedule_id).toBe("1");
 })
 
 test('Deve deletar um appointment existente', async () => {
 	const input = {
-    user_id: "4",
+    user_id: "1",
     service_id: "1",
     schedule_id: "1",
 	};

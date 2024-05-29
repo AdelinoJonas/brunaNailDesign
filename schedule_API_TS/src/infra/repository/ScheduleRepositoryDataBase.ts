@@ -29,16 +29,16 @@ export default class ScheduleRepositoryDataBase implements ScheduleRepositoryDat
   }
 
   async getAllSchedules(): Promise<Schedule[]> {
-    const serviceData = await knex('schedules').select('*');
-    const schedules: Schedule[] = serviceData.map(data => ({
+    const scheduleData = await knex('schedules').select('*');
+    const schedules: Schedule[] = scheduleData.map(data => ({
       scheduleId: data.schedule_id,
       available_day: data.available_day,
       start_time: data.start_time,
       end_time: data.end_time,
       is_free: data.is_free
     }));
-console.log(schedules);
-
+    console.log(schedules);
+    
     return schedules;
   }
   

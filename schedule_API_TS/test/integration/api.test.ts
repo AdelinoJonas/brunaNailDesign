@@ -107,13 +107,13 @@ test('Deve deletar um usuário existente', async () => {
 	const outputCreateUser = response1.data.user_id;
 	try {
 		const inputLogin = {
-			email: "john.doe@gmail.net",
+			email: "brunapereira@studio.com.br",
 			password: "Bruna24",
 		};
 		const login = await axios.post("http://localhost:3000/login", inputLogin);
 		const token = login.data.token;
 		const headers = { headers: { authorization: `Bearer ${token}` } };
-		const response2 = await axios.delete(`http://localhost:3000/user/${outputCreateUser}`, headers);
+		const response2 = await axios.delete(`http://localhost:3000/admin/user/${outputCreateUser}`, headers);
 		const deletedUser = response2.data.message;
 		expect(deletedUser).toBe("User deleted successfully");
 	} catch (error:any) {
@@ -521,7 +521,7 @@ test("Deve obter um horario", async function() {
   }
 });
 
-test.only("Deve obter todos os horários", async () => {
+test("Deve obter todos os horários", async () => {
 	try {
 	  const inputLogin = {
 		email: "john.does@gmail.com",
@@ -532,7 +532,7 @@ test.only("Deve obter todos os horários", async () => {
 	  const headers = { headers: { authorization: `Bearer ${token}` } };
 	  const response = await axios.get("http://localhost:3000/schedules", headers);
 	  const outputGetSchedules = response.data;
-		  expect(outputGetSchedules.length).toBeDefined();
+	expect(outputGetSchedules.length).toBeDefined();
 	} catch (error:any) {
 	  console.error("Erro ao obter usuários:", error.message);
 	}
@@ -700,7 +700,7 @@ test("Deve obter um appointment", async function() {
 		const token = login.data.token;
 		const headers = { headers: { authorization: `Bearer ${token}` } };
 		const input = {
-			user_id: "4",
+			user_id: "1",
 			service_id: "1",
 			schedule_id: "1",
 		};
@@ -708,13 +708,26 @@ test("Deve obter um appointment", async function() {
 		const output_id = response1.data.appointment_id;
 		const response2 = await axios.get(`http://localhost:3000/appointment/${output_id}`, headers);
 		const output1 = response2.data;
-		expect(output1.user_id).toBe("4");
+		expect(output1.user_id).toBe("1");
 		expect(output1.service_id).toBe("1");
 		expect(output1.schedule_id).toBe("1");
 	} else {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
 })
+
+test("Deve obter todos os agendamentos", async () => {
+	const inputLogin = {
+		email: "brunapereira@studio.com.br",
+	    password: "Bruna24",
+	};
+	const login = await axios.post("http://localhost:3000/login", inputLogin);
+	const token = login.data.token;
+	const headers = { headers: { authorization: `Bearer ${token}` } };
+	const response = await axios.get("http://localhost:3000/admin/appointments", headers);
+	const outputGet = response.data;
+	expect(outputGet.length).toBeDefined();
+});
 
 test("Deve editar um appointment", async function() {
 	const inputLogin = {

@@ -41,6 +41,7 @@ import adminVerify from "./middlewares/adminVerify";
 import GetAllUsers from "./application/usecase/User/GetAllUsers";
 import GetAllServices from "./application/usecase/Service/GetAllServices";
 import GetAllSchedules from "./application/usecase/Schedule/GetAllSchedules";
+import GetAllAppointment from "./application/usecase/Appointment/GetAllAppointment";
 
 const app = express();
 app.use(express.json());
@@ -75,16 +76,6 @@ app.patch("/user/:userId", async function (req, res) {
     return res.status(404).json({ error: "user not found" });
   }
   return res.json(output);
-});
-
-app.delete("/user/:userId", async function (req, res) {
-  try {
-    const useCase = new DeleteUser(new UserRepositoryDataBase());
-    const output = await useCase.execute({ userId: req.params.userId }); 
-    return res.json(output)
-  } catch (e) {
-    return res.status(500).json({ e: 'Internal server error'})
-  }
 });
 
 app.get("/service/:serviceId", async function (req, res) {
@@ -184,6 +175,16 @@ app.get("/admin/users", async function (req, res) {
   }
 });
 
+app.delete("/admin/user/:userId", async function (req, res) {
+  try {
+    const useCase = new DeleteUser(new UserRepositoryDataBase());
+    const output = await useCase.execute({ userId: req.params.userId }); 
+    return res.json(output)
+  } catch (e) {
+    return res.status(500).json({ e: 'Internal server error'})
+  }
+});
+
 app.post("/admin/service", async function (req, res) {
   const useCase = new CreateService(new ServiceRepositoryDataBase());
   const output = await useCase.execute(req.body);
@@ -223,6 +224,17 @@ try {
 } catch (e) {
   return res.status(500).json({ e: 'Internal server error'})
 }
+});
+
+app.get("/admin/appointments", async function (req, res) {
+  const useCase = new GetAllAppointment(new AppointmentRepositoryDataBase());
+  try {
+    const output = await useCase.execute();
+    return res.json(output);
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.listen(3000, () => {

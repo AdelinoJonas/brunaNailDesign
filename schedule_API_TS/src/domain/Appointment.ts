@@ -1,13 +1,20 @@
 
 export default class Appointment {
-
-  constructor (
-    readonly user_id: string,
-    readonly service_id: string,
-    readonly schedule_id: string ) {
+    constructor(
+      readonly service_id: string,
+      readonly schedule_id: string,
+      readonly user_id: string,
+    ) {}
+  
+    static create(
+      service_id: string,
+      schedule_id: string,
+      user_id: string,
+    ) {
+      return new Appointment(
+        service_id,
+        schedule_id,
+        user_id,
+      );
+    }
   }
-
-  static create( user_id: string, service_id: string, schedule_id: string ) {
-    return new Appointment(user_id, service_id, schedule_id);
-  }
-}
