@@ -52,7 +52,7 @@ test.only("Deve obter todos os usuários", async () => {
     const headers = { headers: { authorization: `Bearer ${token}` } };
     const response = await axios.get("http://localhost:3000/users", headers);
     const outputGetUsers = response.data;
-		console.log(outputGetUsers);
+		expect(outputGetUsers.length).toBeDefined();
   } catch (error:any) {
     console.error("Erro ao obter usuários:", error.message);
   }
