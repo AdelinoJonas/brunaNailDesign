@@ -5,7 +5,7 @@ test("Deve cadastrar um usuário", async function () {
 		name: "John Doe",
 		email: "john.doe@gmail.com",
 		phone: "41984498900",
-    password: "Bruna24",
+        password: "Bruna24",
 	};
 	const response1 = await axios.post("http://localhost:3000/user", input);
 	const output1 = response1.data;
@@ -101,18 +101,21 @@ test('Deve deletar um usuário existente', async () => {
 });
 
 test('Deve realizar o login', async () => {
-  const input = {
-    email: "john.done@gmail.com",
+	const input = {
+		name: "John Doe",
+		email: "john.doe@gmail.net",
+		phone: "41984498900",
+		password: "Bruna24",
+	};
+	await axios.post("http://localhost:3000/user", input);
+  const inputLogin = {
+    email: "john.doe@gmail.net",
     password: "Bruna24"
   };
-  try {
-    const response = await axios.post("http://localhost:3000/login", input);
-    expect(response.status).toBe(200);
-    expect(response.data.user).toBeDefined();
-    expect(response.data.token).toBeDefined();
-  } catch (error:any) {
-    fail(error.message);
-  }
+	const response = await axios.post("http://localhost:3000/login", inputLogin);
+	expect(response.status).toBe(200);
+	expect(response.data.user).toBeDefined();
+	expect(response.data.token).toBeDefined();
 });
 
 test("Deve cadastrar um Serviço", async function () {
