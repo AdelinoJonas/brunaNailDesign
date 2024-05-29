@@ -249,8 +249,8 @@ test("Deve obter todos os serviços", async () => {
 	  const token = login.data.token;
 	  const headers = { headers: { authorization: `Bearer ${token}` } };
 	  const response = await axios.get("http://localhost:3000/services", headers);
-	  const outputGetUsers = response.data;
-		  expect(outputGetUsers.length).toBeDefined();
+	  const outputGetServices = response.data;
+		  expect(outputGetServices.length).toBeDefined();
 	} catch (error:any) {
 	  console.error("Erro ao obter usuários:", error.message);
 	}
@@ -482,7 +482,7 @@ test("Não deve cadastrar um Horário sem ser admin", async function () {
   }
 });
 
-test("Deve obter um schedule", async function() {
+test("Deve obter um horario", async function() {
   const input = {
     name: "John Doe",
     email: "john.does@gmail.com",
@@ -520,6 +520,23 @@ test("Deve obter um schedule", async function() {
     console.error("Login falhou: Não foi possível obter o token de autenticação.");
   }
 });
+
+test.only("Deve obter todos os horários", async () => {
+	try {
+	  const inputLogin = {
+		email: "john.does@gmail.com",
+		password: "Bruna24",
+	  };
+	  const login = await axios.post("http://localhost:3000/login", inputLogin);
+	  const token = login.data.token;
+	  const headers = { headers: { authorization: `Bearer ${token}` } };
+	  const response = await axios.get("http://localhost:3000/schedules", headers);
+	  const outputGetSchedules = response.data;
+		  expect(outputGetSchedules.length).toBeDefined();
+	} catch (error:any) {
+	  console.error("Erro ao obter usuários:", error.message);
+	}
+  });
 
 test("Deve editar um schedule", async function() {
   const input = {
