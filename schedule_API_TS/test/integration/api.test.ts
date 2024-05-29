@@ -41,6 +41,22 @@ test("Deve obter um usuário", async () => {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
 });
+test.only("Deve obter todos os usuários", async () => {
+  try {
+    const inputLogin = {
+      email: "brunapereira@studio.com.br",
+      password: "Bruna24",
+    };
+    const login = await axios.post("http://localhost:3000/login", inputLogin);
+    const token = login.data.token;
+    const headers = { headers: { authorization: `Bearer ${token}` } };
+    const response = await axios.get("http://localhost:3000/users", headers);
+    const outputGetUsers = response.data;
+		console.log(outputGetUsers);
+  } catch (error:any) {
+    console.error("Erro ao obter usuários:", error.message);
+  }
+});
 
 test("Deve editar um usuário", async function() {
 	const input = {

@@ -17,3 +17,4 @@ export default class User {
     return new User(name, email, phone, password);
   }
 }
+
