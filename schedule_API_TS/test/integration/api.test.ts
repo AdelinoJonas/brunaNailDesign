@@ -239,6 +239,23 @@ test("Deve obter um serviço", async function() {
 	}
 })
 
+test("Deve obter todos os serviços", async () => {
+	try {
+	  const inputLogin = {
+		email: "john.does@gmail.com",
+		password: "Bruna24",
+	  };
+	  const login = await axios.post("http://localhost:3000/login", inputLogin);
+	  const token = login.data.token;
+	  const headers = { headers: { authorization: `Bearer ${token}` } };
+	  const response = await axios.get("http://localhost:3000/services", headers);
+	  const outputGetUsers = response.data;
+		  expect(outputGetUsers.length).toBeDefined();
+	} catch (error:any) {
+	  console.error("Erro ao obter usuários:", error.message);
+	}
+  });
+
 test("Deve editar um serviço", async function() {
 	const inputLoginAdm = {
 		email: "brunapereira@studio.com.br",

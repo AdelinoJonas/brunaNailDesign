@@ -29,5 +29,5 @@ type Input = {
 }
 
 type Output = {
-  service_id: any
+  service_id: string
 }

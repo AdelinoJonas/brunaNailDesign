@@ -32,6 +32,19 @@ export default class ServiceRepositoryDataBase implements ServiceRepository {
       is_course: serviceData.is_course
     };
   }
+  async getAllServices(): Promise<Service[]> {
+    const serviceData = await knex('services').select('*');
+    const services:Service[] = serviceData.map(data => ({
+      title: data.title,
+      price: data.price, 
+      duration: data.duration, 
+      description: data.description, 
+      image_url: data.image_url, 
+      is_course: data.is_course
+    }));
+
+    return services;
+  }
 
   async update(serviceId: string, service: Partial<Service>) {
     const { title, price, duration, description, image_url , is_course } = service;

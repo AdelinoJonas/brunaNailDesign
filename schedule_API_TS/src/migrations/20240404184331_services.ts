@@ -8,7 +8,7 @@ export async function up(): Promise<void> {
     table.string("duration", 255).notNullable();
     table.string("description", 600).notNullable();
     table.string("image_url", 255);
-    table.boolean("is_course");
+    table.boolean("is_course").defaultTo(true);
   });
 }
 

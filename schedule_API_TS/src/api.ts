@@ -39,6 +39,7 @@ import DeleteAppointment from "./application/usecase/Appointment/DeleteAppointme
 import { tokenVerify } from "./middlewares/tokenVerify";
 import adminVerify from "./middlewares/adminVerify";
 import GetAllUsers from "./application/usecase/User/GetAllUsers";
+import GetAllServices from "./application/usecase/Service/GetAllServices";
 
 const app = express();
 app.use(express.json());
@@ -92,6 +93,18 @@ app.get("/service/:serviceId", async function (req, res) {
     return res.status(404).json({ error: "Service not found" });
   }
   return res.json(output);
+});
+
+
+app.get("/services", async function (req, res) {
+  const useCase = new GetAllServices(new ServiceRepositoryDataBase());
+  try {
+    const output = await useCase.execute();
+    return res.json(output);
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.get("/schedule/:scheduleId", async function (req, res) {
@@ -148,7 +161,7 @@ try {
 
 app.use('/admin', adminVerify);
 
-app.get("/users", async function (req, res) {
+app.get("/admin/users", async function (req, res) {
   const useCase = new GetAllUsers(new UserRepositoryDataBase());
   try {
     const output = await useCase.execute();
