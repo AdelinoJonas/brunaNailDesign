@@ -1,5 +1,6 @@
 import CreateAppointment from "../../src/application/usecase/Appointment/CreateAppointment";
 import DeleteAppointment from "../../src/application/usecase/Appointment/DeleteAppointment";
+import GetAllAppointment from "../../src/application/usecase/Appointment/GetAllAppointment";
 import GetAppointment from "../../src/application/usecase/Appointment/GetAppointment";
 import UpdateAppointment from "../../src/application/usecase/Appointment/UpdateAppointment";
 import AppointmentRepositoryDataBase from "../../src/infra/repository/AppointmentRepositoryDataBase";
@@ -30,6 +31,22 @@ test("Deve obter um appointment", async function() {
 	expect(output1.service_id).toBe("1");
 	expect(output1.schedule_id).toBe("1");
 })
+
+test("Deve obter todos os appointments", async function() {
+	const input = {
+    user_id: "5",
+    service_id: "7",
+    schedule_id: "85",
+	};
+	const useCase = new CreateAppointment(new AppointmentRepositoryDataBase());
+  await useCase.execute(input); 
+  const usecase1 = new GetAllAppointment(new AppointmentRepositoryDataBase());
+  const output1 = await usecase1.execute(); 
+  console.log(output1);
+  
+  expect(output1.length).toBeDefined();
+})
+
 
 test("Deve editar um appointment", async function() {
 	const input = {

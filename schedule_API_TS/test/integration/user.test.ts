@@ -93,7 +93,6 @@ test("Deve editar um usuário", async function() {
 	expect(output1.email).toBe("joana.dark@gmail.com");
 	expect(output1.phone).toBe("41984494689");
 	expect(output1.is_active).toBe(false);
-
 })
 
 test('Deve deletar um usuário existente', async () => {

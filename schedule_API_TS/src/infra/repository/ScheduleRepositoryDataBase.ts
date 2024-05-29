@@ -36,9 +36,7 @@ export default class ScheduleRepositoryDataBase implements ScheduleRepositoryDat
       start_time: data.start_time,
       end_time: data.end_time,
       is_free: data.is_free
-    }));
-    console.log(schedules);
-    
+    }));  
     return schedules;
   }
   

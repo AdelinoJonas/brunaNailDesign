@@ -71,7 +71,8 @@ app.get("/user/:userId", async function (req, res) {
 
 app.patch("/user/:userId", async function (req, res) {
   const useCase = new UpdateUser(new UserRepositoryDataBase());
-  const output = await useCase.execute({ userId: req.params.userId, data: req.body });    
+  const output = await useCase.execute({ userId: req.params.userId, data: req.body }); 
+  console.log(output);   
   if (!output) {
     return res.status(404).json({ error: "user not found" });
   }

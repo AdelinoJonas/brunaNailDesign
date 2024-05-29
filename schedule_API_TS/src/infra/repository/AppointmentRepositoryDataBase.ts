@@ -28,7 +28,7 @@ export default class AppointmentRepositoryDataBase implements AppointmentReposit
   }
 
   async getAllAppointment(): Promise<Appointment[]> {
-    const appointmentData = await knex('schedules').select('*');
+    const appointmentData = await knex('appointments').select('*');
     const appointments: Appointment[] = appointmentData.map((data) =>
       Appointment.create(
         data.user_id,
@@ -36,7 +36,6 @@ export default class AppointmentRepositoryDataBase implements AppointmentReposit
         data.schedule_id,
       )
     );
-    console.log(appointments);
     return appointments;
   }
 

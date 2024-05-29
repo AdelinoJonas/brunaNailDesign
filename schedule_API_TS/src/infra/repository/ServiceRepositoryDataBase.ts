@@ -42,7 +42,6 @@ export default class ServiceRepositoryDataBase implements ServiceRepository {
       image_url: data.image_url, 
       is_course: data.is_course
     }));
-
     return services;
   }
 

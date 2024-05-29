@@ -23,6 +23,8 @@ export default class UserRepositoryDataBase implements UserRepository {
     .select()
     .where('user_id', userId)
     .first();
+    console.log('USERDATA', userData);
+    
     return {
       userId: userData.user_id,
       name: userData.name,
@@ -50,6 +52,7 @@ export default class UserRepositoryDataBase implements UserRepository {
   async update(userId: string, user: Partial<User>) {
     const { name, email, phone, password, is_active} = user;
     const passHashed = await bcrypt.hash(`${password}`, 10);
+    console.log(user);
     await knex('users')
       .where('user_id', userId)
       .update({
@@ -59,6 +62,7 @@ export default class UserRepositoryDataBase implements UserRepository {
         password: passHashed?.value,
         is_active
       });
+      console.log(user);
     return user;
   }
 

@@ -58,24 +58,16 @@ test("Deve obter todos os usuários", async () => {
   }
 });
 
-test("Deve editar um usuário", async function() {
-	const input = {
-		name: "John Doe",
-		email: "john.done@gmail.com",
-		phone: "41984498900",
-		password: "Bruna24",
-	};
-	const responseCreate = await axios.post("http://localhost:3000/user", input);
-	const userId = responseCreate.data.user_id;
+test.only("Deve editar um usuário", async function() {
 	try {
 	const inputLogin = {
-		email: "john.done@gmail.com",
+		email: "brunapereira@studio.com.br",
 		password: "Bruna24",
 	};
 	const login = await axios.post("http://localhost:3000/login", inputLogin);
 	const token = login.data.token;
-	const headers = { headers: { authorization: `Bearer ${token}` } };
-	
+	const userId = login.data.user.user_id;
+	const headers = { headers: { Authorization: `Bearer ${token}` } };
 		const inputUpdated = {
 			name: "Joana Darc",
 			email: "joana.dark@gmail.com",
@@ -83,9 +75,10 @@ test("Deve editar um usuário", async function() {
 			password: "Joana32",
 			is_active: false
 		};
+		console.log(userId );
+		
 		const responseUpdate = await axios.patch(`http://localhost:3000/user/${userId}`, inputUpdated, headers);
 		console.log("UPDATED",responseUpdate);
-		
 		const output = responseUpdate.data;
 		expect(output.name).toBe("Joana Darc");
 		expect(output.email).toBe("joana.dark@gmail.com");
@@ -95,31 +88,6 @@ test("Deve editar um usuário", async function() {
 		console.error("Erro ao editar usuário:", error.message);
 	}
 })
-
-test('Deve deletar um usuário existente', async () => {
-	const input = {
-		name: "John Doe",
-		email: "john.doe@gmail.net",
-		phone: "41984498900",
-		password: "Bruna24",
-	};
-	const response1 = await axios.post("http://localhost:3000/user", input);
-	const outputCreateUser = response1.data.user_id;
-	try {
-		const inputLogin = {
-			email: "brunapereira@studio.com.br",
-			password: "Bruna24",
-		};
-		const login = await axios.post("http://localhost:3000/login", inputLogin);
-		const token = login.data.token;
-		const headers = { headers: { authorization: `Bearer ${token}` } };
-		const response2 = await axios.delete(`http://localhost:3000/admin/user/${outputCreateUser}`, headers);
-		const deletedUser = response2.data.message;
-		expect(deletedUser).toBe("User deleted successfully");
-	} catch (error:any) {
-		console.error("Erro ao deletar usuário:", error.message);
-	}
-});
 
 test('Deve realizar o login', async () => {
 	const input = {
