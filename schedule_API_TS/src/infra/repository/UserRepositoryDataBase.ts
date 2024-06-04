@@ -23,15 +23,7 @@ export default class UserRepositoryDataBase implements UserRepository {
     .select()
     .where('user_id', userId)
     .first();
-    console.log('USERDATA', userData);
-    
-    return {
-      name: userData.name,
-      email: userData.email,
-      phone: userData.phone,
-      is_admin: userData.is_admin,
-      is_active: userData.is_active
-    };
+    return userData
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -51,7 +43,6 @@ export default class UserRepositoryDataBase implements UserRepository {
   async update(userId: string, user: Partial<User>) {
     const { name, email, phone, password, is_active} = user;
     const passHashed = await bcrypt.hash(`${password}`, 10);
-    console.log(user);
     await knex('users')
       .where('user_id', userId)
       .update({
@@ -61,7 +52,6 @@ export default class UserRepositoryDataBase implements UserRepository {
         password: passHashed?.value,
         is_active
       });
-      console.log(user);
     return user;
   }
 

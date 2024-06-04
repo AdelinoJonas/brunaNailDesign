@@ -83,12 +83,8 @@ test("Deve editar um usuário", async function() {
 	};
 	const usecase = new CreateUser(new UserRepositoryDataBase());
 	const output = await usecase.execute(input); 
-	console.log('OUTPUT', output);
-	
 	const usecase1 = new  UpdateUser(new UserRepositoryDataBase());
-	const output1 = await usecase1.execute({userId:output.user_id, data:inputUpdated}); 
-	console.log('editar', output1);
-	
+	const output1 = await usecase1.execute({id:output.user_id, data:inputUpdated}); 
 	expect(output1.name).toBe("Joana Darc");
 	expect(output1.email).toBe("joana.dark@gmail.com");
 	expect(output1.phone).toBe("41984494689");

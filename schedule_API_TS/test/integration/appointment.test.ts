@@ -42,8 +42,6 @@ test("Deve obter todos os appointments", async function() {
   await useCase.execute(input); 
   const usecase1 = new GetAllAppointment(new AppointmentRepositoryDataBase());
   const output1 = await usecase1.execute(); 
-  console.log(output1);
-  
   expect(output1.length).toBeDefined();
 })
 

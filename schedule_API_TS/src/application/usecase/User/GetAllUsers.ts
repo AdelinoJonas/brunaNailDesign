@@ -6,7 +6,6 @@ export default class GetAllUsers {
   
   async execute (): Promise<Output[]> {
     const users: any[] = await this.userRepository.getAllUsers();
-    
     const output: Output[] = users.map(user => ({
       userId: user.user_id,
       name: user.name,
@@ -15,7 +14,6 @@ export default class GetAllUsers {
       is_admin: user.is_admin,
       is_active: user.is_active
     }));
-
     return output;
   }
 }

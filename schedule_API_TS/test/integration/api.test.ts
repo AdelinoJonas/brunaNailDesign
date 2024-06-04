@@ -12,7 +12,7 @@ test("Deve cadastrar um usuário", async function () {
 	expect(output1).toBeDefined();
 });
 
-test.only("Deve obter um usuário", async () => {
+test("Deve obter um usuário", async () => {
 	const input = {
 		name: "John Doe",
 		email: "john.does@gmail.com",
@@ -21,17 +21,13 @@ test.only("Deve obter um usuário", async () => {
 	};
 	const postedUser = await axios.post("http://localhost:3000/user", input);
 	const outputCreateUser = postedUser.data.user_id;
-	console.log('CREATE USER', outputCreateUser);
-	
 	const inputLogin = {
 		email: "john.does@gmail.com",
 		password: "Bruna24",
 	};
 	const login = await axios.post("http://localhost:3000/login", inputLogin);
-	
 	if (login && login.data && login.data.token) {
 		const token = login.data.token;
-		console.log('TOKEN USER', token);
 		const headers = { headers: { authorization: `Bearer ${token}` } };
 		const response = await axios.get(`http://localhost:3000/user/${outputCreateUser}`,headers);
 		const outputGetUser = response.data;
@@ -51,8 +47,9 @@ test("Deve obter todos os usuários", async () => {
     };
     const login = await axios.post("http://localhost:3000/login", inputLogin);
     const token = login.data.token;
-    const headers = { headers: { authorization: `Bearer ${token}` } };
-    const response = await axios.get("http://localhost:3000/users", headers);
+	console.log(login.data);
+    const headers = { headers: { Authorization: `Bearer ${token}` } };
+    const response = await axios.get("http://localhost:3000/admin/users", headers);
     const outputGetUsers = response.data;
 		expect(outputGetUsers.length).toBeDefined();
   } catch (error:any) {

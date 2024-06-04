@@ -15,16 +15,13 @@ interface PartialUserData {
 export default class UpdateUser {
   constructor(readonly userRepository: UserRepository) {}
 
-  async execute(input: { userId: string; data: PartialUserData }): Promise<User> {
-    const existingUser = await this.userRepository.get(input.userId);
-    console.log(existingUser);
+  async execute(input: { id: string; data: PartialUserData }): Promise<User> {
+    const existingUser = await this.userRepository.get(input.id);
     if (!existingUser) {
       throw new Error("User not found");
     }
     const updatedUser = { ...existingUser, ...input.data };
-    console.log(updatedUser);
-    const data = await this.userRepository.update(input.userId, updatedUser);
-
+    const data = await this.userRepository.update(input.id, updatedUser);
     return {
       name: data.name,
       email: data.email,

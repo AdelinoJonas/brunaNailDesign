@@ -4,7 +4,7 @@ import LoginRepositoryDataBase from "../infra/repository/LoginRepositoryDataBase
 import LoginUser from "../application/usecase/Login";
 
 interface DecodedToken {
-  userId: string;
+  id: string;
 }
 
 const jwtSecret: string = process.env.JWT_SECRET || "Brunanail";
@@ -22,7 +22,7 @@ async function tokenVerify(request: Request, response: Response, next: Function)
     const token: string = authorization.replace("Bearer ", "").trim();
     let id: string | undefined;
     const decodedToken = jwt.verify(token, jwtSecret) as DecodedToken;
-    id = decodedToken.userId;
+    id = decodedToken.id; 
     if (!id) {
       response.status(401).json({
         message: "Token inválido ou ausente.",

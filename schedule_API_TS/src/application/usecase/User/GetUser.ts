@@ -6,9 +6,8 @@ export default class GetUser {
   
   async execute (input: Input): Promise<Output> {
     const user = await this.userRepository.get(input.userId);
-    
     return {
-      userId: user.user_id,
+      id: user.user_id,
       name: user.name,
       email: user.email,
       phone:user.phone,
@@ -23,7 +22,7 @@ type Input = {
 }
 
 type Output = {
-  userId: string,
+  id: string,
   name: string,
   email: string,
   phone: string,
