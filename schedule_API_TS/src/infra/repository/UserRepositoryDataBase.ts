@@ -26,7 +26,6 @@ export default class UserRepositoryDataBase implements UserRepository {
     console.log('USERDATA', userData);
     
     return {
-      userId: userData.user_id,
       name: userData.name,
       email: userData.email,
       phone: userData.phone,

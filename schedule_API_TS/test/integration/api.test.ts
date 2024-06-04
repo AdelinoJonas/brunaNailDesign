@@ -11,7 +11,8 @@ test("Deve cadastrar um usuário", async function () {
 	const output1 = response1.data;
 	expect(output1).toBeDefined();
 });
-test("Deve obter um usuário", async () => {
+
+test.only("Deve obter um usuário", async () => {
 	const input = {
 		name: "John Doe",
 		email: "john.does@gmail.com",
@@ -20,27 +21,28 @@ test("Deve obter um usuário", async () => {
 	};
 	const postedUser = await axios.post("http://localhost:3000/user", input);
 	const outputCreateUser = postedUser.data.user_id;
+	console.log('CREATE USER', outputCreateUser);
+	
 	const inputLogin = {
 		email: "john.does@gmail.com",
 		password: "Bruna24",
 	};
 	const login = await axios.post("http://localhost:3000/login", inputLogin);
+	
 	if (login && login.data && login.data.token) {
 		const token = login.data.token;
+		console.log('TOKEN USER', token);
 		const headers = { headers: { authorization: `Bearer ${token}` } };
-		try {
-			const response = await axios.get(`http://localhost:3000/user/${outputCreateUser}`, headers);
-			const outputGetUser = response.data;
-			expect(outputGetUser.name).toBe("John Doe");
-			expect(outputGetUser.email).toBe("john.does@gmail.com");
-			expect(outputGetUser.phone).toBe("41984498900");
-		} catch (error:any) {
-				console.error("Erro ao obter usuário:", error.message);
-		}
+		const response = await axios.get(`http://localhost:3000/user/${outputCreateUser}`,headers);
+		const outputGetUser = response.data;
+		expect(outputGetUser.name).toBe("John Doe");
+		expect(outputGetUser.email).toBe("john.does@gmail.com");
+		expect(outputGetUser.phone).toBe("41984498900");
 	} else {
 		console.error("Login falhou: Não foi possível obter o token de autenticação.");
 	}
 });
+
 test("Deve obter todos os usuários", async () => {
   try {
     const inputLogin = {
@@ -58,35 +60,34 @@ test("Deve obter todos os usuários", async () => {
   }
 });
 
-test.only("Deve editar um usuário", async function() {
-	try {
+test("Deve editar um usuário", async function() {
+	const input = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		phone: "41984498900",
+        password: "Bruna24",
+	};
+	const createdUser = await axios.post("http://localhost:3000/user", input);
 	const inputLogin = {
 		email: "brunapereira@studio.com.br",
 		password: "Bruna24",
 	};
 	const login = await axios.post("http://localhost:3000/login", inputLogin);
 	const token = login.data.token;
-	const userId = login.data.user.user_id;
 	const headers = { headers: { Authorization: `Bearer ${token}` } };
-		const inputUpdated = {
-			name: "Joana Darc",
-			email: "joana.dark@gmail.com",
-			phone: "41984494689",
-			password: "Joana32",
-			is_active: false
-		};
-		console.log(userId );
-		
-		const responseUpdate = await axios.patch(`http://localhost:3000/user/${userId}`, inputUpdated, headers);
-		console.log("UPDATED",responseUpdate);
-		const output = responseUpdate.data;
-		expect(output.name).toBe("Joana Darc");
-		expect(output.email).toBe("joana.dark@gmail.com");
-		expect(output.phone).toBe("41984494689");
-		expect(output.is_active).toBe(false);
-	} catch (error:any) {
-		console.error("Erro ao editar usuário:", error.message);
-	}
+	const inputUpdated = {
+		name: "Joana Darc",
+		email: "joana.dark@gmail.com",
+		phone: "41984494689",
+		password: "Joana32",
+		is_active: false
+	};
+	const responseUpdate = await axios.patch(`http://localhost:3000/admin/user/${createdUser.data.user_id}`, inputUpdated, headers);
+	const output = responseUpdate.data;
+	expect(output.name).toBe("Joana Darc");
+	expect(output.email).toBe("joana.dark@gmail.com");
+	expect(output.phone).toBe("41984494689");
+	expect(output.is_active).toBe(false);
 })
 
 test('Deve realizar o login', async () => {
