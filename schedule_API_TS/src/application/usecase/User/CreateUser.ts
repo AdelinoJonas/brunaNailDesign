@@ -1,3 +1,4 @@
+import Email from "../../../domain/Email";
 import User from "../../../domain/User";
 import UserRepository from "../../repository/UserRepository";
 

@@ -23,7 +23,8 @@ export default class UserRepositoryDataBase implements UserRepository {
     .select()
     .where('user_id', userId)
     .first();
-    return userData
+    console.log(userData);
+    return userData;
   }
 
   async getAllUsers(): Promise<User[]> {
@@ -34,9 +35,9 @@ export default class UserRepositoryDataBase implements UserRepository {
       email: data.email,
       phone: data.phone,
       password: data.password,
-      is_active: data.is_active
+      is_active: data.is_active,
+      is_admin: data.is_admin
     }));
-
     return users;
   }
   
@@ -52,6 +53,8 @@ export default class UserRepositoryDataBase implements UserRepository {
         password: passHashed?.value,
         is_active
       });
+      console.log(user);
+      
     return user;
   }
 

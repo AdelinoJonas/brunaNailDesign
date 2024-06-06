@@ -5,6 +5,7 @@ import GetUser from "../../src/application/usecase/User/GetUser";
 import UpdateUser from "../../src/application/usecase/User/UpdateUser";
 import LoginRepositoryDataBase from "../../src/infra/repository/LoginRepositoryDataBase";
 import UserRepositoryDataBase from "../../src/infra/repository/UserRepositoryDataBase";
+const bcrypt = require('bcrypt');
 
 test("Deve cadastrar um Usuário", async function(){
 	const input = {
@@ -61,7 +62,7 @@ test("Deve obter um usuário", async function(){
   const usecase = new CreateUser(new UserRepositoryDataBase());
   const output = await usecase.execute(input); 
   const usecase1 = new GetUser(new UserRepositoryDataBase());
-  const output1 = await usecase1.execute({userId: output.user_id}); 
+  const output1 = await usecase1.execute({userId: output.user_id});   
   expect(output1.name).toBe("John Doe");
   expect(output1.email).toBe("john.doe@gmail.com");
   expect(output1.phone).toBe("41984498900");
@@ -73,6 +74,7 @@ test("Deve editar um usuário", async function() {
 		email: "john.doe@gmail.com",
 		phone: "41984498900",
 		password: "Bruna24",
+		is_active: true
 	};
 	const inputUpdated = {
 		name: "Joana Darc",

@@ -22,12 +22,14 @@ export default class UpdateUser {
     }
     const updatedUser = { ...existingUser, ...input.data };
     const data = await this.userRepository.update(input.id, updatedUser);
+    console.log('USECASE UPDATEUSER',data);
     return {
       name: data.name,
       email: data.email,
       phone: data.phone,
       password: data.password,
-      is_active: data.is_active
+      is_active: data.is_active,
+      is_admin: data.is_admin
     };
   }
 }

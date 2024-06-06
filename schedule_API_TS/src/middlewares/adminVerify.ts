@@ -28,7 +28,7 @@ async function adminVerify(request: Request, response: Response, next: Function)
 
     const repository = new UserRepositoryDataBase();
     const user = await repository.get(decodedToken['id']);
-    if (user?.is_admin === 0) {
+    if (Number(user?.is_admin) === 0) {
       response.status(401).json({
         message: "Usuário não tem permissão para acessar.",
       });

@@ -1,3 +1,6 @@
+import Email from "../../../domain/Email";
+import Password from "../../../domain/Password";
+import Phone from "../../../domain/Phone";
 import UserRepository from "../../repository/UserRepository";
 
 export default class GetUser {
@@ -5,15 +8,15 @@ export default class GetUser {
   }
   
   async execute (input: Input): Promise<Output> {
-    const user = await this.userRepository.get(input.userId);
+    const data = await this.userRepository.get(input.userId); 
     return {
-      id: user.user_id,
-      name: user.name,
-      email: user.email,
-      phone:user.phone,
-      is_admin: user.is_admin,
-      is_active: user.is_active
-    }
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      is_active: data.is_active,
+      is_admin: data.is_admin
+    };
   }
 }
 
@@ -22,10 +25,10 @@ type Input = {
 }
 
 type Output = {
-  id: string,
   name: string,
-  email: string,
-  phone: string,
+  email: string | Email;
+  phone: string | Phone;
+  password: string | Password;
   is_admin: boolean,
   is_active:boolean
 }
