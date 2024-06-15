@@ -47,7 +47,6 @@ test("Deve obter todos os usuários", async () => {
     };
     const login = await axios.post("http://localhost:3000/login", inputLogin);
     const token = login.data.token;
-	console.log(login.data);
     const headers = { headers: { Authorization: `Bearer ${token}` } };
     const response = await axios.get("http://localhost:3000/admin/users", headers);
     const outputGetUsers = response.data;

@@ -1,6 +1,6 @@
 import AppointmentRepository from "../../repository/AppointmentRepository";
 
-export default class GetAllAppointment {
+export default class GetAllAppointments {
   constructor (readonly appointmentRepository: AppointmentRepository) {
   }
   

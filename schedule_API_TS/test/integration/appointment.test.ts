@@ -1,6 +1,6 @@
 import CreateAppointment from "../../src/application/usecase/Appointment/CreateAppointment";
 import DeleteAppointment from "../../src/application/usecase/Appointment/DeleteAppointment";
-import GetAllAppointment from "../../src/application/usecase/Appointment/GetAllAppointment";
+import GetAllAppointment from "../../src/application/usecase/Appointment/GetAllAppointments";
 import GetAppointment from "../../src/application/usecase/Appointment/GetAppointment";
 import UpdateAppointment from "../../src/application/usecase/Appointment/UpdateAppointment";
 import AppointmentRepositoryDataBase from "../../src/infra/repository/AppointmentRepositoryDataBase";

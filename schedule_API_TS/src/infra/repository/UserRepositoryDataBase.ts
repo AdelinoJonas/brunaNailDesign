@@ -23,7 +23,6 @@ export default class UserRepositoryDataBase implements UserRepository {
     .select()
     .where('user_id', userId)
     .first();
-    console.log(userData);
     return userData;
   }
 
@@ -52,9 +51,7 @@ export default class UserRepositoryDataBase implements UserRepository {
         phone: phone?.value,
         password: passHashed?.value,
         is_active
-      });
-      console.log(user);
-      
+      });    
     return user;
   }
 

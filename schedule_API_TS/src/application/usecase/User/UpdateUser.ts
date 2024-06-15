@@ -22,7 +22,6 @@ export default class UpdateUser {
     }
     const updatedUser = { ...existingUser, ...input.data };
     const data = await this.userRepository.update(input.id, updatedUser);
-    console.log('USECASE UPDATEUSER',data);
     return {
       name: data.name,
       email: data.email,
