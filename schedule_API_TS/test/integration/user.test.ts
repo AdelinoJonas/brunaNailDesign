@@ -12,7 +12,7 @@ test("Deve cadastrar um Usuário", async function(){
 		name: "John Doe",
 		email: "john.doe@gmail.com",
 		phone: "41984498900",
-    password: "Bruna24",
+    	password: "Bruna24",
 	};
   const usecase = new CreateUser(new UserRepositoryDataBase());
   const output = await usecase.execute(input);  
