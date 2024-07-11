@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="logoColor.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const originalTitle = " BRUNA PEREIRA NAIL DESIGNER -";
+        let currentTitle = originalTitle;
+        let direction = 1;
+        function animateTitle() {
+          if (direction === 1) {
+            currentTitle = currentTitle.slice(1) + currentTitle[0];
+          } else {
+            currentTitle = currentTitle[currentTitle.length - 1] + currentTitle.slice(0, -1);
+          }
+          document.title = currentTitle;
+          if (currentTitle === originalTitle) {
+            direction = direction === 1 && 1;
+          }
+        }
+        setInterval(animateTitle, 200);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
