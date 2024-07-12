@@ -1,49 +1,52 @@
-// import React from 'react';
-// import { render, fireEvent, waitFor } from '@testing-library/react';
-// import CreateUser from '../../src/CreateUser';
-// import UserGatewayHttp from '../../src/infra/gateway/UserGatewayHttp';
-// import AxiosAdapter from '../../src/infra/http/AxiosAdapter';
-
-// function sleep(time) {
-//   return new Promise(resolve => setTimeout(resolve, time));
-// }
-
-// test('Deve criar um usuário', async () => {
-//   const userGateway = new UserGatewayHttp(new AxiosAdapter());
-
-//   const { getByLabelText, getByText } = render(<CreateUser userGateway={userGateway} />);
-
-//   fireEvent.change(getByLabelText('Nome'), { target: { value: 'John Doe' } });
-//   fireEvent.change(getByLabelText('Email'), { target: { value: 'john.doe@gmail.com' } });
-//   fireEvent.change(getByLabelText('Telefone'), { target: { value: '41984498900' } });
-//   fireEvent.click(getByText('Cadastrar usuário'));
-
-//   await waitFor(() => {
-//     expect(getByText('id')).toBeDefined();
-//   });
-
-//   await sleep(200);
-// });
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import CreateUser from '../../src/CreateUser';
+import axios from 'axios';
 
-function sleep (time: number) {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(true);
-		}, time);
-	})
-};
-test('Cadastrar um usuário', async () => {
-  const wrapper = mount(<CreateUser/>);
-  wrapper.find('#name').simulate('change', { target: { value: 'Ana Maria' } });
-  wrapper.find('#email').simulate('change', { target: { value: 'ana@gmail.com' } });
-  wrapper.find('#phone').simulate('change', { target: { value: '41984498900' } });
-  wrapper.find('#password').simulate('change', { target: { value: 'Bruna.24' } });
-  wrapper.find('#confirmPassword').simulate('change', { target: { value: 'Bruna.24' } });
-  wrapper.find('.create-button').simulate('Cadastrar Usuário');
-  await sleep(200);
+jest.mock('axios');
+it('renders input fields and updates state correctly', () => {
+  const { getByPlaceholderText } = render(<CreateUser />);
+  const nameInput = getByPlaceholderText('Digite seu nome') as HTMLInputElement;
+  const emailInput = getByPlaceholderText('Digite seu e-mail') as HTMLInputElement;
+  const phoneInput = getByPlaceholderText('Digite seu Telefone') as HTMLInputElement;
+  const passwordInput = getByPlaceholderText('Digite uma senha') as HTMLInputElement;
+  const confirmPasswordInput = getByPlaceholderText('Confirme sua senha') as HTMLInputElement;    
+  fireEvent.change(nameInput, { target: { value: 'Test User' } });
+  fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+  fireEvent.change(phoneInput, { target: { value: '123456789' } });
+  fireEvent.change(passwordInput, { target: { value: 'Password.123' } });
+  fireEvent.change(confirmPasswordInput, { target: { value: 'Password.123' } });
+  expect(nameInput.value).toBe('Test User');
+  expect(emailInput.value).toBe('test@example.com');
+  expect(phoneInput.value).toBe('123456789');
+  expect(passwordInput.value).toBe('Password.123');
+  expect(confirmPasswordInput.value).toBe('Password.123');
+});
 
-  expect(wrapper.find('.id').text()).toBeDefined();
+it('Deve cadastrar um usuário', async () => {
+  const mockedUserId = '2';
+  (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({
+    data: { user_id: mockedUserId },
+    status: 200,
+    statusText: 'OK',
+    headers: {},
+    config: {},
+  });
+  render(<CreateUser />);
+  const nameInput = screen.getByPlaceholderText('Digite seu nome') as HTMLInputElement;
+  const emailInput = screen.getByPlaceholderText('Digite seu e-mail') as HTMLInputElement;
+  const phoneInput = screen.getByPlaceholderText('Digite seu Telefone') as HTMLInputElement;
+  const passwordInput = screen.getByPlaceholderText('Digite uma senha') as HTMLInputElement;
+  const confirmPasswordInput = screen.getByPlaceholderText('Confirme sua senha') as HTMLInputElement;
+  fireEvent.change(nameInput, { target: { value: 'Test User' } });
+  fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+  fireEvent.change(phoneInput, { target: { value: '123456789' } });
+  fireEvent.change(passwordInput, { target: { value: 'Password.123' } });
+  fireEvent.change(confirmPasswordInput, { target: { value: 'Password.123' } });
+  fireEvent.submit(screen.getByText('Cadastrar Usuário'));
+  await waitFor(() => {
+    expect(screen.getByText(mockedUserId)).toBeInTheDocument();
+  });
+  expect(screen.getByText('Cadastrar Usuário')).toBeInTheDocument();
 });

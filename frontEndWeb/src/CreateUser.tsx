@@ -16,6 +16,8 @@ export default function CreateUser() {
       const input = { name, email, phone, password };
       const response = await axios.post("http://localhost:3000/user", input);
       const output = response.data.user_id;
+      console.log(output);
+      
       setUserId(output);
     } catch (error:any) {
       console.error('Erro ao criar usuário:', error);
