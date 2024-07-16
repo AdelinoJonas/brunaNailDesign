@@ -3,10 +3,12 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CreateUser from '../../src/CreateUser';
 import axios from 'axios';
+import UserGatewayHttp from '../../src/infra/gateway/UserGatewayHttp';
 
 jest.mock('axios');
 it('renders input fields and updates state correctly', () => {
-  const { getByPlaceholderText } = render(<CreateUser />);
+  const userGateway = new UserGatewayHttp();
+  const { getByPlaceholderText } = render(<CreateUser userGateway={userGateway}/>);
   const nameInput = getByPlaceholderText('Digite seu nome') as HTMLInputElement;
   const emailInput = getByPlaceholderText('Digite seu e-mail') as HTMLInputElement;
   const phoneInput = getByPlaceholderText('Digite seu Telefone') as HTMLInputElement;
@@ -25,6 +27,7 @@ it('renders input fields and updates state correctly', () => {
 });
 
 it('Deve cadastrar um usuário', async () => {
+  const userGateway = new UserGatewayHttp();
   const mockedUserId = '2';
   (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({
     data: { user_id: mockedUserId },
@@ -33,7 +36,7 @@ it('Deve cadastrar um usuário', async () => {
     headers: {},
     config: {},
   });
-  render(<CreateUser />);
+  render(<CreateUser userGateway={userGateway}/>);
   const nameInput = screen.getByPlaceholderText('Digite seu nome') as HTMLInputElement;
   const emailInput = screen.getByPlaceholderText('Digite seu e-mail') as HTMLInputElement;
   const phoneInput = screen.getByPlaceholderText('Digite seu Telefone') as HTMLInputElement;

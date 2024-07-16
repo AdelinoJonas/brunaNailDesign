@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import './styles/globalStyles/FormStyles.css';
-import './styles/globalStyles/AllPagesStyles.css';
-import axios from 'axios';
+import UserGateway from './infra/gateway/UserGateway';
+import './styles/globalLayout/AllPagesStyles.css';
+import './styles/globalLayout/FormStyles.css';
 
-export default function CreateUser() {
+interface CreateUserProps {
+  userGateway: UserGateway;
+}
+
+const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -12,16 +16,13 @@ export default function CreateUser() {
   const [userId, setUserId] = useState<string>('');
 
   async function createUser() {
-    try {
-      const input = { name, email, phone, password };
-      const response = await axios.post("http://localhost:3000/user", input);
-      const output = response.data.user_id;
-      console.log(output);
-      
-      setUserId(output);
-    } catch (error:any) {
-      console.error('Erro ao criar usuário:', error);
+    if (password !== confirmPassword) {
+      alert('Senhas não coincidem!');
+      return;
     }
+    const input = { name, email, phone, password };
+    const output = await userGateway.save(input);
+    setUserId(output);
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -98,18 +99,4 @@ export default function CreateUser() {
   );
 }
 
-// interface CreateUserProps {
-//   userGateway: UserGateway;
-// }
-
-// export default function CreateUser({ userGateway }: CreateUserProps) {
-//   const [userBuilder, setUserBuilder] = useState<UserBuilder>(new UserBuilder());
-//   const [user, setUser] = useState<User>();
-
-//   async function createUser() {
-//     const newUser = userBuilder.build(); 
-//     const createdUserId = await userGateway.create(newUser);
-//     newUser.userId = createdUserId;
-//     setUser(newUser);
-//     console.log('USECASE', createdUserId);
-//   }
+export default CreateUser;

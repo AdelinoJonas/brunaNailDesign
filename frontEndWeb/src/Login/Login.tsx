@@ -1,14 +1,13 @@
 // import { yupResolver } from '@hookform/resolvers/yup';
 // import { useState } from 'react';
 // import { useForm } from 'react-hook-form';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
 // import { useNavigate } from 'react-router-dom';
 // import * as yup from 'yup';
 // import { pt } from 'yup-locales';
 // import { useStores } from '../../stores';
-import './styles.css';
-import '../styles/globalStyles/FormStyles.css';
 import logo from '../assets/logoColor.png';
+import '../styles/globalLayout/FormStyles.css';
+import './styles.css';
 // yup.setLocale(pt);
 
 export function Login() {
