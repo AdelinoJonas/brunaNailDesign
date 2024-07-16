@@ -20,7 +20,7 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
       alert('Senhas não coincidem!');
       return;
     }
-    const input = { name, email, phone, password };
+    const input = { name, email, phone, password }; 
     const output = await userGateway.save(input);
     setUserId(output);
   }
