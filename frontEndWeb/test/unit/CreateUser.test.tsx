@@ -6,7 +6,7 @@ import axios from 'axios';
 import UserGatewayHttp from '../../src/infra/gateway/UserGatewayHttp';
 
 jest.mock('axios');
-it('renders input fields and updates state correctly', () => {
+test('renders input fields and updates state correctly', () => {
   const userGateway = new UserGatewayHttp();
   const { getByPlaceholderText } = render(<CreateUser userGateway={userGateway}/>);
   const nameInput = getByPlaceholderText('Digite seu nome') as HTMLInputElement;
@@ -26,7 +26,7 @@ it('renders input fields and updates state correctly', () => {
   expect(confirmPasswordInput.value).toBe('Password.123');
 });
 
-it('Deve cadastrar um usuário', async () => {
+test('Deve cadastrar um usuário', async () => {
   const userGateway = new UserGatewayHttp();
   const mockedUserId = '2';
   (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({

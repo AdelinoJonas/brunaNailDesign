@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import UserGateway from "./UserGateway";
 
@@ -9,6 +8,7 @@ export default class UserGatewayHttp implements UserGateway {
 		return userId;
 	}
 }
+
 // import UserGateway, { CreateUserInput } from "./UserGateway";
 // import HttpClient from "../http/HttpClient";
 // import User from "../../domain/User";
