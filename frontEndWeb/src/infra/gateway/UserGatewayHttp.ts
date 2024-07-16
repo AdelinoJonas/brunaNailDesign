@@ -1,9 +1,13 @@
 import axios from "axios";
 import UserGateway from "./UserGateway";
+import HttpClient from "../http/HttpClient";
 
 export default class UserGatewayHttp implements UserGateway {
+		constructor (readonly httpClient: HttpClient) {
+	}
+
 	async save (user: any) {
-		const userData = await axios.post("http://localhost:3000/user", user);
+		const userData = await this.httpClient.post("http://localhost:3000/user", user);
 		const userId = userData.data.user_id.toString();
 		return userId;
 	}
