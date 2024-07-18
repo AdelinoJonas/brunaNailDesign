@@ -13,7 +13,7 @@ export function ConfirmSignup() {
       <div className="leftContent">
         <img src={logo} alt='Bruna Pereira' className="logo"/>
         <h2>CONTA CRIADA COM SUCESSO!</h2>
-        <button type="submit" id="loginButton">
+        <button onClick={()=>handleOpenWhatsapp()} id="loginButton">
           REALIZAR LOGIN
         </button>
       </div>
