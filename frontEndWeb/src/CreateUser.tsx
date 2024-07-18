@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import UserGateway from './infra/gateway/UserGateway';
 import './styles/globalLayout/AllPagesStyles.css';
-import './styles/globalLayout/FormStyles.css';
+import './styles/registerLayout/RegisterLayout.css';
+import logo from './assets/logoColor.png';
+// import './styles/globalLayout/FormStyles.css';
 
 interface CreateUserProps {
   userGateway: UserGateway;
@@ -30,22 +32,30 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
     createUser();
   }
 
+  function handleOpenWhatsapp() {
+    const message = "Olá, Esqueci minha senha. Pode me ajudar?"
+    const whatsappLink = `https://wa.me/5541984498900?text=T${message}`;
+    window.open(whatsappLink);
+  }
+
   return (
-    <div className='create'>
-      <form id="createUser" className="register" onSubmit={handleSubmit}>
-        <p className="title">CRIAR CONTA COMO USUÁRIO</p>
-        <div className="field">
-          <label className="label">Name:</label>
-          <input 
-            id="name" 
-            className="input" 
-            placeholder="Digite seu nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+    <div className="container">
+    <div className="leftContent">
+      <h1 className="title">CADASTRAR-SE</h1>
+      <form className="formContent">
+        <div className="inputGroup">
+          <label className="label">Name:
+            <input 
+              id="name" 
+              className="input" 
+              placeholder="Digite seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
         </div>
-        <div className="field">
-          <label className="label">Email:</label>
+        <div className="inputGroup">
+          <label className="label">Email:
           <input 
             id="email" 
             className="input" 
@@ -53,9 +63,10 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          </label>
         </div>
-        <div className="field">
-          <label className="label">Telefone:</label>
+        <div className="inputGroup">
+          <label className="label">Telefone:
           <input 
             id="phone" 
             className="input" 
@@ -63,9 +74,10 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+          </label>
         </div>
-        <div className="field">
-          <label className="label">Senha:</label>
+        <div className="inputGroup">
+          <label className="label">Senha:
           <input 
             id="password" 
             type="password" 
@@ -74,9 +86,10 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          </label>
         </div>
-        <div className="field">
-          <label className="label">Confirmar Senha:</label>
+        <div className="inputGroup">
+          <label className="label">Confirmar Senha:
           <input 
             id="confirmPassword" 
             type="password" 
@@ -85,9 +98,10 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          </label>
         </div>
-        <button type="submit" className="create-button">
-          Cadastrar Usuário
+        <button type="submit" id="loginButton">
+          Cadastrar
         </button>
         {userId && (
           <div>
@@ -96,6 +110,9 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
         )}
       </form>
     </div>
+    <div className="rightContent"/>
+  </div>
+
   );
 }
 

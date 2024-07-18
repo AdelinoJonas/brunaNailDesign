@@ -1,0 +1,221 @@
+.container {
+  width: 99vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftContent {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 30vw;
+  height: 35vh;
+  margin-top: -15rem;
+}
+
+.title{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 2.2rem;
+  margin-bottom: 3rem;
+}
+
+h1{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 3rem;
+  line-height: 2.2rem;
+  margin-bottom: 12rem;
+  margin-top: 6rem;
+}
+
+.formContent {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  font-feature-settings: 'calt' off;
+}
+
+.input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: #FFFFFF;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.02rem;
+  font-feature-settings: 'calt' off;
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.8px #A7A7A9;
+    border: 1px solid #bfbfc2; 
+  }
+}
+
+.inputGroupRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.02em;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 1.3rem;
+  cursor: pointer;
+}
+
+.linkForgotPassword {
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.02em;
+}
+
+.checkBoxContainer {
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.9rem;
+}
+
+#loginButton {
+  border: none;
+  height: 40px;
+  width: '38rem';
+  background-color: #F08080;
+  padding: 1rem 3rem;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  cursor: pointer;
+}
+#loginButton:hover{
+  opacity: 0.5;
+  transition: 1s;
+}
+
+span {
+  max-width: 31.875rem;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-align: center;
+  letter-spacing: -0.02rem;
+}
+
+.errorMessage {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+  font-feature-settings: 'calt' off;
+  padding: 0.8rem 0.4rem 0;
+  color: rgb(179, 8, 8);
+}
+
+.linkContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+a {
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.02em;
+}
+a:hover{
+  opacity: 0.5;
+  transition: 1s;
+}
+
+.rightContent {
+  width: 50%;
+  height: 100vh;
+  background-image: url('../../assets/mockup1.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; 
+  }
+  .leftContent {
+    width: 100%;
+    height: auto;
+    padding: 2rem;
+  }
+  .rightContent {
+    display: none;
+  }
+  .formContent {
+    width: 100%;
+    padding: 0 2rem;
+    margin-top: 3rem;
+  }
+  .logo {
+    width: 60%;
+    margin: 2rem 0; 
+  }
+  .input {
+    font-size: 1.4rem; 
+  }
+  .inputGroupRow {
+    font-size: 1.4rem;
+  }
+  .linkForgotPassword {
+    width: 64%;
+    text-align: right;
+    font-size: 1.4rem;
+  }
+}
