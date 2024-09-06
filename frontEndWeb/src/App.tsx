@@ -1,6 +1,7 @@
 import { ConfirmSignup } from './ConfirmSignup.js';
 import CreateUser from './CreateUser.jsx';
 import { Login } from './Login.js';
+import FreeTimeTable from '../src/components/Tables/FreeTimeTable';
 import UserGatewayHttp from './infra/gateway/UserGatewayHttp.js';
 import AxiosAdapter from './infra/http/AxiosAdapter.js';
 import './styles/globalLayout/AllPagesStyles.css';
@@ -13,6 +14,7 @@ function App() {
       <Login/>
       <CreateUser userGateway={userGateway} />
       <ConfirmSignup/>
+      <FreeTimeTable />
     </div>
   )
 }
