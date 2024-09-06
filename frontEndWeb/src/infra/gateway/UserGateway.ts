@@ -1,5 +1,6 @@
 export default interface UserGateway {
 	save (user: any): Promise<any>;
+	login (user:any) : Promise<any>;
 }
 
 // export type CreateUserInput = {

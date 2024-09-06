@@ -1,4 +1,3 @@
-import axios from "axios";
 import UserGateway from "./UserGateway";
 import HttpClient from "../http/HttpClient";
 
@@ -10,6 +9,12 @@ export default class UserGatewayHttp implements UserGateway {
 		const userData = await this.httpClient.post("http://localhost:3000/user", user);
 		const userId = userData.data.user_id.toString();
 		return userId;
+	}
+
+	async login (user: any) {
+		const userData = await this.httpClient.post("http://localhost:3000/login", user);
+		console.log("LOGIN:", userData);
+		
 	}
 }
 

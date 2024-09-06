@@ -107,7 +107,7 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
           <button type="submit" id="submit-button">
             Cadastrar
           </button>
-          <button onClick={()=> navigate('/')} className="turn-back">
+          <button onClick={()=> navigate(-1)} className="turn-back">
             Voltar
           </button>
           {userId && (

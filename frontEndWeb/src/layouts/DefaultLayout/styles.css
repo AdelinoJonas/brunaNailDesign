@@ -1,37 +1,41 @@
 /* LayoutContainer.css */
 .layout-container {
   display: grid;
-  grid-template-columns: 19%;
-  grid-template-rows: 0fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "aside header"
+    "aside main";
+  height: 100vh;
+  grid-gap: 10px; /* Adicione um espaço entre os itens, se desejar */
 }
 
 @media (max-width: 1080px) {
   .layout-container {
-    /* Adapte as regras para tamanhos menores, se necessário */
-    /* display: grid;
-       grid-template-columns: 1fr;
-       grid-template-rows: 0fr;
-       grid-template-areas: 'MobileNavbarComponent' 'main'; */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header"
+      "main";
   }
 }
 
 /* HeaderPage.css */
 .header-page {
+  grid-area: header;
   background-color: yellow;
-  grid-area: 1 / 2 / 2 / 3;
 }
 
 /* AsideNavibar.css */
 .aside-navibar {
-  position: fixed;
-  grid-area: 1 / 1 / 3 / 2;
+  grid-area: aside;
+  position: fixed; /* Fixe o menu lateral na tela */
+  height: 100%;
 }
 
 /* Main.css */
 .main {
-  grid-area: 2 / 2 / 3 / 3;
+  grid-area: main;
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;

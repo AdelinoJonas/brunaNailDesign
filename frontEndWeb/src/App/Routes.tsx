@@ -1,9 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-import { Login } from '../Pages/Signup/Login';
 import { DefaultLayout } from '../layouts/DefaultLayout';
+import Clients from '../Pages/Clients';
+import Home from '../Pages/Home';
+import Login from '../Pages/Login';
 import Page404 from '../Pages/Page404/';
-import ProtectedRoutes from './ProtectedRoutes';
+import Schedule from '../Pages/Schedule';
+import ServiceList from '../Pages/ServicesList';
 import CreateUser from '../Pages/Signup/CreateUser';
+import ProtectedRoutes from './ProtectedRoutes';
 
 export function MyRoutes() {
   return (
@@ -13,10 +17,10 @@ export function MyRoutes() {
       <Route element={<ProtectedRoutes redirectTo="/" allowedRoles={['user', 'admin']} />} >
         <Route path="/" element={<DefaultLayout />} >
           {/* Rotas acessíveis por 'user' e 'admin' */}
-          {/* <Route path="/home" element={<Home/>} /> */}
-          {/* <Route path="/schedules" element={<Schedule />} />
+          <Route path="/home" element={<Home/>} />
+          <Route path="/schedules" element={<Schedule/>} /> 
           <Route path="/clients" element={<Clients />} />
-          <Route path="/services" element={<ServiceList />} /> */}
+          <Route path="/services" element={<ServiceList />} />
         </Route>
       </Route>
       <Route element={<ProtectedRoutes redirectTo="/" allowedRoles={['admin']} />} >
