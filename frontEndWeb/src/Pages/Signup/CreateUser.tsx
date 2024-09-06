@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import UserGateway from '../infra/gateway/UserGateway';
-import '../styles/globalLayout/AllPagesStyles.css';
-import '../styles/registerLayout/RegisterLayout.css';
+import { useNavigate } from 'react-router-dom';
+import UserGateway from '../../infra/gateway/UserGateway';
+import '../../styles/globalLayout/AllPagesStyles.css';
+import '../../styles/registerLayout/RegisterLayout.css';
 
 interface CreateUserProps {
   userGateway: UserGateway;
 }
 
 const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
+  const navigate = useNavigate();
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -104,6 +106,9 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
           </div>
           <button type="submit" id="submit-button">
             Cadastrar
+          </button>
+          <button onClick={()=> navigate('/')} className="turn-back">
+            Voltar
           </button>
           {userId && (
             <div className="user-id">

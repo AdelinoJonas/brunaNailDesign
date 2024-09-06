@@ -1,0 +1,12 @@
+.layout-container {
+   position: relative;
+   background-color: #f8fafc;
+ }
+ 
+main {
+   max-width: 128.8rem;
+   min-height: 100vh;
+   margin: 0 auto;
+   padding: 1.6rem 7.6rem 4.9rem;
+ }
+ 

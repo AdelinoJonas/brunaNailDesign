@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
-import * as Sc from './styles';
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import './styles.css';  // Import the CSS file instead of styled-components
 
-const schedules = [
+interface Schedule {
+  id: number;
+  cadastro: string;
+  name: string;
+  email: string;
+  phone: string;
+}
+
+const schedules: Schedule[] = [
   {
     id: 1,
     cadastro: "05/11/2023",
@@ -20,37 +28,24 @@ const schedules = [
   },
 ];
 
-export default function ClientsTable() {
-  const [orderBy, setOrderBy] = useState("data");
+const ClientsTable: React.FC = () => {
+  const [orderBy, setOrderBy] = useState<string>("data");
 
   useEffect(() => {
     setOrderBy("data");
   }, []);
 
-  function handleSort(column) {
+  const handleSort = (column: string) => {
     setOrderBy(column);
   };
 
   const columns = [
-    {
-      title: "ID",
-    },
-    {
-      title: "CADASTRO",
-    },
-    {
-      title: "NAME",
-
-    },
-    {
-      title: "E-MAIL",
-    },
-    {
-      title: "TELEFONE",
-    },
-    {
-      title: "OPÇÕES",
-    },
+    { title: "ID" },
+    { title: "CADASTRO" },
+    { title: "NAME" },
+    { title: "E-MAIL" },
+    { title: "TELEFONE" },
+    { title: "OPÇÕES" },
   ];
 
   const rows = schedules.map((schedule) => (
@@ -60,15 +55,15 @@ export default function ClientsTable() {
       <td>{schedule.name}</td>
       <td>{schedule.email}</td>
       <td>{schedule.phone}</td>
-      <td >
-        <CiEdit className="icon"/>
+      <td>
+        <CiEdit className="icon" />
         <RiDeleteBin5Line className="icon" />
       </td>
     </tr>
   ));
 
   return (
-    <Sc.Table>
+    <table className="clients-table">
       <thead>
         <tr>
           {columns.map((column) => (
@@ -79,6 +74,8 @@ export default function ClientsTable() {
       <tbody>
         {rows}
       </tbody>
-    </Sc.Table>
+    </table>
   );
 };
+
+export default ClientsTable;

@@ -1,13 +1,9 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-import { Login } from '../Pages/Login';
+import { Login } from '../Pages/Signup/Login';
 import { DefaultLayout } from '../layouts/DefaultLayout';
 import Page404 from '../Pages/Page404/';
-// Importe outros componentes conforme necessário
-
-import ProtectedRoutes from './ProtectedRoutes'; // Importe o componente atualizado
-import CreateUser from '../Pages/CreateUser';
+import ProtectedRoutes from './ProtectedRoutes';
+import CreateUser from '../Pages/Signup/CreateUser';
 
 export function MyRoutes() {
   return (

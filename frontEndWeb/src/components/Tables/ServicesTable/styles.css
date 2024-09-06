@@ -1,0 +1,70 @@
+/* styles.css */
+.schedules-table {
+  min-width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 3rem;
+  border-radius: 50px;
+}
+
+.schedules-table td {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.schedules-table td:last-child {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+.schedules-table .icon {
+  cursor: pointer;
+}
+
+.schedules-table .iconRight {
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.schedules-table th {
+  background-color: #f1f1f1;
+  padding: 1rem 0;
+}
+
+.schedules-table tbody tr {
+  border-bottom: 1px solid #52475C;
+}
+
+.schedules-table tbody tr:hover {
+  background-color: #e0e0e0; /* Use a suitable color */
+  color: #333; /* Use a suitable color */
+}
+
+.schedules-table .service {
+  max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: start;
+}
+
+.schedules-table .description {
+  max-width: 230px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: start;
+}
+
+.schedules-table .image {
+  width: 50px; /* Adjust the size as needed */
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .schedules-table {
+    width: 100%;
+  }
+}

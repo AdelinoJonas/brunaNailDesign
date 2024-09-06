@@ -1,0 +1,21 @@
+/* styles.css */
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.container label {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+  color: #555555;
+  margin-bottom: 0.4rem;
+}
+
+.error-message {
+  font-size: 1.4rem;
+  color: #ff0000; /* Adjust the color to match your theme's alert color */
+  padding: 0.8rem 0.4rem 0;
+}

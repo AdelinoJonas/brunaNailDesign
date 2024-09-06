@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logoColor.png';
-import '../styles/globalLayout/AllPagesStyles.css';
-import '../styles/registerLayout/RegisterLayout.css';
+import logo from '../../assets/logoColor.png';
+import '../../styles/globalLayout/AllPagesStyles.css';
+import '../../styles/registerLayout/RegisterLayout.css';
 
 export function Login() {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export function Login() {
           </button>
           <div className='linkContainer'>
             <span>Ainda não tem conta?</span>
-            <a id="signIn" onClick={handleSignUpRedirect}>Cadastre-se aqui.</a>
+            <a className='sign' id="signIn" onClick={handleSignUpRedirect}>Cadastre-se aqui.</a>
           </div>
         </form>
       </div>

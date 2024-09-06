@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
-import * as Sc from './styles';
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import './styles.css';  // Import the CSS file instead of styled-components
 
-const schedules = [
+interface Schedule {
+  id: number;
+  service: string;
+  description: string;
+  time: string;
+  price: string;
+  image: string;
+  is_course: boolean;
+}
+
+const schedules: Schedule[] = [
   {
     id: 1,
     service: "Banho de Gel",
@@ -24,58 +34,44 @@ const schedules = [
   },
 ];
 
-export default function SchedulesTable() {
-  const [orderBy, setOrderBy] = useState("data");
+const SchedulesTable: React.FC = () => {
+  const [orderBy, setOrderBy] = useState<string>("data");
 
   useEffect(() => {
     setOrderBy("data");
   }, []);
 
-  function handleSort(column) {
+  const handleSort = (column: string) => {
     setOrderBy(column);
   };
 
   const columns = [
-    {
-      title: "ID"
-    },
-    {
-      title: "IMAGEM"
-    },
-    {
-      title: "SERVIÇOS"
-    },
-    {
-      title: "DESCRIÇÃO"
-    },
-    {
-      title: "DURAÇÃO"
-    },
-    {
-      title: "PREÇO"
-    },
-    {
-      title: "OPÇÕES"
-    },
+    { title: "ID" },
+    { title: "IMAGEM" },
+    { title: "SERVIÇOS" },
+    { title: "DESCRIÇÃO" },
+    { title: "DURAÇÃO" },
+    { title: "PREÇO" },
+    { title: "OPÇÕES" },
   ];
 
   const rows = schedules.map((schedule) => (
     <tr key={schedule.id}>
       <td>{schedule.id}</td>
-      <td>{schedule.image}</td>
+      <td><img src={schedule.image} alt={schedule.service} className="image" /></td>
       <td className="service">{schedule.service}</td>
       <td className="description">{schedule.description}</td>
       <td>{schedule.time}</td>
       <td>{schedule.price}</td>
-      <td >
-        <CiEdit className="icon"/>
+      <td>
+        <CiEdit className="icon" />
         <RiDeleteBin5Line className="iconRight" />
       </td>
     </tr>
   ));
 
   return (
-    <Sc.Table>
+    <table className="schedules-table">
       <thead>
         <tr>
           {columns.map((column) => (
@@ -86,6 +82,8 @@ export default function SchedulesTable() {
       <tbody>
         {rows}
       </tbody>
-    </Sc.Table>
+    </table>
   );
 };
+
+export default SchedulesTable;

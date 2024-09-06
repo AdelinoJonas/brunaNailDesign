@@ -65,6 +65,19 @@
   opacity: 0.8;
 }
 
+.turn-back {
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #806262;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.turn-back:hover {
+  opacity: 0.8;
+}
+
 .user-id {
   margin-top: 1rem;
 }
@@ -77,6 +90,33 @@
   background-position: center;
 }
 
+.linkContainer{
+  text-align: center;
+}
+
+.checkBoxContainer{
+  width: 50%;
+  display: flex;
+  gap: 5px;
+}
+
+.input-group-row{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linkForgotPassword{
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.sign{
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
 @media (max-width: 1066px) {
   .create-user-image,
   .login-image {

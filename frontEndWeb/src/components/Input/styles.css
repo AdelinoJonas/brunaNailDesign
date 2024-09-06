@@ -1,0 +1,28 @@
+/* styles.css */
+.input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: #ffffff; /* Adjust if using theme colors */
+  border: 1px solid #e93f66; /* Default border color if invalid */
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  color: #555555;
+}
+
+.input:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.4px #a7a7a9;
+  border: 0.4px solid #a7a7a9;
+}
+
+.input:disabled {
+  background-color: #f1f1f1;
+  border: none;
+}
+
+.input.invalid {
+  border: 1px solid #a7a7a9; /* Border color if invalid */
+}
