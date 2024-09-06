@@ -1,233 +1,116 @@
-.container {
-  width: 99vw;
+.create-user-container,
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   height: 100vh;
-  display: flex;
-  justify-content: space-between;
+  width: 100vw;
+}
+.logo {
+  width: 60%;
 }
 
-.leftContent {
-  width: 50%;
-  height: 100vh;
+.create-user-form,
+.login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-.logo {
-  width: 30vw;
-  height: 35vh;
-  margin-top: -13rem;
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
-.title{
-  font-style: normal;
-  font-weight: 400;
-  font-size: 3rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
-h2{
-  font-style: normal;
-  font-weight: 500;
-  font-size: 3rem;
-  line-height: 2.2rem;
-  margin-bottom: 12rem;
-  margin-top: 6rem;
-}
-
-.formContent {
-  width: 55%;
+.form-content {
+  width: 100%;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 }
 
-.inputGroup {
+.input-group {
   display: flex;
   flex-direction: column;
 }
 
 .label {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  font-style: normal;
-  font-weight: 600;
   font-size: 1.6rem;
-  line-height: 2.2rem;
-  font-feature-settings: 'calt' off;
+  margin-bottom: 0.8rem;
 }
 
 .input {
   width: 100%;
   padding: 0.9rem 1.2rem;
-  background: #FFFFFF;
   border-radius: 6px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.02rem;
-  font-feature-settings: 'calt' off;
-}
-.input:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.8px #A7A7A9;
-  border: 1px solid #bfbfc2; 
+  border: 1px solid #ccc;
 }
 
-.inputGroupRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.02em;
-}
-
-.icon {
-  position: absolute;
-  top: 50%;
-  right: 1.3rem;
-  cursor: pointer;
-}
-
-.linkForgotPassword {
-  font-size: 1.5rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.02em;
-}
-
-.checkBoxContainer {
-  display: flex;
-  align-items: center;
-}
-
-input[type="checkbox"] {
-  margin-right: 0.9rem;
-}
-
+#submit-button,
 #loginButton {
   border: none;
-  height: 40px;
-  width: '38rem';
-  background-color: #F08080;
-  padding: 1rem 3rem;
+  padding: 1rem;
   border-radius: 4px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 2rem;
-  text-align: center;
+  background-color: #F08080;
+  font-size: 1.8rem;
   cursor: pointer;
 }
-#loginButton:hover{
-  opacity: 0.5;
-  transition: 1s;
+
+#submit-button:hover,
+#loginButton:hover {
+  opacity: 0.8;
 }
 
-span {
-  max-width: 31.875rem;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
-  text-align: center;
-  letter-spacing: -0.02rem;
+.user-id {
+  margin-top: 1rem;
 }
 
-.errorMessage {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2.2rem;
-  font-feature-settings: 'calt' off;
-  padding: 0.8rem 0.4rem 0;
-  color: rgb(179, 8, 8);
-}
-
-.linkContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-a {
-  cursor: pointer;
-  color: rgb(0, 0, 0);
-  font-weight: 700;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.02em;
-}
-a:hover{
-  opacity: 0.5;
-  transition: 1s;
-}
-
-.rightContent {
-  width: 50%;
-  height: 100vh;
+/* Imagem de fundo */
+.create-user-image,
+.login-image {
   background-image: url('../../assets/mockup1.jpeg');
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  display: block;
 }
 
 @media (max-width: 1066px) {
-  .rightContent {
-    display: none; 
-  }
-  .leftContent{
-    width: 100%;
-  }
-  .container {
-    width: 98vw;
-  }
-}
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column; 
-    width: 97vw;
-  }
-  .leftContent {
-    width: 100%;
-    height: auto;
-    padding: 2rem;
-  }
-  .rightContent {
+  .create-user-image,
+  .login-image {
     display: none;
   }
-  .formContent {
+  .create-user-container,
+  .login-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .create-user-container,
+  .login-container {
+    flex-direction: column;
+  }
+  .create-user-form,
+  .login-form {
     width: 100%;
-    padding: 0 2rem;
-    margin-top: 3rem;
+    padding: 2rem;
+  }
+  .create-user-image,
+  .login-image {
+    display: none;
   }
   .logo {
     width: 60%;
-    margin: 2rem 0; 
+    margin: 2rem 0;
   }
   .input {
-    font-size: 1.4rem; 
-  }
-  .inputGroupRow {
     font-size: 1.4rem;
   }
+  .input-group-row,
   .linkForgotPassword {
-    width: 64%;
-    text-align: right;
     font-size: 1.4rem;
   }
 }

@@ -1,0 +1,139 @@
+/* Container styles */
+.container {
+  width: 24vw;
+  margin-left: 2.4rem;
+  position: relative;
+}
+
+@media (max-width: 1080px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Input styles */
+.input {
+  width: 100%;
+  height: 4rem;
+  padding: 1rem 1.6rem 1rem 4rem;
+  border: 1px solid #973f20;
+  border-radius: 20px;
+  color: #555555;
+}
+
+.input.showList {
+  border-radius: 20px 20px 0 0;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.input::placeholder {
+  color: #555555;
+}
+
+@media (max-width: 1080px) {
+  .input {
+    background-color: transparent;
+    border: 1px solid #929292;
+    margin-left: 0;
+  }
+
+  .input:focus {
+    background-color: #F8FAFC;
+  }
+}
+
+/* Search Icon styles */
+.searchIcon {
+  position: absolute;
+  z-index: 1;
+  margin: 1rem 1.8rem;
+  color: #555555;
+  font-size: 20px;
+}
+
+@media (max-width: 1080px) {
+  .searchIcon {
+    margin: 1rem 1rem 1rem 1.5rem;
+  }
+}
+
+/* Close Icon styles */
+.closeIcon {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  margin: 1rem 1.8rem;
+  right: 0;
+  font-size: 20px;
+  color: #555555;
+}
+
+.closeIcon.show {
+  display: block;
+}
+
+.closeIcon:hover {
+  transition: all 0.3s;
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+@media (max-width: 1080px) {
+  .closeIcon {
+    margin: 1rem 1rem 1rem 1.5rem;
+  }
+}
+
+/* Dropdown List styles */
+.dropdownList {
+  position: absolute;
+  display: flex;
+  left: 0;
+  right: 0;
+  max-height: 20rem;
+  transform: translate(0, -1rem);
+  transition: all 0.9s;
+}
+
+/* List Items styles */
+.listItems {
+  overflow: auto;
+  width: 100%;
+  padding: 0;
+  background: #F8FAFC;
+  border-radius: 0 0 20px 20px;
+  transition: all 0.9s;
+}
+
+@media (max-width: 1080px) {
+  .listItems {
+    border: 1px solid #929292;
+    border-top: none;
+    background: #F8FAFC;
+  }
+}
+
+/* Item styles */
+.item {
+  list-style-type: none;
+  padding: 0.5rem 1.8rem;
+  color: #555555;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.02em;
+  font-feature-settings: 'calt' off;
+}
+
+.item:hover {
+  background-color: rgba(138, 158, 181, 0.2);
+  cursor: pointer;
+}
+
+.item:last-child {
+  border-radius: 0 0 20px 20px;
+}

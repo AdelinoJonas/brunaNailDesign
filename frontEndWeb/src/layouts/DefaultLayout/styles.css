@@ -1,0 +1,55 @@
+/* LayoutContainer.css */
+.layout-container {
+  display: grid;
+  grid-template-columns: 19%;
+  grid-template-rows: 0fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+@media (max-width: 1080px) {
+  .layout-container {
+    /* Adapte as regras para tamanhos menores, se necessário */
+    /* display: grid;
+       grid-template-columns: 1fr;
+       grid-template-rows: 0fr;
+       grid-template-areas: 'MobileNavbarComponent' 'main'; */
+  }
+}
+
+/* HeaderPage.css */
+.header-page {
+  background-color: yellow;
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+/* AsideNavibar.css */
+.aside-navibar {
+  position: fixed;
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+/* Main.css */
+.main {
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .main {
+    width: 100%;
+  }
+}
+
+/* MobileContainer.css */
+.mobile-container {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .mobile-container {
+    display: block;
+  }
+}

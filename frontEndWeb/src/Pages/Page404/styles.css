@@ -1,0 +1,21 @@
+
+.pageError {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #000;
+  color: #FFF;
+  gap: 2rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+p {
+  font-weight: 400;
+  font-size: 2rem;
+}

@@ -1,0 +1,64 @@
+.button {
+  cursor: pointer;
+  width: 10.5rem;
+  height: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  padding: 0rem 2rem;
+  box-shadow: 0px 2px 4px rgba(74, 74, 74, 0.5);
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  border: 1px solid #973f20;
+  color: var(--primary-text-color);
+  transition: all 0.2s;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button.medium {
+  /* Example: font-size: 1.2rem; */
+}
+
+.button.large {
+  /* Example: font-size: 1.6rem; */
+}
+
+.button.typeNew {
+  /* Example: background-color: #ff5722; */
+}
+
+.button.rounded {
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+}
+
+@media (max-width: 800px) {
+  .button.rounded {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  display: block;
+}
+
+.title.hidden {
+  display: none;
+}
+
+.plus {
+  width: 2rem;
+  height: 2rem;
+  color: var(--white);
+}

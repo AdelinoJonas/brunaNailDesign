@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import UserGateway from './infra/gateway/UserGateway';
-import './styles/globalLayout/AllPagesStyles.css';
-import './styles/registerLayout/RegisterLayout.css';
+import UserGateway from '../infra/gateway/UserGateway';
+import '../styles/globalLayout/AllPagesStyles.css';
+import '../styles/registerLayout/RegisterLayout.css';
 
 interface CreateUserProps {
   userGateway: UserGateway;
@@ -13,9 +13,9 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
   const [phone, setPhone] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<string | null>(null);
 
-  async function createUser() {
+  const createUser = async () => {
     if (password !== confirmPassword) {
       alert('Senhas não coincidem!');
       return;
@@ -28,94 +28,93 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
       console.error('Erro ao salvar usuário:', error);
       // Lógica para tratamento de erro, se necessário
     }
-  }
+  };
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     createUser();
-  }
-
-  function handleOpenWhatsapp() {
-    const message = "Olá, Esqueci minha senha. Pode me ajudar?";
-    const whatsappLink = `https://wa.me/5541984498900?text=${encodeURIComponent(message)}`;
-    window.open(whatsappLink);
-  }
+  };
 
   return (
-    <div className="container">
-      <div className="leftContent">
+    <div className="create-user-container">
+      <div className="create-user-form">
         <h1 className="title">CADASTRAR-SE</h1>
-        <form className="formContent" onSubmit={handleSubmit}>
-          <div className="inputGroup">
-            <label className="label">Name:
-              <input 
-                id="name" 
-                className="input" 
+        <form className="form-content" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label className="label" htmlFor="name">
+              Nome:
+              <input
+                id="name"
+                className="input"
                 placeholder="Digite seu nome"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </label>
           </div>
-          <div className="inputGroup">
-            <label className="label">Email:
-              <input 
-                id="email" 
-                className="input" 
+          <div className="input-group">
+            <label className="label" htmlFor="email">
+              Email:
+              <input
+                id="email"
+                className="input"
                 placeholder="Digite seu e-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
           </div>
-          <div className="inputGroup">
-            <label className="label">Telefone:
-              <input 
-                id="phone" 
-                className="input" 
-                placeholder="Digite seu Telefone"
+          <div className="input-group">
+            <label className="label" htmlFor="phone">
+              Telefone:
+              <input
+                id="phone"
+                className="input"
+                placeholder="Digite seu telefone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             </label>
           </div>
-          <div className="inputGroup">
-            <label className="label">Senha:
-              <input 
-                id="password" 
-                type="password" 
-                className="input" 
+          <div className="input-group">
+            <label className="label" htmlFor="password">
+              Senha:
+              <input
+                id="password"
+                type="password"
+                className="input"
                 placeholder="Digite uma senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
           </div>
-          <div className="inputGroup">
-            <label className="label">Confirmar Senha:
-              <input 
-                id="confirmPassword" 
-                type="password" 
-                className="input" 
+          <div className="input-group">
+            <label className="label" htmlFor="confirmPassword">
+              Confirmar Senha:
+              <input
+                id="confirmPassword"
+                type="password"
+                className="input"
                 placeholder="Confirme sua senha"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </label>
           </div>
-          <button type="submit" id="loginButton">
+          <button type="submit" id="submit-button">
             Cadastrar
           </button>
-          {/* {userId && ( */}
-            <div>
-              <div className="id"><h4>ID do usuário: {userId}</h4></div>
+          {userId && (
+            <div className="user-id">
+              <h4>ID do usuário: {userId}</h4>
             </div>
-          {/* )} */}
+          )}
         </form>
       </div>
-      <div className="rightContent"/>
+      <div className="create-user-image" />
     </div>
   );
-}
+};
 
 export default CreateUser;

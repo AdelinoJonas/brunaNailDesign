@@ -1,0 +1,113 @@
+/* Header.css */
+.header {
+  box-shadow: 0px 2px 4px rgba(74, 74, 74, 0.15);
+  padding: 2rem 3.5rem;
+  background-color: #FFE7D3;
+}
+
+.header--hidden {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 2.6rem 3.6rem;
+  display: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+}
+
+.left-group {
+  display: flex;
+  width: 40%;
+}
+
+.left-group--hidden {
+  display: none;
+}
+
+.left-group div {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.back-link {
+  all: unset;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.back-link--hidden {
+  display: none;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 3.2rem;
+  line-height: 3.6rem;
+  color: #52475C;
+}
+
+.logo-img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  margin-right: 0.8rem;
+  background-color: #2C669E;
+}
+
+.logo-img img {
+  width: 6rem;
+  height: 6rem;
+  object-fit: contain;
+}
+
+.logo-img:hover {
+  cursor: pointer;
+}
+
+.right-group {
+  width: 60%;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.right-group--responsive {
+  width: 100%;
+  justify-content: center;
+  margin-left: 0;
+}
+
+@media (max-width: 1080px) {
+  .header {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 2.6rem 3.6rem;
+    display: none;
+  }
+
+  .left-group {
+    display: none;
+  }
+}
+
+@media (max-width: 1074px) {
+  .right-group {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+}
