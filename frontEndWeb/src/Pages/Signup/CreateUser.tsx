@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserGateway from '../../infra/gateway/UserGateway';
+import axios from 'axios'; // Certifique-se de ter o axios instalado
 import '../../styles/globalLayout/AllPagesStyles.css';
 import '../../styles/registerLayout/RegisterLayout.css';
 
-interface CreateUserProps {
-  userGateway: UserGateway;
-}
-
-const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
+const CreateUser: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -16,25 +12,34 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [userId, setUserId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null); // Para exibir mensagens de erro
 
-  const createUser = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (password !== confirmPassword) {
-      alert('Senhas não coincidem!');
+      setError('As senhas não coincidem.');
+      console.log('Senha e confirmação de senha não coincidem.');
       return;
     }
-    const input = { name, email, phone, password };
-    try {
-      const output = await userGateway.save(input);
-      setUserId(output); // assumindo que output é o ID retornado pelo backend
-    } catch (error) {
-      console.error('Erro ao salvar usuário:', error);
-      // Lógica para tratamento de erro, se necessário
-    }
-  };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    createUser();
+    try {
+      console.log('Enviando dados para criar o usuário...');
+      const response = await axios.post('http://localhost:3000/user', {
+        name,
+        email,
+        phone,
+        password,
+      });
+
+      console.log('Usuário criado com sucesso:', response.data);
+      setUserId(response.data.id);
+      setError(null); // Limpar mensagem de erro se a requisição for bem-sucedida
+      
+    } catch (err) {
+      console.error('Erro ao criar usuário:', err);
+      setError('Ocorreu um erro ao criar o usuário.');
+    }
   };
 
   return (
@@ -104,12 +109,17 @@ const CreateUser: React.FC<CreateUserProps> = ({ userGateway }) => {
               />
             </label>
           </div>
-          <button type="submit" id="submit-button">
+          <button type="submit" id="submit-button" onClick={()=>navigate("/confirmSignup")}>
             Cadastrar
           </button>
-          <button onClick={()=> navigate(-1)} className="turn-back">
+          <button onClick={() => navigate(-1)} className="turn-back">
             Voltar
           </button>
+          {error && (
+            <div className="error-message">
+              <h4>{error}</h4>
+            </div>
+          )}
           {userId && (
             <div className="user-id">
               <h4>ID do usuário: {userId}</h4>
